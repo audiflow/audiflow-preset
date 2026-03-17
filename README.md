@@ -71,7 +71,6 @@ Schema SSoT: `audiflow-smartplaylist-editor/crates/sp_core/assets/*.schema.json`
 - [docs/overview.md](docs/overview.md) -- Purpose and concepts
 - [docs/architecture/system-overview.md](docs/architecture/system-overview.md) -- Data flow and design constraints
 - [docs/specs/file-structure.md](docs/specs/file-structure.md) -- Three-level JSON hierarchy spec
-- [docs/specs/schema-structure.md](docs/specs/schema-structure.md) -- Schema definitions and field reference
 - [docs/development/change-workflow.md](docs/development/change-workflow.md) -- How to add or modify patterns
 
 ## Contributing
