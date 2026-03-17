@@ -2,20 +2,19 @@
 
 ## Purpose
 
-audiflow-smartplaylist is the production configuration data repository for the audiflow podcast ecosystem's smart playlist feature. It stores JSON config files that define how podcast episodes are grouped, filtered, sorted, and displayed within the audiflow mobile app. These files are deployed as static assets to GitHub Pages and fetched by the app at runtime.
+audiflow-smartplaylist is the configuration data repository for the audiflow podcast ecosystem's smart playlist feature. It stores JSON config files that define how podcast episodes are grouped, filtered, sorted, and displayed within the audiflow mobile app. These files are deployed as static assets to GitHub Pages and fetched by the app at runtime.
 
 ## Responsibilities
 
-- Store production-ready playlist configuration JSON files
-- Host vendored JSON Schema files for local validation
-- Provide CI pipelines for validation (on PR) and deployment (on merge to main)
+- Store playlist configuration JSON files for all environments (prod, staging, dev)
+- Host vendored JSON Schema files for local validation (on env/version branches)
+- Provide CI pipelines for validation (on PR) and deployment (on merge to target branch)
 - Auto-bump `dataVersion` fields via CI when patterns change
 
 ## Non-responsibilities
 
-- Schema authoring or evolution (owned by `audiflow-smartplaylist-dev`)
+- Schema authoring or evolution (owned by `audiflow-smartplaylist-editor`)
 - Config editing UX (owned by `audiflow-smartplaylist-editor`)
-- Dev/staging experimentation data (owned by `audiflow-smartplaylist-dev`)
 - App-side parsing, caching, or playback logic (owned by `audiflow`)
 
 ## Main concepts
@@ -27,24 +26,32 @@ audiflow-smartplaylist is the production configuration data repository for the a
 - **Pattern meta** (`{patternId}/meta.json`): Per-pattern file with feed matching rules and ordered playlist IDs.
 - **dataVersion**: Monotonically increasing integer bumped by CI when data changes. Used by the app for cache invalidation.
 - **schemaVersion**: Integer indicating structural schema version. Bumped only when JSON structure changes (not data-only changes).
+- **Env/version branch**: Data and schemas live on branches like `prod/v2`, `stg/v2`, `dev/v2` -- not on `main`.
 
 ## Primary entry points
 
+On env/version branches (e.g., `prod/v2`):
 - `patterns/meta.json`: Root index, start here to understand available patterns
 - `patterns/{patternId}/meta.json`: Per-pattern metadata (feed matching, playlist list)
 - `patterns/{patternId}/playlists/{playlistId}.json`: Individual playlist definitions
 - `schema/playlist-definition.schema.json`: Primary schema for playlist definitions
 - `schema/scripts/validate.sh`: Local validation script
 
+On `main`:
+- `.github/workflows/`: CI pipelines for validation and deployment
+- `docs/`: Repository documentation
+- `scripts/`: Infrastructure scripts
+
 ## Key dependencies
 
-- `audiflow-smartplaylist-editor` (sp_cli package): CI uses `validate.dart` and `bump_versions.dart`
-- `check-jsonschema` (Python, via uv): Local schema validation
-- GitHub Pages: Static hosting for production deployment
+- `audiflow-smartplaylist-editor` (sp_cli binary): CI uses pre-compiled binary for validation and version bumping
+- GitHub Pages: Static hosting for all environments
+- GitHub Actions: CI/CD
 
 ## Read next
 
 - docs/architecture/system-overview.md
+- docs/architecture/multi-env-deploy.md
 - docs/specs/file-structure.md
 - docs/development/change-workflow.md
 

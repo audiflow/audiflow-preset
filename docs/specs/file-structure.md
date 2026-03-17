@@ -4,6 +4,8 @@
 
 Defines the three-level JSON file hierarchy used by this repository to store smart playlist configurations. All consumers (app, editor, CI tools) depend on this structure.
 
+Note: This file structure exists on env/version branches (e.g., `prod/v2`, `dev/v2`), not on `main`. The `main` branch holds infrastructure only (workflows, docs, scripts).
+
 ## Definitions
 
 - **Root index**: `patterns/meta.json` -- discovery file listing all available patterns
@@ -21,11 +23,13 @@ This document defines:
 - The loading strategy for consumers
 
 This document does not define:
-- Full schema field descriptions (see `schema/*.schema.json`)
+- Full schema field descriptions (see `schema/*.schema.json` on env branches)
 - Resolver algorithm behavior (see schema descriptions in `schema/playlist-definition.schema.json`)
 - Editor workflow for creating configs (see editor repo docs)
 
 ## Directory layout
+
+On each env/version branch (e.g., `prod/v2`):
 
 ```
 patterns/

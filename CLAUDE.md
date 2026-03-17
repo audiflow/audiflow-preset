@@ -4,7 +4,7 @@ Smart playlist configuration data for all environments. Static JSON files deploy
 
 ## Branch and deployment model
 
-`main` holds infrastructure (workflows, docs, CODEOWNERS). Data lives on env/version branches:
+`main` holds infrastructure (workflows, docs, scripts). Data and vendored schemas live on env/version branches:
 
 | Branch | Deploy path | URL |
 |--------|------------|-----|
@@ -19,13 +19,13 @@ Multiple schema versions can be served concurrently. Old versions remain deploya
 
 ## Ecosystem context
 
-The single data repo in the audiflow ecosystem (formerly split into prod and dev repos). The `audiflow-smartplaylist-editor` web tool reads/writes these files locally; users commit and push. Schema SSoT lives in `audiflow-smartplaylist-editor/crates/sp_core/assets/`.
+The single data repo in the audiflow ecosystem (3 repos: app, editor, config data). The `audiflow-smartplaylist-editor` web tool reads/writes these files locally; users commit and push. Schema SSoT lives in `audiflow-smartplaylist-editor/crates/sp_core/assets/`.
 
 ## Responsibilities
 
-- Playlist configurations for all environments (JSON under `patterns/`)
+- Playlist configurations for all environments (JSON under `patterns/` on env branches)
 - CI deployment to GitHub Pages (via `.github/workflows/deploy-pages.yml`)
-- Schema vendoring for local validation (`schema/`)
+- Schema vendoring for local validation (`schema/` on env branches)
 
 ## Non-responsibilities
 
@@ -35,6 +35,14 @@ The single data repo in the audiflow ecosystem (formerly split into prod and dev
 
 ## File layout
 
+On `main` (infrastructure only):
+```
+.github/workflows/    # CI pipelines
+docs/                 # Repository documentation
+scripts/              # Infrastructure scripts
+```
+
+On env/version branches (e.g., `prod/v2`):
 ```
 patterns/
   meta.json                    # Root index: dataVersion, schemaVersion, pattern summaries
@@ -48,10 +56,10 @@ schema/                        # Vendored schemas + validation tooling
 ## Validation
 
 ```bash
-# Local schema validation (requires uv)
+# Local schema validation (on env branches, requires uv)
 schema/scripts/validate.sh patterns/**/*.json
 
-# CI validates on PR via editor's sp_cli
+# CI validates on PR via editor's pre-compiled audiflow-editor binary
 # See .github/workflows/validate.yml
 ```
 
@@ -59,12 +67,14 @@ schema/scripts/validate.sh patterns/**/*.json
 
 - docs/overview.md -- purpose, concepts, entry points
 - docs/architecture/system-overview.md -- data flow and design constraints
+- docs/architecture/multi-env-deploy.md -- branch model and deployment
 - docs/specs/file-structure.md -- three-level JSON hierarchy spec
 - docs/development/change-workflow.md -- how to add/modify patterns
 
 ## When changing this repository
 
-- All JSON must conform to schemas in `schema/`
+- Data changes go on env/version branches (e.g., `dev/v2`), not `main`
+- All JSON must conform to schemas in `schema/` (on the same branch)
 - Changes to `patterns/` deploy automatically on merge to the target branch
 - Schema SSoT is in the editor repo; vendor updated schemas into `schema/`
 - Check whether docs/specs/file-structure.md needs updating
