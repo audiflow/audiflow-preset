@@ -1,5 +1,5 @@
 {
-  "dataVersion": 17,
+  "dataVersion": 18,
   "patterns": [
     {
       "dataVersion": 11,
@@ -23,7 +23,7 @@
       "playlistCount": 1
     },
     {
-      "dataVersion": 4,
+      "dataVersion": 5,
       "displayName": "超相対性理論",
       "feedUrlHint": "https://anchor.fm/s/57a9101c/podcast/rss",
       "id": "cho_soutaisei_riron",
