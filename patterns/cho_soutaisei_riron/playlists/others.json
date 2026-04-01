@@ -12,5 +12,6 @@
   },
   "id": "others",
   "playlistStructure": "grouped",
+  "priority": 30,
   "resolverType": "year"
 }
