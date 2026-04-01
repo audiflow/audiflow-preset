@@ -1,12 +1,13 @@
 {
-  "dataVersion": 4,
+  "dataVersion": 5,
   "feedUrls": [
     "https://anchor.fm/s/57a9101c/podcast/rss"
   ],
   "id": "cho_soutaisei_riron",
   "playlists": [
     "topics",
-    "extras"
+    "extras",
+    "others"
   ],
   "yearGroupedEpisodes": true
 }
