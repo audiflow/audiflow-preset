@@ -29,7 +29,6 @@
     "yearBinding": "pinToYear"
   },
   "id": "topics",
-  "nullSeasonGroupKey": 0,
   "playlistStructure": "grouped",
   "priority": 10,
   "resolverType": "titleAppearanceOrder",
