@@ -12,13 +12,6 @@
       }
     ]
   },
-  "episodeList": {
-    "titleExtractor": {
-      "group": 1,
-      "pattern": "^#\\d+ (.*?)[／：]",
-      "source": "title"
-    }
-  },
   "groupList": {
     "showDateRange": true,
     "sort": {
@@ -34,7 +27,7 @@
   "resolverType": "titleAppearanceOrder",
   "titleExtractor": {
     "group": 1,
-    "pattern": "^#\\d+ *?(.*?)(?:[／：]|（(?:その\\d+|[前中後]編)）)",
+    "pattern": "^#\\d+ *?(.*?)（(?:その\\d+|[前中後]編)）",
     "source": "title"
   }
 }
