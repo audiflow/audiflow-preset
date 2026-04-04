@@ -19,7 +19,8 @@
     },
     "id": {
       "type": "string",
-      "description": "Pattern identifier that must exactly match the parent directory name. Used as the cache storage key and for constructing file paths (e.g., {id}/playlists/{playlistId}.json)."
+      "minLength": 1,
+      "description": "Semi-deterministic pattern identifier derived at creation time and fixed forever. Computed as md5(podcastGuid)[0:12] if podcastGuid is available, otherwise md5(feedUrls[0])[0:12]. Must exactly match the parent directory name. Used as the cache storage key and for constructing file paths (e.g., {id}/playlists/{playlistId}.json)."
     },
     "podcastGuid": {
       "type": "string",

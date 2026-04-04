@@ -1,9 +1,9 @@
 {
-  "dataVersion": 6,
+  "dataVersion": 7,
   "feedUrls": [
     "https://anchor.fm/s/81fb5eec/podcast/rss"
   ],
-  "id": "news_connect",
+  "id": "03ef94a3f8da",
   "playlists": [
     "by_category",
     "by_year"

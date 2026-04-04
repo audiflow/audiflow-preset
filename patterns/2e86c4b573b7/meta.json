@@ -1,9 +1,9 @@
 {
-  "dataVersion": 11,
+  "dataVersion": 12,
   "feedUrls": [
     "https://anchor.fm/s/8c2088c/podcast/rss"
   ],
-  "id": "coten_radio",
+  "id": "2e86c4b573b7",
   "playlists": [
     "regular",
     "short",

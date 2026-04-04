@@ -1,9 +1,9 @@
 {
-  "dataVersion": 6,
+  "dataVersion": 7,
   "feedUrls": [
     "https://rss.art19.com/business-wars"
   ],
-  "id": "business-wars",
+  "id": "6e3ddeeaed0a",
   "playlists": [
     "seasons"
   ],

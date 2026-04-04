@@ -9,7 +9,7 @@ Defines the three-level JSON file hierarchy used by this repository to store sma
 - **Root index**: `patterns/meta.json` -- discovery file listing all available patterns
 - **Pattern meta**: `patterns/{patternId}/meta.json` -- per-podcast feed matching and playlist list
 - **Playlist definition**: `patterns/{patternId}/playlists/{playlistId}.json` -- episode grouping/filtering/sorting rules
-- **patternId**: Directory name identifying a podcast pattern (e.g., `coten_radio`, `business-wars`)
+- **patternId**: Semi-deterministic identifier derived from the podcast's identity (see [Pattern ID derivation](#pattern-id-derivation) below). 12-character lowercase hex string (e.g., `2e86c4b573b7`)
 - **playlistId**: Filename (without `.json`) of a playlist definition; must match the `id` field inside the file
 
 ## Scope
@@ -96,6 +96,19 @@ Consumers load configs lazily by level:
 3. Fetch `playlists/{id}.json` -- load individual definitions as needed
 
 Each level is independently cacheable. The `dataVersion` fields enable cache invalidation without re-fetching unchanged data.
+
+## Pattern ID derivation
+
+Pattern IDs are semi-deterministic: computed once at creation time from the podcast's identity, then fixed forever. This prevents duplicate configs for the same podcast.
+
+**Derivation rule**:
+
+1. If `podcastGuid` is available: `md5(podcastGuid)[0:12]`
+2. Otherwise: `md5(feedUrls[0])[0:12]`
+
+The result is a 12-character lowercase hex string (48 bits). The editor enforces this rule on pattern creation. The CLI validates that existing deterministic IDs match their expected derivation.
+
+**Format detection**: Any `patternId` matching the 12-hex-char pattern is treated as a deterministic ID and subject to derivation validation. IDs in other formats are implicitly grandfathered.
 
 ## Consistency rules
 
