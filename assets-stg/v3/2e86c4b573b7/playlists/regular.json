@@ -1,0 +1,49 @@
+{
+  "displayName": "レギュラーシリーズ",
+  "episodeExtractor": {
+    "episodeGroup": 2,
+    "fallbackEpisodePattern": "(\\d+)】",
+    "fallbackSeasonNumber": 0,
+    "fallbackToRss": true,
+    "pattern": "【(\\d+)-(\\d+)】",
+    "seasonGroup": 1,
+    "source": "title"
+  },
+  "episodeFilters": {
+    "exclude": [
+      {
+        "title": "【COTEN RADIO\\s*ショート"
+      }
+    ],
+    "require": [
+      {
+        "title": "【\\d+-\\d+】"
+      }
+    ]
+  },
+  "groupList": {
+    "showDateRange": true,
+    "sort": {
+      "field": "playlistNumber",
+      "order": "ascending"
+    },
+    "userSortable": true,
+    "yearBinding": "pinToYear"
+  },
+  "id": "regular",
+  "nullSeasonGroupKey": 0,
+  "playlistStructure": "grouped",
+  "priority": 10,
+  "resolverType": "rss",
+  "titleExtractor": {
+    "fallback": {
+      "group": 1,
+      "pattern": "【COTEN RADIO\\s*(.+?)\\s*(\\d+)】",
+      "source": "title"
+    },
+    "fallbackValue": "その他",
+    "group": 1,
+    "pattern": "【COTEN RADIO\\s*([^】]+)編\\s*(\\d+)】",
+    "source": "title"
+  }
+}

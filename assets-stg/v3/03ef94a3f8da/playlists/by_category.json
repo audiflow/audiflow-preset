@@ -1,0 +1,45 @@
+{
+  "displayName": "カテゴリ別",
+  "episodeList": {
+    "showYearHeaders": true
+  },
+  "groups": [
+    {
+      "displayName": "平日版",
+      "id": "daily_news",
+      "pattern": "【\\d+月\\d+日】"
+    },
+    {
+      "displayName": "土曜版",
+      "id": "saturday",
+      "pattern": "【土曜版"
+    },
+    {
+      "displayName": "ニュース小話",
+      "id": "news_talk",
+      "pattern": "【ニュース小話"
+    },
+    {
+      "displayName": "特別編",
+      "id": "special",
+      "pattern": "【.*?特別編.*?】"
+    },
+    {
+      "displayName": "越境日本人編",
+      "id": "expat",
+      "pattern": "【越境日本人編"
+    },
+    {
+      "displayName": "祝日版",
+      "id": "holiday",
+      "pattern": "【祝日版"
+    },
+    {
+      "displayName": "その他",
+      "id": "other"
+    }
+  ],
+  "id": "by_category",
+  "playlistStructure": "grouped",
+  "resolverType": "category"
+}
