@@ -3,7 +3,7 @@
   "episodeFilters": {
     "exclude": [
       {
-        "title": "（.*?）|\\(.*?\\)"
+        "title": "（.+?）|\\(.+?\\)"
       }
     ]
   },
