@@ -1,14 +1,22 @@
 # Schema Changelog
 
+## Unreleased
+
+### Renamed: `playlistStructure` -> `presentation`
+
+**Values:** `split` -> `separate`, `grouped` -> `combined`
+
+**Why:** The pair `split`/`grouped` lacked a coherent naming axis -- `split` described an action while `grouped` described a state. The new names sit on a clear presentation axis: `separate` means each resolver result is presented as its own playlist (selectable from a dropdown); `combined` means all results are presented as group cards inside a single playlist. The field name `presentation` reflects that this controls how results appear to the user, not internal structure.
+
 ## 2026-03-08 -- v2 restructure
 
-### Renamed: `contentType` -> `playlistStructure`
+### Renamed: `contentType` -> `playlistStructure` (subsequently renamed to `presentation`; see Unreleased)
 
-**Values:** `episodes` -> `split`, `groups` -> `grouped`
+**Values:** `episodes` -> `split`, `groups` -> `grouped` (subsequently renamed to `separate`/`combined`)
 
 **Format:** Changed from `enum` to `oneOf` with per-value descriptions.
 
-**Why:** `contentType` was too generic. `episodes` described the content, not the structural outcome (one definition splitting into many independent playlists). The new names make the structural choice self-evident: `split` produces many playlists, `grouped` nests groups inside one playlist.
+**Why:** `contentType` was too generic. `episodes` described the content, not the structural outcome (one definition splitting into many independent playlists). The new names make the structural choice self-evident: `split` produces many playlists, `grouped` nests groups inside one playlist. (Note: `split` and `grouped` were subsequently renamed to `separate` and `combined`; see Unreleased.)
 
 ### Renamed: `yearHeaderMode` -> `groupList.yearBinding`
 
@@ -16,7 +24,7 @@
 
 **Format:** Changed from `enum` to `oneOf` with per-value descriptions. Moved inside `groupList` object.
 
-**Why:** `yearHeaderMode` described the UI mechanism (headers) rather than the relationship (how groups bind to years). `perEpisode` was misleading -- the behavior is splitting a group across multiple years, parallel to `playlistStructure: split`. `firstEpisode` was unclear about what "first" meant; `pinToYear` clearly says the group anchors to one year.
+**Why:** `yearHeaderMode` described the UI mechanism (headers) rather than the relationship (how groups bind to years). `perEpisode` was misleading -- the behavior is splitting a group across multiple years, parallel to `playlistStructure: split` (subsequently renamed to `presentation: separate`). `firstEpisode` was unclear about what "first" meant; `pinToYear` clearly says the group anchors to one year.
 
 ### Renamed: `smartPlaylistEpisodeExtractor` -> `numberingExtractor`
 
@@ -39,7 +47,7 @@ where `EpisodeFilterEntry` is `{ title?: string, description?: string }`
 **Before:** `yearHeaderMode`, `showSortOrderToggle`, `showDateRange`, `customSort` (flat top-level fields)
 **After:** `groupList.yearBinding`, `groupList.userSortable`, `groupList.showDateRange`, `groupList.sort`
 
-**Why:** These settings only apply when `playlistStructure` is `grouped`. Nesting them makes the conditional relationship explicit -- the entire `groupList` object is meaningless in `split` mode.
+**Why:** These settings only apply when `playlistStructure` is `grouped` (subsequently renamed to `presentation: combined`). Nesting them makes the conditional relationship explicit -- the entire `groupList` object is meaningless in `split` (subsequently `separate`) mode.
 
 ### Restructured: `episodeYearHeaders` -> `episodeList.showYearHeaders`
 
@@ -116,7 +124,7 @@ where `EpisodeFilterEntry` is `{ title?: string, description?: string }`
 
 ### Kept at top level: `titleExtractor`, `prependSeasonNumber`
 
-**Why:** Both apply to resolver results regardless of `playlistStructure`. In `split` mode they affect playlist titles; in `grouped` mode they affect group card titles. They are not grouped-only settings.
+**Why:** Both apply to resolver results regardless of `playlistStructure` (subsequently renamed to `presentation`). In `split` (subsequently `separate`) mode they affect playlist titles; in `grouped` (subsequently `combined`) mode they affect group card titles. They are not grouped-only settings.
 
 ### Schema version: v1 -> v2
 
@@ -126,9 +134,9 @@ where `EpisodeFilterEntry` is `{ title?: string, description?: string }`
 
 | v1 field | v2 field |
 |----------|----------|
-| `contentType` | `playlistStructure` |
-| `contentType: "episodes"` | `playlistStructure: "split"` |
-| `contentType: "groups"` | `playlistStructure: "grouped"` |
+| `contentType` | `presentation` |
+| `contentType: "episodes"` | `presentation: "separate"` |
+| `contentType: "groups"` | `presentation: "combined"` |
 | `titleFilter` | `episodeFilters.require: [{ title: "..." }]` |
 | `excludeFilter` | `episodeFilters.exclude: [{ title: "..." }]` |
 | `requireFilter` | `episodeFilters.require: [{ title: "..." }]` (merged with titleFilter) |
