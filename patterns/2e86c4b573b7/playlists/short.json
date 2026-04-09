@@ -30,7 +30,7 @@
   },
   "id": "short",
   "nullSeasonGroupKey": 0,
-  "playlistStructure": "grouped",
+  "presentation": "combined",
   "priority": 20,
   "resolverType": "seasonNumber",
   "titleExtractor": {

@@ -12,7 +12,7 @@
   },
   "groups": [],
   "id": "seasons",
-  "playlistStructure": "grouped",
+  "presentation": "combined",
   "prependSeasonNumber": true,
   "resolverType": "seasonNumber",
   "titleExtractor": {

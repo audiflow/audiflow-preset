@@ -22,7 +22,7 @@
     "yearBinding": "pinToYear"
   },
   "id": "topics",
-  "playlistStructure": "grouped",
+  "presentation": "combined",
   "priority": 10,
   "resolverType": "titleDiscovery",
   "titleExtractor": {
