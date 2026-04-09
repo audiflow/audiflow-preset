@@ -23,7 +23,6 @@
   },
   "id": "topics",
   "presentation": "combined",
-  "priority": 10,
   "resolverType": "titleDiscovery",
   "titleExtractor": {
     "group": 1,

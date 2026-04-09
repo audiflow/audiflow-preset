@@ -2,7 +2,6 @@
   "id": "categories",
   "displayName": "Story Arcs",
   "resolverType": "titleClassifier",
-  "priority": 50,
   "presentation": "combined",
   "episodeFilters": {
     "require": [

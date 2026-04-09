@@ -33,7 +33,6 @@
   "id": "regular",
   "nullSeasonGroupKey": 0,
   "presentation": "combined",
-  "priority": 10,
   "resolverType": "seasonNumber",
   "titleExtractor": {
     "fallback": {

@@ -227,6 +227,5 @@
   ],
   "id": "extras",
   "presentation": "combined",
-  "priority": 30,
   "resolverType": "titleClassifier"
 }

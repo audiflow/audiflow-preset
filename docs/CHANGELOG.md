@@ -24,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Simplify titleExtractor pattern and remove episodeList
 - Add others playlist and refactor topics in cho_soutaisei_riron
-- Add priority 30 to others playlist
+- ~~Add priority 30 to others playlist~~ (priority field removed in v4)
 - Remove dead nullSeasonGroupKey from topics
 - Wrap regex alternation in ASCII group inside full-width parens
 

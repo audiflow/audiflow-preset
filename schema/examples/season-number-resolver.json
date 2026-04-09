@@ -2,7 +2,6 @@
   "id": "seasons",
   "displayName": "Seasons",
   "resolverType": "seasonNumber",
-  "priority": 100,
   "presentation": "combined",
   "nullSeasonGroupKey": 0,
   "titleExtractor": {

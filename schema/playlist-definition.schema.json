@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://audiflow.app/schema/v4/playlist-definition.json",
   "title": "SmartPlaylist Definition",
-  "description": "Defines how a smart playlist groups, filters, sorts, and displays episodes for a specific podcast. Each definition file lives at {patternId}/playlists/{id}.json. Multiple definitions under the same pattern share the podcast's episode pool and claim episodes through a priority-based system.",
+  "description": "Defines how a smart playlist groups, filters, sorts, and displays episodes for a specific podcast. Each definition file lives at {patternId}/playlists/{id}.json. Multiple definitions under the same pattern share the podcast's episode pool.",
   "type": "object",
   "required": [
     "id",
@@ -40,12 +40,6 @@
           "description": "Groups episodes by matching their titles against regex patterns defined in the groups array. Groups are evaluated in order; the first matching pattern claims each episode. A group without a pattern acts as a catch-all for unmatched episodes. Best for podcasts with naming conventions like '[Series A] Episode 1' or 'Arc 1: Title'. Requires: groups. Does not use titleExtractor (group display names come from GroupDef.displayName)."
         }
       ]
-    },
-    "priority": {
-      "type": "integer",
-      "default": 0,
-      "minimum": 0,
-      "description": "Controls episode claiming order among sibling definitions within the same pattern. Processing order: (1) definitions with at least one filter are processed first, sorted by priority ascending; (2) definitions without any filters (fallbacks) are processed second, also sorted by priority ascending. Within each group, lower priority numbers claim matching episodes first. Once a filtered definition claims episodes, those episodes are unavailable to subsequent definitions."
     },
     "presentation": {
       "description": "Determines how resolver results are presented to the user.",

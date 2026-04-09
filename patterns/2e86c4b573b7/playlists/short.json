@@ -31,7 +31,6 @@
   "id": "short",
   "nullSeasonGroupKey": 0,
   "presentation": "combined",
-  "priority": 20,
   "resolverType": "seasonNumber",
   "titleExtractor": {
     "fallback": {

@@ -17,7 +17,6 @@
   },
   "id": "person",
   "presentation": "combined",
-  "priority": 10,
   "resolverType": "titleDiscovery",
   "titleExtractor": {
     "fallback": {
