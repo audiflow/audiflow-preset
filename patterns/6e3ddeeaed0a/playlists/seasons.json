@@ -12,9 +12,9 @@
   },
   "groups": [],
   "id": "seasons",
-  "playlistStructure": "grouped",
+  "presentation": "combined",
   "prependSeasonNumber": true,
-  "resolverType": "rss",
+  "resolverType": "seasonNumber",
   "titleExtractor": {
     "group": 1,
     "pattern": "^(.*?) [-|] ",

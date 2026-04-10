@@ -48,8 +48,8 @@ schema/                        # Vendored schemas + validation tooling
 ## Validation
 
 ```bash
-# Local schema validation (requires uv)
-schema/scripts/validate.sh patterns/**/*.json
+# Local schema validation (requires gh CLI)
+schema/scripts/validate.sh patterns/
 
 # CI validates on PR via editor's sp_cli
 # See .github/workflows/validate.yml

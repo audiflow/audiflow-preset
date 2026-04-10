@@ -40,6 +40,6 @@
     }
   ],
   "id": "by_category",
-  "playlistStructure": "grouped",
-  "resolverType": "category"
+  "presentation": "combined",
+  "resolverType": "titleClassifier"
 }

@@ -226,7 +226,6 @@
     }
   ],
   "id": "extras",
-  "playlistStructure": "grouped",
-  "priority": 30,
-  "resolverType": "category"
+  "presentation": "combined",
+  "resolverType": "titleClassifier"
 }

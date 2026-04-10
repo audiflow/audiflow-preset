@@ -1,9 +1,8 @@
 {
   "id": "categories",
   "displayName": "Story Arcs",
-  "resolverType": "category",
-  "priority": 50,
-  "playlistStructure": "grouped",
+  "resolverType": "titleClassifier",
+  "presentation": "combined",
   "episodeFilters": {
     "require": [
       { "title": "(?:Main|Bonus)" }

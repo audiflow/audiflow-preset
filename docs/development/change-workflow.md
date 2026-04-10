@@ -46,7 +46,7 @@ Schema changes originate in `audiflow-smartplaylist-dev`, not here. If a schema 
 
 - Keep changes localized to one pattern when possible
 - Ensure `id` fields match directory/file names exactly
-- Use existing patterns as reference (e.g., `patterns/coten_radio/` for `rss` resolver)
+- Use existing patterns as reference (e.g., `patterns/2e86c4b573b7/` for `seasonNumber` resolver)
 - All JSON must use `additionalProperties: false` per schema -- no extra fields
 
 ## Validation checklist

@@ -4,11 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [v3] - 2026-04-04
+## [v3] - 2026-04-08
 
-### Changed
+### Added
 
-- Migrate pattern IDs to content-hash (SHA-256) identifiers
+- Pattern 9d1626c9a46b (東京ビジネスハブ) with person and others playlists
+
+### Changed (2026-04-04)
+
+- Migrate pattern IDs to content-hash (MD5) identifiers
 - Bump schema `$id` URIs from v2 to v3
 - Bump `schemaVersion` to 3
 
@@ -18,7 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Simplify titleExtractor pattern and remove episodeList
 - Add others playlist and refactor topics in cho_soutaisei_riron
-- Add priority 30 to others playlist
+- ~~Add priority 30 to others playlist~~ (priority field removed in v4)
 - Remove dead nullSeasonGroupKey from topics
 - Wrap regex alternation in ASCII group inside full-width parens
 

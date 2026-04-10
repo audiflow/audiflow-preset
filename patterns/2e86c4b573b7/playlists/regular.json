@@ -1,6 +1,6 @@
 {
   "displayName": "レギュラーシリーズ",
-  "episodeExtractor": {
+  "numberingExtractor": {
     "episodeGroup": 2,
     "fallbackEpisodePattern": "(\\d+)】",
     "fallbackSeasonNumber": 0,
@@ -31,10 +31,8 @@
     "yearBinding": "pinToYear"
   },
   "id": "regular",
-  "nullSeasonGroupKey": 0,
-  "playlistStructure": "grouped",
-  "priority": 10,
-  "resolverType": "rss",
+  "presentation": "combined",
+  "resolverType": "seasonNumber",
   "titleExtractor": {
     "fallback": {
       "group": 1,

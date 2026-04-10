@@ -8,6 +8,6 @@
     ]
   },
   "id": "others",
-  "playlistStructure": "grouped",
+  "presentation": "combined",
   "resolverType": "year"
 }

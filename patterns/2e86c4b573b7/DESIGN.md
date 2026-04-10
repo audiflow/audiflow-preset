@@ -16,15 +16,15 @@ Some episodes lack the `【season-episode】` bracket pattern entirely and need 
 
 ## Playlist breakdown
 
-Three playlists, ordered by priority:
+Three playlists:
 
 | Playlist | What it captures | Why separate |
 |----------|-----------------|--------------|
-| `regular` (pri=10) | Numbered main series (`【{s}-{e}】`) | Core content, reliable title structure, grouped by theme |
-| `short` (pri=20) | COTEN RADIO ショート episodes | Same numbering scheme but different series line, needs own filter |
-| `extras` (pri=30) | Everything else -- 番外編, 特別編, guest episodes | Catch-all for episodes that don't fit the numbered series |
+| `regular` | Numbered main series (`【{s}-{e}】`) | Core content, reliable title structure, grouped by theme |
+| `short` | COTEN RADIO ショート episodes | Same numbering scheme but different series line, needs own filter |
+| `extras` | Everything else -- 番外編, 特別編, guest episodes | Catch-all for episodes that don't fit the numbered series |
 
-Priority determines claim order: regular claims first, then short, then extras gets the remainder.
+Definitions with filters claim episodes first; `extras` (no filter) gets the remainder.
 
 ## Episode identification
 
@@ -47,7 +47,7 @@ Group names (the theme of a multi-episode series) are extracted from titles:
 
 ### extras
 
-No automated episode extraction. Uses `category` resolver -- episodes are matched to groups by regexp against their title, not by RSS metadata.
+No automated episode extraction. Uses `titleClassifier` resolver -- episodes are matched to groups by regexp against their title.
 
 ## Grouping decisions
 

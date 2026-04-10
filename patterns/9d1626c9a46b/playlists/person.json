@@ -16,9 +16,8 @@
     "yearBinding": "splitByYear"
   },
   "id": "person",
-  "playlistStructure": "grouped",
-  "priority": 10,
-  "resolverType": "titleAppearanceOrder",
+  "presentation": "combined",
+  "resolverType": "titleDiscovery",
   "titleExtractor": {
     "fallback": {
       "group": 1,

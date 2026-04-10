@@ -1,6 +1,6 @@
 {
   "displayName": "ショートシリーズ",
-  "episodeExtractor": {
+  "numberingExtractor": {
     "episodeGroup": 2,
     "fallbackEpisodePattern": "【番外編[＃#](\\d+)】",
     "fallbackSeasonNumber": 0,
@@ -29,10 +29,8 @@
     "yearBinding": "pinToYear"
   },
   "id": "short",
-  "nullSeasonGroupKey": 0,
-  "playlistStructure": "grouped",
-  "priority": 20,
-  "resolverType": "rss",
+  "presentation": "combined",
+  "resolverType": "seasonNumber",
   "titleExtractor": {
     "fallback": {
       "pattern": "【COTEN RADIOショート\\s+(.+?)\\s*(\\d+|前編|中編|後編)】",

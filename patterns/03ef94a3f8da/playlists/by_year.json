@@ -41,6 +41,6 @@
     }
   ],
   "id": "by_year",
-  "playlistStructure": "grouped",
-  "resolverType": "category"
+  "presentation": "combined",
+  "resolverType": "titleClassifier"
 }

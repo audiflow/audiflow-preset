@@ -48,15 +48,15 @@ The canonical schemas are maintained in `audiflow-smartplaylist-editor/crates/sp
 
 1. Check out the target env/version branch (e.g., `dev/v2`)
 2. Copy updated schema files from `audiflow-smartplaylist-editor/crates/sp_core/assets/` into `schema/`
-3. Run local validation: `schema/scripts/validate.sh patterns/**/*.json`
+3. Run local validation: `schema/scripts/validate.sh patterns/`
 4. Fix any data that no longer conforms
 5. Commit and push to the env branch
 
 ## Validation
 
 ```bash
-# Local validation (on env branches, requires uv)
-schema/scripts/validate.sh patterns/**/*.json
+# Local validation (on env branches, requires gh CLI)
+schema/scripts/validate.sh patterns/
 
 # CI validates automatically on PR via .github/workflows/validate.yml
 ```

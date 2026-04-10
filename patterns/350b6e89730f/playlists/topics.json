@@ -22,9 +22,8 @@
     "yearBinding": "pinToYear"
   },
   "id": "topics",
-  "playlistStructure": "grouped",
-  "priority": 10,
-  "resolverType": "titleAppearanceOrder",
+  "presentation": "combined",
+  "resolverType": "titleDiscovery",
   "titleExtractor": {
     "group": 1,
     "pattern": "^#\\d+ *?(.*?)（(?:その\\d+|[前中後]編)）",

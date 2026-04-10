@@ -12,7 +12,6 @@
     "userSortable": true
   },
   "id": "extras",
-  "playlistStructure": "grouped",
-  "priority": 20,
+  "presentation": "combined",
   "resolverType": "year"
 }

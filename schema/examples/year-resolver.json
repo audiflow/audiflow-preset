@@ -2,7 +2,7 @@
   "id": "by-year",
   "displayName": "By Year",
   "resolverType": "year",
-  "playlistStructure": "grouped",
+  "presentation": "combined",
   "groupList": {
     "yearBinding": "splitByYear",
     "sort": {
