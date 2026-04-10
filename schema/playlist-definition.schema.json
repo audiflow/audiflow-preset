@@ -38,18 +38,6 @@
         {
           "const": "titleClassifier",
           "description": "Groups episodes by matching their titles against patterns you define in the groups section. Groups are evaluated in order; the first matching pattern claims each episode. A group without a pattern acts as a catch-all for unmatched episodes. Best for podcasts with naming conventions like 'Arc 1: ...' or 'Mystery Series: ...'. Requires: groups. Does not use titleExtractor (group names come from the display names you define directly)."
-        },
-        {
-          "const": "rss",
-          "description": "Deprecated v3 alias for 'seasonNumber'. Use 'seasonNumber' for new configs."
-        },
-        {
-          "const": "category",
-          "description": "Deprecated v3 alias for 'titleClassifier'. Use 'titleClassifier' for new configs."
-        },
-        {
-          "const": "titleAppearanceOrder",
-          "description": "Deprecated v3 alias for 'titleDiscovery'. Use 'titleDiscovery' for new configs."
         }
       ]
     },
@@ -145,10 +133,6 @@
       "$ref": "#/$defs/NumberingExtractor",
       "description": "Finds season and episode numbers in episode titles or descriptions. Overrides feed data (itunes:season, itunes:episode) with values parsed from episode content. Essential for podcasts that encode numbering in titles (e.g., '[62-15] Title') rather than using standard RSS tags. Can be customized per-group via GroupDef.numberingExtractor."
     },
-    "episodeExtractor": {
-      "$ref": "#/$defs/NumberingExtractor",
-      "description": "Deprecated v3 alias for 'numberingExtractor'. Use 'numberingExtractor' for new configs."
-    },
     "groups": {
       "type": "array",
       "description": "Group definitions, primarily used by titleClassifier. Each group defines a text pattern for matching episode titles. Groups are evaluated in order; the first match claims each episode. A group without a pattern acts as a catch-all for unmatched episodes and should be placed last. For titleDiscovery, only groups[0].pattern is used as a fallback when titleExtractor is not provided. Groups can customize display, episodeList, and numberingExtractor settings.",
@@ -163,23 +147,6 @@
         "properties": {
           "resolverType": {
             "const": "titleClassifier"
-          }
-        },
-        "required": [
-          "resolverType"
-        ]
-      },
-      "then": {
-        "required": [
-          "groups"
-        ]
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "resolverType": {
-            "const": "category"
           }
         },
         "required": [
@@ -286,10 +253,6 @@
         "numberingExtractor": {
           "$ref": "#/$defs/NumberingExtractor",
           "description": "Custom number rule for this group. When not set, uses the playlist default."
-        },
-        "episodeExtractor": {
-          "$ref": "#/$defs/NumberingExtractor",
-          "description": "Deprecated v3 alias for 'numberingExtractor'. Use 'numberingExtractor' for new configs."
         }
       }
     },
