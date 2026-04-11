@@ -7,11 +7,14 @@
       }
     ]
   },
-  "groupList": {
-    "showDateRange": true,
+  "groupItem": {
+    "showDateRange": true
+  },
+  "groupListing": {
     "userSortable": true
   },
-  "id": "extras",
-  "presentation": "combined",
-  "resolverType": "year"
+  "grouping": {
+    "by": "year"
+  },
+  "id": "extras"
 }

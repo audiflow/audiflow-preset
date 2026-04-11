@@ -7,17 +7,18 @@
       }
     ]
   },
-  "groupList": {
-    "showDateRange": true
+  "groupItem": {
+    "prependSeasonNumber": true,
+    "showDateRange": true,
+    "titleExtractor": {
+      "group": 1,
+      "pattern": "^(.*?) [-|] ",
+      "source": "title"
+    }
   },
-  "groups": [],
-  "id": "seasons",
-  "presentation": "combined",
-  "prependSeasonNumber": true,
-  "resolverType": "seasonNumber",
-  "titleExtractor": {
-    "group": 1,
-    "pattern": "^(.*?) [-|] ",
-    "source": "title"
-  }
+  "grouping": {
+    "by": "seasonNumber",
+    "staticClassifiers": []
+  },
+  "id": "seasons"
 }

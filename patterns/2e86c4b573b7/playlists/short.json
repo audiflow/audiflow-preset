@@ -1,14 +1,5 @@
 {
   "displayName": "ショートシリーズ",
-  "numberingExtractor": {
-    "episodeGroup": 2,
-    "fallbackEpisodePattern": "【番外編[＃#](\\d+)】",
-    "fallbackSeasonNumber": 0,
-    "fallbackToRss": true,
-    "pattern": "【(\\d+)-(\\d+)】",
-    "seasonGroup": 1,
-    "source": "title"
-  },
   "episodeFilters": {
     "require": [
       {
@@ -19,8 +10,20 @@
       }
     ]
   },
-  "groupList": {
+  "groupItem": {
     "showDateRange": true,
+    "titleExtractor": {
+      "fallback": {
+        "pattern": "【COTEN RADIOショート\\s+(.+?)\\s*(\\d+|前編|中編|後編)】",
+        "source": "title"
+      },
+      "fallbackValue": "番外編",
+      "group": 1,
+      "pattern": "【COTEN RADIOショート\\s+(.+?)編?\\s*(\\d+|前編|中編|後編)】",
+      "source": "title"
+    }
+  },
+  "groupListing": {
     "sort": {
       "field": "playlistNumber",
       "order": "ascending"
@@ -28,17 +31,17 @@
     "userSortable": true,
     "yearBinding": "pinToYear"
   },
-  "id": "short",
-  "presentation": "combined",
-  "resolverType": "seasonNumber",
-  "titleExtractor": {
-    "fallback": {
-      "pattern": "【COTEN RADIOショート\\s+(.+?)\\s*(\\d+|前編|中編|後編)】",
+  "grouping": {
+    "by": "seasonNumber",
+    "numberingExtractor": {
+      "episodeGroup": 2,
+      "fallbackEpisodePattern": "【番外編[＃#](\\d+)】",
+      "fallbackSeasonNumber": 0,
+      "fallbackToRss": true,
+      "pattern": "【(\\d+)-(\\d+)】",
+      "seasonGroup": 1,
       "source": "title"
-    },
-    "fallbackValue": "番外編",
-    "group": 1,
-    "pattern": "【COTEN RADIOショート\\s+(.+?)編?\\s*(\\d+|前編|中編|後編)】",
-    "source": "title"
-  }
+    }
+  },
+  "id": "short"
 }

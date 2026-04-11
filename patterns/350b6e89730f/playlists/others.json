@@ -10,7 +10,8 @@
       }
     ]
   },
-  "id": "others",
-  "presentation": "combined",
-  "resolverType": "year"
+  "grouping": {
+    "by": "year"
+  },
+  "id": "others"
 }

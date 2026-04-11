@@ -1,14 +1,5 @@
 {
   "displayName": "レギュラーシリーズ",
-  "numberingExtractor": {
-    "episodeGroup": 2,
-    "fallbackEpisodePattern": "(\\d+)】",
-    "fallbackSeasonNumber": 0,
-    "fallbackToRss": true,
-    "pattern": "【(\\d+)-(\\d+)】",
-    "seasonGroup": 1,
-    "source": "title"
-  },
   "episodeFilters": {
     "exclude": [
       {
@@ -21,8 +12,21 @@
       }
     ]
   },
-  "groupList": {
+  "groupItem": {
     "showDateRange": true,
+    "titleExtractor": {
+      "fallback": {
+        "group": 1,
+        "pattern": "【COTEN RADIO\\s*(.+?)\\s*(\\d+)】",
+        "source": "title"
+      },
+      "fallbackValue": "その他",
+      "group": 1,
+      "pattern": "【COTEN RADIO\\s*([^】]+)編\\s*(\\d+)】",
+      "source": "title"
+    }
+  },
+  "groupListing": {
     "sort": {
       "field": "playlistNumber",
       "order": "ascending"
@@ -30,18 +34,17 @@
     "userSortable": true,
     "yearBinding": "pinToYear"
   },
-  "id": "regular",
-  "presentation": "combined",
-  "resolverType": "seasonNumber",
-  "titleExtractor": {
-    "fallback": {
-      "group": 1,
-      "pattern": "【COTEN RADIO\\s*(.+?)\\s*(\\d+)】",
+  "grouping": {
+    "by": "seasonNumber",
+    "numberingExtractor": {
+      "episodeGroup": 2,
+      "fallbackEpisodePattern": "(\\d+)】",
+      "fallbackSeasonNumber": 0,
+      "fallbackToRss": true,
+      "pattern": "【(\\d+)-(\\d+)】",
+      "seasonGroup": 1,
       "source": "title"
-    },
-    "fallbackValue": "その他",
-    "group": 1,
-    "pattern": "【COTEN RADIO\\s*([^】]+)編\\s*(\\d+)】",
-    "source": "title"
-  }
+    }
+  },
+  "id": "regular"
 }

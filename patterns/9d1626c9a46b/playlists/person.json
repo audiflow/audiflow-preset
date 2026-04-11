@@ -7,25 +7,30 @@
       }
     ]
   },
-  "episodeList": {
+  "episodeItem": {
+    "titleExtractor": {
+      "fallback": {
+        "group": 1,
+        "pattern": "（([^）]+)）",
+        "source": "title"
+      },
+      "group": 1,
+      "pattern": "\\(([^)]+)\\)",
+      "source": "title"
+    }
+  },
+  "episodeListing": {
     "showYearHeaders": true
   },
-  "groupList": {
-    "showDateRange": false,
+  "groupItem": {
+    "showDateRange": false
+  },
+  "groupListing": {
     "userSortable": true,
     "yearBinding": "splitByYear"
   },
-  "id": "person",
-  "presentation": "combined",
-  "resolverType": "titleDiscovery",
-  "titleExtractor": {
-    "fallback": {
-      "group": 1,
-      "pattern": "（([^）]+)）",
-      "source": "title"
-    },
-    "group": 1,
-    "pattern": "\\(([^)]+)\\)",
-    "source": "title"
-  }
+  "grouping": {
+    "by": "titleDiscovery"
+  },
+  "id": "person"
 }

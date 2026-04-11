@@ -12,8 +12,15 @@
       }
     ]
   },
-  "groupList": {
+  "groupItem": {
     "showDateRange": true,
+    "titleExtractor": {
+      "group": 1,
+      "pattern": "^#\\d+ *?(.*?)（(?:その\\d+|[前中後]編)）",
+      "source": "title"
+    }
+  },
+  "groupListing": {
     "sort": {
       "field": "newestEpisodeDate",
       "order": "ascending"
@@ -21,12 +28,8 @@
     "userSortable": true,
     "yearBinding": "pinToYear"
   },
-  "id": "topics",
-  "presentation": "combined",
-  "resolverType": "titleDiscovery",
-  "titleExtractor": {
-    "group": 1,
-    "pattern": "^#\\d+ *?(.*?)（(?:その\\d+|[前中後]編)）",
-    "source": "title"
-  }
+  "grouping": {
+    "by": "titleDiscovery"
+  },
+  "id": "topics"
 }
