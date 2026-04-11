@@ -52,6 +52,8 @@ The script uses the iTunes Search API. Adjust `--country` as needed (us, gb, etc
 
 ### Step 2: Analyze the feed
 
+Prerequisite: requires Python 3.9+ and the `defusedxml` package (`pip install defusedxml`).
+
 ```bash
 python3 <skill_path>/scripts/analyze-feed.py "<feed_url>"
 ```

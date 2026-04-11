@@ -71,7 +71,7 @@ For alternative setups, see the [editor repository](https://github.com/audiflow/
 
 ### Using AI coding assistants (optional)
 
-This repo includes an `audiflow-playlist` skill that guides AI assistants through the full pattern creation workflow: searching for podcast feeds, analyzing RSS title patterns, writing JSON configs, and validating.
+This repo includes an `audiflow-playlist` skill that guides AI assistants through the full pattern creation workflow: searching for podcast feeds, analyzing RSS title patterns, writing JSON configs, and validating. Prerequisite: the helper scripts require Python 3.9+ and the `defusedxml` package (`pip install defusedxml`).
 
 | Tool | Invocation |
 |------|------------|

@@ -80,18 +80,22 @@ NS = {
 }
 
 
-def fetch_feed(url: str) -> str:
-    """Fetch RSS feed content from URL."""
+def fetch_feed(url: str) -> bytes:
+    """Fetch RSS feed content from URL as raw bytes."""
     req = urllib.request.Request(url, headers={
         "User-Agent": "audiflow-playlist-skill/1.0",
         "Accept": "application/rss+xml, application/xml, text/xml",
     })
     with urllib.request.urlopen(req, timeout=30) as resp:
-        return resp.read().decode("utf-8")
+        return resp.read()
 
 
-def parse_feed(xml_content: str, feed_url: str) -> FeedInfo:
-    """Parse RSS feed XML into structured feed info."""
+def parse_feed(xml_content: bytes | str, feed_url: str) -> FeedInfo:
+    """Parse RSS feed XML into structured feed info.
+
+    Accepts bytes (preferred -- lets ElementTree honor the XML encoding
+    declaration) or str.
+    """
     root = ET.fromstring(xml_content)
     channel = root.find("channel")
     if channel is None:
