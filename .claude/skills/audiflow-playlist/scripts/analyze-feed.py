@@ -20,7 +20,13 @@ import json
 import re
 import sys
 import urllib.request
-import xml.etree.ElementTree as ET
+from email.utils import parsedate_to_datetime
+try:
+    import defusedxml.ElementTree as ET
+except ImportError:
+    # defusedxml not installed -- fall back to stdlib with a warning.
+    # Safe enough for local CLI use; CI should install defusedxml.
+    import xml.etree.ElementTree as ET
 from collections import Counter
 from dataclasses import dataclass, field
 
@@ -121,8 +127,21 @@ def parse_feed(xml_content: str, feed_url: str) -> FeedInfo:
                 guid=guid,
             ))
 
-    dates = [ep.pub_date for ep in episodes if ep.pub_date]
-    date_range = (dates[-1] if dates else "", dates[0] if dates else "")
+    # Parse dates and use min/max -- RSS feeds are not guaranteed ordered
+    parsed_dates: list[tuple[str, object]] = []
+    for ep in episodes:
+        if ep.pub_date:
+            try:
+                dt = parsedate_to_datetime(ep.pub_date)
+                parsed_dates.append((ep.pub_date, dt))
+            except (ValueError, TypeError):
+                pass
+    if parsed_dates:
+        oldest = min(parsed_dates, key=lambda pair: pair[1])[0]
+        newest = max(parsed_dates, key=lambda pair: pair[1])[0]
+        date_range = (oldest, newest)
+    else:
+        date_range = ("", "")
 
     return FeedInfo(
         title=title,
@@ -174,7 +193,7 @@ def detect_bracket_patterns(titles: list[str]) -> list[PatternMatch]:
 def detect_numbering(titles: list[str]) -> dict:
     """Detect season/episode numbering patterns in titles."""
     numbering_patterns = [
-        (r"S(\d+)\s*E(\d+)", "SxxExx format"),
+        (r"[Ss](\d+)\s*[Ee](\d+)", "SxxExx format"),
         (r"[Ss]eason\s+(\d+)", "Season N format"),
         (r"[Ee]p(?:isode)?\.?\s*(\d+)", "Episode N format"),
         (r"#(\d+)", "Hash numbering (#N)"),
@@ -310,11 +329,25 @@ def suggest_resolver(
 
     # Build suggested groups for titleClassifier
     suggested_groups = []
+    used_group_ids: set[str] = set()
     if prefixes:
-        for p in prefixes[:10]:
+        for idx, p in enumerate(prefixes[:10]):
             escaped = re.escape(p["prefix"])
+            raw_id = re.sub(r"[^a-z0-9_]", "_", p["prefix"].lower())[:30]
+            # Strip leading/trailing underscores and collapse runs
+            raw_id = re.sub(r"_+", "_", raw_id).strip("_")
+            # Fallback for non-Latin prefixes that collapse to empty
+            if not raw_id:
+                raw_id = f"group_{hashlib.md5(p['prefix'].encode('utf-8')).hexdigest()[:6]}"
+            # Deduplicate IDs
+            candidate = raw_id
+            seq = 2
+            while candidate in used_group_ids:
+                candidate = f"{raw_id}_{seq}"
+                seq += 1
+            used_group_ids.add(candidate)
             suggested_groups.append({
-                "id": re.sub(r"[^a-z0-9_]", "_", p["prefix"].lower())[:30],
+                "id": candidate,
                 "displayName": p["prefix"],
                 "pattern": escaped,
                 "episodeCount": p["count"],
@@ -334,7 +367,7 @@ def suggest_resolver(
                 suggested_filters.append({
                     "type": "require",
                     "field": "title",
-                    "pattern": r"[\u3010]\\d+-\\d+[\u3011]",
+                    "pattern": r"[\u3010\uff3b]\d+-\d+[\u3011\uff3d]",
                     "description": "Match numbered bracket episodes",
                 })
 

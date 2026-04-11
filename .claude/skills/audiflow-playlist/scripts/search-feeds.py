@@ -5,7 +5,8 @@ Usage:
     python search-feeds.py "podcast name" [--limit N] [--country CC]
 
 Output (JSON):
-    Array of results with feedUrl, podcastGuid, title, author, artworkUrl, etc.
+    Array of results with feedUrl, trackId, title, author, artworkUrl, genre,
+    episodeCount, and country.
     Results are sorted by relevance. feedUrl is the RSS feed URL needed for
     pattern creation.
 """
