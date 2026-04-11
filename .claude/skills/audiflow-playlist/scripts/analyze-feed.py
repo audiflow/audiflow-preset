@@ -177,13 +177,17 @@ def detect_bracket_patterns(titles: list[str]) -> list[PatternMatch]:
         # Detect specific bracket formats
         formats: dict[str, list[str]] = {}
 
+        # Use the same bracket characters as the prefilter for classification
+        open_brackets = r"\u3010\u300c\u300e\u3014\uff08\uff3b"
+        close_brackets = r"\u3011\u300d\u300f\u3015\uff09\uff3d"
+
         for t in bracket_titles:
             # e.g. numbered brackets
-            if re.search(r"[\u3010\uff3b]\d+-\d+[\u3011\uff3d]", t):
+            if re.search(rf"[{open_brackets}]\d+-\d+[{close_brackets}]", t):
                 formats.setdefault("numbered_bracket", []).append(t)
-            elif re.search(r"[\u3010\uff3b]\d+\u6708\d+\u65e5[\u3011\uff3d]", t):
+            elif re.search(rf"[{open_brackets}]\d+\u6708\d+\u65e5[{close_brackets}]", t):
                 formats.setdefault("date_bracket", []).append(t)
-            elif re.search(r"[\u3010\uff3b]", t):
+            elif re.search(rf"[{open_brackets}]", t):
                 formats.setdefault("generic_bracket", []).append(t)
 
         for fmt, examples in formats.items():
@@ -282,7 +286,6 @@ def detect_rss_seasons(episodes: list[Episode]) -> dict:
 
 def suggest_resolver(
     titles: list[str],
-    episodes: list[Episode],
     numbering: dict,
     rss_seasons: dict,
     prefixes: list[dict],
@@ -347,7 +350,7 @@ def suggest_resolver(
     used_group_ids: set[str] = {"other"}  # reserve catch-all ID
     if prefixes:
         included_prefixes = prefixes[:10]
-        for idx, p in enumerate(included_prefixes):
+        for p in included_prefixes:
             escaped = re.escape(p["prefix"])
             raw_id = re.sub(r"[^a-z0-9_]", "_", p["prefix"].lower())[:30]
             # Strip leading/trailing underscores and collapse runs
@@ -365,7 +368,7 @@ def suggest_resolver(
             suggested_groups.append({
                 "id": candidate,
                 "displayName": p["prefix"],
-                "pattern": escaped,
+                "pattern": f"^{escaped}",
                 "episodeCount": p["count"],
             })
         # Catch-all group omits "pattern" entirely (schema does not allow null).
@@ -532,7 +535,7 @@ def main() -> None:
         rss_seasons = detect_rss_seasons(feed.episodes)
         prefixes = detect_recurring_prefixes(titles)
 
-        suggestion = suggest_resolver(titles, feed.episodes, numbering, rss_seasons, prefixes)
+        suggestion = suggest_resolver(titles, numbering, rss_seasons, prefixes)
         pattern_id = compute_pattern_id(feed.podcast_guid, feed.feed_url)
         report = format_report(feed, suggestion, pattern_id)
 
