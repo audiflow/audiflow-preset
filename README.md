@@ -69,6 +69,18 @@ You can pass extra flags to the editor:
 
 For alternative setups, see the [editor repository](https://github.com/audiflow/audiflow-smartplaylist-editor) (build from source, Docker).
 
+### Using AI coding assistants (optional)
+
+This repo includes an `audiflow-playlist` skill that guides AI assistants through the full pattern creation workflow: searching for podcast feeds, analyzing RSS title patterns, writing JSON configs, and validating.
+
+| Tool | Invocation |
+|------|------------|
+| [Claude Code](https://claude.ai/claude-code) | `/audiflow-playlist create a pattern for <podcast name>` |
+| [Codex CLI](https://github.com/openai/codex) | Auto-discovered from `.agents/skills/` |
+| [Cursor](https://cursor.com/) | Auto-discovered from `.cursor/skills/` |
+
+All three platforms share the same skill source via symlinks. The skill handles feed lookup, resolver selection, JSON authoring, and browser preview with `./editor.sh`.
+
 ## File structure
 
 Configs use a three-level hierarchy for efficient lazy loading:
