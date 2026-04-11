@@ -71,6 +71,7 @@ class Suggestion:
     has_bracket_format: bool
     suggested_filters: list[dict]
     suggested_groups: list[dict]
+    group_stats: dict[str, int]
 
 
 NS = {
@@ -108,7 +109,7 @@ def parse_feed(xml_content: bytes | str, feed_url: str) -> FeedInfo:
         or ""
     ).strip()
 
-    # Extract podcast GUID from podcast:guid or channel-level guid
+    # Extract podcast GUID from podcast:guid (Podcast Index namespace)
     podcast_guid = ""
     guid_elem = channel.find("podcast:guid", NS)
     if guid_elem is not None and guid_elem.text:
@@ -345,8 +346,9 @@ def suggest_resolver(
     if not reasoning_parts:
         reasoning_parts.append("No strong patterns detected; titleClassifier with manual groups recommended")
 
-    # Build suggested groups for titleClassifier
-    suggested_groups = []
+    # Build suggested groups for titleClassifier (schema-compatible GroupDef shape)
+    suggested_groups: list[dict] = []
+    group_stats: dict[str, int] = {}
     used_group_ids: set[str] = {"other"}  # reserve catch-all ID
     if prefixes:
         included_prefixes = prefixes[:10]
@@ -369,27 +371,27 @@ def suggest_resolver(
                 "id": candidate,
                 "displayName": p["prefix"],
                 "pattern": f"^{escaped}",
-                "episodeCount": p["count"],
             })
+            group_stats[candidate] = p["count"]
         # Catch-all group omits "pattern" entirely (schema does not allow null).
         # Only subtract included prefixes (not all) to avoid undercounting.
         included_total = sum(p["count"] for p in included_prefixes)
         suggested_groups.append({
             "id": "other",
             "displayName": "Other",
-            "episodeCount": len(titles) - included_total,
         })
+        group_stats["other"] = len(titles) - included_total
 
-    # Build suggested filters
-    suggested_filters = []
+    # Build suggested filters using the playlist schema's episodeFilters shape
+    suggested_filters: list[dict] = []
     if bracket_patterns:
         for bp in bracket_patterns:
             if bp.pattern == "numbered_bracket":
                 suggested_filters.append({
-                    "type": "require",
-                    "field": "title",
-                    "pattern": r"[\u3010\uff3b]\d+-\d+[\u3011\uff3d]",
-                    "description": "Match numbered bracket episodes",
+                    "require": [
+                        {"title": r"[\u3010\uff3b]\d+-\d+[\u3011\uff3d]"},
+                    ],
+                    "exclude": [],
                 })
 
     return Suggestion(
@@ -400,6 +402,7 @@ def suggest_resolver(
         has_bracket_format=has_bracket_format,
         suggested_filters=suggested_filters,
         suggested_groups=suggested_groups,
+        group_stats=group_stats,
     )
 
 
@@ -443,6 +446,7 @@ def format_report(feed: FeedInfo, suggestion: Suggestion, pattern_id: str) -> di
             "resolverType": suggestion.resolver_type,
             "reasoning": suggestion.reasoning,
             "suggestedGroups": suggestion.suggested_groups,
+            "groupStats": suggestion.group_stats,
             "suggestedFilters": suggestion.suggested_filters,
         },
         "sampleTitles": titles[:50],
@@ -503,9 +507,11 @@ def format_text_report(report: dict) -> str:
     lines.append(f"  Reasoning: {suggestion['reasoning']}")
     if suggestion["suggestedGroups"]:
         lines.append("  Suggested groups:")
+        stats = suggestion.get("groupStats", {})
         for g in suggestion["suggestedGroups"]:
             pattern_str = g.get("pattern") or "(catch-all)"
-            lines.append(f"    - {g['displayName']} [{pattern_str}] ({g['episodeCount']} episodes)")
+            count = stats.get(g["id"], 0)
+            lines.append(f"    - {g['displayName']} [{pattern_str}] ({count} episodes)")
     lines.append("")
 
     lines.append("## Sample Titles (first 50)")
