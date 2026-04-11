@@ -45,7 +45,7 @@ For full schema details, read `references/schema-reference.md`.
 If the user provides a feed URL, skip to Step 2. Otherwise, search by title:
 
 ```bash
-python <skill_path>/scripts/search-feeds.py "podcast name" --country jp
+python3 <skill_path>/scripts/search-feeds.py "podcast name" --country jp
 ```
 
 The script uses the iTunes Search API. Adjust `--country` as needed (us, gb, etc.). Present results and let the user pick the right podcast. Note the `feedUrl` from the chosen result.
@@ -53,7 +53,7 @@ The script uses the iTunes Search API. Adjust `--country` as needed (us, gb, etc
 ### Step 2: Analyze the feed
 
 ```bash
-python <skill_path>/scripts/analyze-feed.py "<feed_url>"
+python3 <skill_path>/scripts/analyze-feed.py "<feed_url>"
 ```
 
 This fetches the RSS feed and reports:
