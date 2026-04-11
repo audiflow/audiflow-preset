@@ -68,3 +68,9 @@ schema/scripts/validate.sh patterns/
 - Changes to `patterns/` deploy automatically on merge to the target branch
 - Schema SSoT is in the editor repo; vendor updated schemas into `schema/`
 - Check whether docs/specs/file-structure.md needs updating
+
+## Codex notes
+
+- If the user names a local skill or asks to use a repo-specific skill, check `.agents/skills/<skill-name>/agents/openai.yaml` before assuming the skill is unavailable.
+- For playlist-pattern work, also check `.agents/skills/audiflow-playlist/agents/openai.yaml` and the files it references, even if the skill was not surfaced by the runtime's built-in skill list.
+- Treat `.agents/skills/**/SKILL.md`, referenced files under `related_paths`, and any symlink targets they point to as part of the repo's working instructions.
