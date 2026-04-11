@@ -1,0 +1,43 @@
+{
+  "displayName": "ゲスト別",
+  "episodeItem": {
+    "titleExtractor": {
+      "group": 1,
+      "pattern": "#\\d+(?:-\\d+)?\\s+(.+?)\\s*【",
+      "source": "title"
+    }
+  },
+  "groupItem": {
+    "showDateRange": true,
+    "titleExtractor": {
+      "fallback": {
+        "group": 1,
+        "pattern": "【(?:出演：)?(.+?)\\s*】",
+        "source": "title"
+      },
+      "group": 1,
+      "pattern": "【(?:出演：)?(.+?)\\s*編",
+      "source": "title"
+    }
+  },
+  "groupListing": {
+    "showDateRange": true,
+    "sort": {
+      "field": "playlistNumber",
+      "order": "ascending"
+    },
+    "userSortable": true
+  },
+  "grouping": {
+    "by": "titleDiscovery",
+    "discoveryHint": "【(?:出演：)?(.+?)(?:\\s*編.?)?】"
+  },
+  "id": "professors",
+  "selector": {
+    "partitionBy": "seasonNumber",
+    "titleExtractor": {
+      "source": "seasonNumber",
+      "template": "シーズン {value}"
+    }
+  }
+}
