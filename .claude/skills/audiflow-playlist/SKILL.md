@@ -224,7 +224,28 @@ Create `patterns/{patternId}/DESIGN.md` documenting:
 
 This helps future maintainers understand the reasoning behind regex choices.
 
-### Step 7: Validate
+### Step 7: Preview in browser
+
+After writing the pattern files, launch the editor web UI so the user can see the actual grouping result with live RSS data:
+
+```bash
+# Start the editor in the background (downloads binary automatically)
+nohup ./editor.sh > /dev/null 2>&1 &
+EDITOR_PID=$!
+```
+
+Tell the user: "Editor is running at http://localhost:8080 -- open it to preview your pattern with live feed data. Let me know when you're done and I'll stop the server."
+
+When the user is done previewing:
+```bash
+kill $EDITOR_PID 2>/dev/null
+```
+
+If the preview reveals issues (wrong grouping, mismatched regex, episodes in the wrong playlist), fix the JSON files and reload the browser -- the editor picks up file changes.
+
+The preview step is optional but recommended for new patterns. Skip it if the user just wants to validate and commit.
+
+### Step 8: Validate
 
 ```bash
 schema/scripts/validate.sh patterns/
@@ -240,8 +261,9 @@ This downloads the `audiflow-editor` binary (matching `schema/VERSION`) and runs
 2. Understand what needs to change (new playlist, updated groups, filter tweaks)
 3. If modifying regex patterns, analyze sample titles first -- run `analyze-feed.py` to see current episode titles
 4. Make changes, keeping the DESIGN.md in sync
-5. Validate with `schema/scripts/validate.sh patterns/`
-6. Bump `dataVersion` is handled by CI (`audiflow-editor bump-versions`), but for local testing set it manually
+5. Preview with `./editor.sh` to verify grouping looks correct in the browser (optional)
+6. Validate with `schema/scripts/validate.sh patterns/`
+7. Bump `dataVersion` is handled by CI (`audiflow-editor bump-versions`), but for local testing set it manually
 
 ---
 
