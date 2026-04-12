@@ -49,7 +49,7 @@
         "id": "wakamiya1",
         "displayName": "実験と挑戦 プロデューサー・研究者 若新雄純さんが企むこれまで&これから",
         "pattern": "若新雄純さんが企むこれまで",
-        "episodeList": {
+        "episodeListing": {
           "showYearHeaders": false
         }
       },
@@ -77,7 +77,7 @@
         "id": "ukita",
         "displayName": "戦国の貴公子　宇喜多秀家　～夢託されし秀吉チルドレンの生き様～",
         "pattern": "宇喜多秀家",
-        "episodeList": {
+        "episodeListing": {
           "showYearHeaders": false
         }
       },
@@ -85,7 +85,7 @@
         "id": "sadoshima",
         "displayName": "世界を理解する為の観察力の鍛え方 佐渡島庸平",
         "pattern": "佐渡島庸平",
-        "episodeList": {
+        "episodeListing": {
           "showYearHeaders": false
         }
       },
@@ -93,7 +93,7 @@
         "id": "kusano",
         "displayName": "PMの仕事から見るCOTEN 草野陽夏",
         "pattern": "草野陽夏の仕事から見る",
-        "episodeList": {
+        "episodeListing": {
           "showYearHeaders": false
         }
       },
@@ -106,7 +106,7 @@
         "id": "heralbony",
         "displayName": "株式会社ヘラルボニーの挑戦",
         "pattern": "株式会社ヘラルボニーの挑戦",
-        "episodeList": {
+        "episodeListing": {
           "showYearHeaders": false
         }
       },
@@ -134,7 +134,7 @@
         "id": "aoyagi",
         "displayName": "青柳考哉（株式会社BOOK）",
         "pattern": "青柳考哉",
-        "episodeList": {
+        "episodeListing": {
           "showYearHeaders": false
         }
       },
@@ -142,7 +142,7 @@
         "id": "nakagawa",
         "displayName": "中川政七商店",
         "pattern": "中川政七商店",
-        "episodeList": {
+        "episodeListing": {
           "showYearHeaders": false
         }
       },
@@ -150,7 +150,7 @@
         "id": "kitagawa",
         "displayName": "量子コンピュータ 北川拓也",
         "pattern": "北川拓也",
-        "episodeList": {
+        "episodeListing": {
           "showYearHeaders": false
         }
       },
@@ -173,10 +173,10 @@
         "id": "special",
         "displayName": "特別編",
         "pattern": "特別編",
-        "display": {
+        "groupListing": {
           "yearBinding": "splitByYear"
         },
-        "episodeList": {
+        "episodeListing": {
           "showYearHeaders": true,
           "sort": {
             "field": "publishedAt",
@@ -188,10 +188,10 @@
         "id": "extra",
         "displayName": "番外編",
         "pattern": "番外編\\s*[#＃]",
-        "display": {
+        "groupListing": {
           "yearBinding": "splitByYear"
         },
-        "episodeList": {
+        "episodeListing": {
           "showYearHeaders": true,
           "sort": {
             "field": "publishedAt",
@@ -202,10 +202,10 @@
       {
         "id": "other",
         "displayName": "その他",
-        "display": {
+        "groupListing": {
           "yearBinding": "splitByYear"
         },
-        "episodeList": {
+        "episodeListing": {
           "showYearHeaders": true,
           "sort": {
             "field": "publishedAt",
