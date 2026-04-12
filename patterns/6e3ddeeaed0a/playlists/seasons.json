@@ -1,5 +1,10 @@
 {
+  "id": "seasons",
   "displayName": "Seasons",
+  "grouping": {
+    "by": "seasonNumber"
+  },
+  "priority": 0,
   "episodeFilters": {
     "exclude": [
       {
@@ -8,18 +13,12 @@
     ]
   },
   "groupItem": {
-    "prependSeasonNumber": true,
     "showDateRange": true,
+    "prependSeasonNumber": true,
     "titleExtractor": {
-      "group": 1,
+      "source": "title",
       "pattern": "^(.*?) [-|] ",
-      "source": "title"
+      "group": 1
     }
-  },
-  "grouping": {
-    "by": "seasonNumber",
-    "staticClassifiers": []
-  },
-  "id": "seasons",
-  "priority": 0
+  }
 }

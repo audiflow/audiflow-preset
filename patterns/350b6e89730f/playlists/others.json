@@ -1,5 +1,10 @@
 {
+  "id": "others",
   "displayName": "その他",
+  "grouping": {
+    "by": "year"
+  },
+  "priority": 2,
   "episodeFilters": {
     "exclude": [
       {
@@ -9,10 +14,5 @@
         "title": "番外編|雑談回|特別編"
       }
     ]
-  },
-  "grouping": {
-    "by": "year"
-  },
-  "id": "others",
-  "priority": 2
+  }
 }

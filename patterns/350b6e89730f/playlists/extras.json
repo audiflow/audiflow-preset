@@ -1,5 +1,10 @@
 {
+  "id": "extras",
   "displayName": "番外編・雑談回",
+  "grouping": {
+    "by": "year"
+  },
+  "priority": 1,
   "episodeFilters": {
     "require": [
       {
@@ -7,15 +12,10 @@
       }
     ]
   },
-  "groupItem": {
-    "showDateRange": true
-  },
   "groupListing": {
     "userSortable": true
   },
-  "grouping": {
-    "by": "year"
-  },
-  "id": "extras",
-  "priority": 1
+  "groupItem": {
+    "showDateRange": true
+  }
 }

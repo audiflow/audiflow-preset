@@ -1,38 +1,10 @@
 {
+  "id": "professors",
   "displayName": "ゲスト別",
-  "episodeItem": {
-    "titleExtractor": {
-      "group": 1,
-      "pattern": "#\\d+(?:-\\d+)?\\s+(.+?)\\s*【",
-      "source": "title"
-    }
-  },
-  "groupItem": {
-    "showDateRange": true,
-    "titleExtractor": {
-      "fallback": {
-        "group": 1,
-        "pattern": "【(?:出演：)?(.+?)\\s*】",
-        "source": "title"
-      },
-      "group": 1,
-      "pattern": "【(?:出演：)?(.+?)\\s*編",
-      "source": "title"
-    }
-  },
-  "groupListing": {
-    "showDateRange": true,
-    "sort": {
-      "field": "playlistNumber",
-      "order": "ascending"
-    },
-    "userSortable": true
-  },
   "grouping": {
     "by": "titleDiscovery",
     "discoveryHint": "【(?:出演：)?(.+?)(?:\\s*編.?)?】"
   },
-  "id": "professors",
   "selector": {
     "partitionBy": "seasonNumber",
     "titleExtractor": {
@@ -40,5 +12,32 @@
       "template": "シーズン {value}"
     }
   },
-  "priority": 0
+  "priority": 0,
+  "groupListing": {
+    "userSortable": true,
+    "sort": {
+      "field": "playlistNumber",
+      "order": "ascending"
+    }
+  },
+  "groupItem": {
+    "showDateRange": true,
+    "titleExtractor": {
+      "source": "title",
+      "pattern": "【(?:出演：)?(.+?)\\s*編",
+      "group": 1,
+      "fallback": {
+        "source": "title",
+        "pattern": "【(?:出演：)?(.+?)\\s*】",
+        "group": 1
+      }
+    }
+  },
+  "episodeItem": {
+    "titleExtractor": {
+      "source": "title",
+      "pattern": "#\\d+(?:-\\d+)?\\s+(.+?)\\s*【",
+      "group": 1
+    }
+  }
 }

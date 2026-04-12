@@ -1,12 +1,11 @@
 {
   "dataVersion": 1,
+  "id": "9d1626c9a46b",
   "feedUrls": [
     "https://feeds.megaphone.fm/TBS6742412969"
   ],
-  "id": "9d1626c9a46b",
   "playlists": [
     "person",
     "others"
-  ],
-  "yearGroupedEpisodes": false
+  ]
 }
