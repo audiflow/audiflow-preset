@@ -1,6 +1,7 @@
 {
   "id": "extras",
   "displayName": "その他(番外編など)",
+  "priority": 2,
   "grouping": {
     "by": "titleClassifier",
     "staticClassifiers": [
@@ -214,7 +215,6 @@
       }
     ]
   },
-  "priority": 2,
   "groupListing": {
     "yearBinding": "pinToYear",
     "userSortable": true,

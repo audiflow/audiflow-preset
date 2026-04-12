@@ -1,6 +1,7 @@
 {
   "id": "by_category",
   "displayName": "カテゴリ別",
+  "priority": 0,
   "grouping": {
     "by": "titleClassifier",
     "staticClassifiers": [
@@ -40,7 +41,6 @@
       }
     ]
   },
-  "priority": 0,
   "episodeListing": {
     "showYearHeaders": true
   }

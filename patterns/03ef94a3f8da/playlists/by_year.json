@@ -1,6 +1,7 @@
 {
   "id": "by_year",
   "displayName": "年別",
+  "priority": 1,
   "grouping": {
     "by": "titleClassifier",
     "staticClassifiers": [
@@ -40,7 +41,6 @@
       }
     ]
   },
-  "priority": 1,
   "groupListing": {
     "yearBinding": "splitByYear",
     "userSortable": true

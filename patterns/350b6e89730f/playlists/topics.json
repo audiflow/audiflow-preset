@@ -1,9 +1,6 @@
 {
   "id": "topics",
   "displayName": "テーマ回",
-  "grouping": {
-    "by": "titleDiscovery"
-  },
   "priority": 0,
   "episodeFilters": {
     "require": [
@@ -16,6 +13,9 @@
         "title": "番外編|雑談回|特別編"
       }
     ]
+  },
+  "grouping": {
+    "by": "titleDiscovery"
   },
   "groupListing": {
     "yearBinding": "pinToYear",

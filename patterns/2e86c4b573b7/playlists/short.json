@@ -1,6 +1,17 @@
 {
   "id": "short",
   "displayName": "ショートシリーズ",
+  "priority": 1,
+  "episodeFilters": {
+    "require": [
+      {
+        "title": "【\\d+-\\d+】"
+      },
+      {
+        "title": "【COTEN RADIO\\s*ショート"
+      }
+    ]
+  },
   "grouping": {
     "by": "seasonNumber",
     "numberingExtractor": {
@@ -12,17 +23,6 @@
       "fallbackEpisodePattern": "【番外編[＃#](\\d+)】",
       "fallbackToRss": true
     }
-  },
-  "priority": 1,
-  "episodeFilters": {
-    "require": [
-      {
-        "title": "【\\d+-\\d+】"
-      },
-      {
-        "title": "【COTEN RADIO\\s*ショート"
-      }
-    ]
   },
   "groupListing": {
     "yearBinding": "pinToYear",
