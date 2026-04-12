@@ -42,5 +42,6 @@
       }
     ]
   },
-  "id": "by_category"
+  "id": "by_category",
+  "priority": 0
 }

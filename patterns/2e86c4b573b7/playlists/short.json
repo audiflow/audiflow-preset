@@ -43,5 +43,6 @@
       "source": "title"
     }
   },
-  "id": "short"
+  "id": "short",
+  "priority": 1
 }

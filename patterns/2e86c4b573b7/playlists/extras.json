@@ -230,5 +230,6 @@
       }
     ]
   },
-  "id": "extras"
+  "id": "extras",
+  "priority": 2
 }

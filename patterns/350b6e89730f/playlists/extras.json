@@ -16,5 +16,6 @@
   "grouping": {
     "by": "year"
   },
-  "id": "extras"
+  "id": "extras",
+  "priority": 1
 }

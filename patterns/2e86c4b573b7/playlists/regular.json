@@ -46,5 +46,6 @@
       "source": "title"
     }
   },
-  "id": "regular"
+  "id": "regular",
+  "priority": 0
 }

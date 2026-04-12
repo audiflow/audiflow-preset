@@ -13,5 +13,6 @@
   "grouping": {
     "by": "year"
   },
-  "id": "others"
+  "id": "others",
+  "priority": 2
 }

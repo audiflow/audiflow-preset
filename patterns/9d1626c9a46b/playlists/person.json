@@ -32,5 +32,6 @@
   "grouping": {
     "by": "titleDiscovery"
   },
-  "id": "person"
+  "id": "person",
+  "priority": 0
 }

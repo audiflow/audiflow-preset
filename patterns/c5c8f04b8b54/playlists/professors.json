@@ -39,5 +39,6 @@
       "source": "seasonNumber",
       "template": "シーズン {value}"
     }
-  }
+  },
+  "priority": 0
 }

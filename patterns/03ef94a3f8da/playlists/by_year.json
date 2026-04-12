@@ -43,5 +43,6 @@
       }
     ]
   },
-  "id": "by_year"
+  "id": "by_year",
+  "priority": 1
 }

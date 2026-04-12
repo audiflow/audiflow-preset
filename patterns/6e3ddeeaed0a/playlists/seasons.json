@@ -20,5 +20,6 @@
     "by": "seasonNumber",
     "staticClassifiers": []
   },
-  "id": "seasons"
+  "id": "seasons",
+  "priority": 0
 }
