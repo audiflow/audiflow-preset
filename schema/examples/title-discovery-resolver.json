@@ -1,23 +1,28 @@
 {
   "id": "story-arcs",
   "displayName": "Story Arcs",
-  "resolverType": "titleDiscovery",
-  "presentation": "combined",
+  "priority": 0,
   "episodeFilters": {
     "require": [
       { "title": "\\[.+\\]" }
     ]
   },
-  "titleExtractor": {
-    "source": "title",
-    "pattern": "\\[(.+?)\\s+\\d+\\]",
-    "group": 1
+  "grouping": {
+    "by": "titleDiscovery",
+    "discoveryHint": "\\[(.+?)\\s+\\d+\\]",
+    "numberingExtractor": {
+      "source": "title",
+      "pattern": "\\[.+?\\s+(\\d+)\\]",
+      "seasonGroup": null,
+      "episodeGroup": 1,
+      "fallbackToRss": true
+    }
   },
-  "numberingExtractor": {
-    "source": "title",
-    "pattern": "\\[.+?\\s+(\\d+)\\]",
-    "seasonGroup": null,
-    "episodeGroup": 1,
-    "fallbackToRss": true
+  "groupItem": {
+    "titleExtractor": {
+      "source": "title",
+      "pattern": "\\[(.+?)\\s+\\d+\\]",
+      "group": 1
+    }
   }
 }

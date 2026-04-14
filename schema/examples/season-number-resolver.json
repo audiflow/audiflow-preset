@@ -1,21 +1,25 @@
 {
   "id": "seasons",
   "displayName": "Seasons",
-  "resolverType": "seasonNumber",
-  "presentation": "combined",
-  "titleExtractor": {
-    "source": "seasonNumber",
-    "template": "Season {value}",
-    "fallbackValue": "Specials"
+  "priority": 0,
+  "grouping": {
+    "by": "seasonNumber"
   },
-  "groupList": {
-    "showDateRange": true,
+  "groupListing": {
     "sort": {
       "field": "playlistNumber",
       "order": "descending"
     }
   },
-  "episodeList": {
+  "groupItem": {
+    "showDateRange": true,
+    "titleExtractor": {
+      "source": "seasonNumber",
+      "template": "Season {value}",
+      "fallbackValue": "Specials"
+    }
+  },
+  "episodeListing": {
     "showYearHeaders": true
   }
 }
