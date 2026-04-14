@@ -1,0 +1,485 @@
+# Instincts generated from https://github.com/audiflow/audiflow-smartplaylist
+# Generated: 2026-04-14T06:38:30.739Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: audiflow-smartplaylist-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: chore, feat, refactor, fix
+
+## Evidence
+
+- 12 commits analyzed
+- Detected conventional commit pattern
+- Examples: chore: vendor v5 schema from editor repo, feat: add ReTACTION RADIO pattern using v5 schema (selector.partitionBy)
+
+---
+id: audiflow-smartplaylist-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Commit Length
+
+## Action
+
+Write moderate-length commit messages (~57 characters)
+
+## Evidence
+
+- Average commit message length: 57 chars
+- Based on 12 commits
+
+---
+id: audiflow-smartplaylist-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: audiflow-smartplaylist-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: audiflow-smartplaylist-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: audiflow-smartplaylist-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: audiflow-smartplaylist-workflow-schema-version-upgrade-and-pattern-migration
+trigger: "when doing schema version upgrade and pattern migration"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Workflow Schema Version Upgrade And Pattern Migration
+
+## Action
+
+Follow the schema-version-upgrade-and-pattern-migration workflow:
+1. Update schema/playlist-definition.schema.json to new version.
+2. Update schema/VERSION and related docs (e.g., schema-reference.md).
+3. Update patterns/meta.json to reference new schema fields.
+4. Migrate all patterns/*/playlists/*.json files to new schema syntax.
+5. Optionally update patterns/*/meta.json for new fields or order.
+6. Commit all changes together.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: schema/playlist-definition.schema.json, schema/VERSION, .claude/skills/audiflow-playlist/references/schema-reference.md
+
+---
+id: audiflow-smartplaylist-workflow-add-or-update-pattern
+trigger: "when doing add or update pattern"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Workflow Add Or Update Pattern
+
+## Action
+
+Follow the add-or-update-pattern workflow:
+1. Create or update patterns/<pattern-id>/meta.json.
+2. Create or update patterns/<pattern-id>/playlists/*.json.
+3. Optionally add or update patterns/<pattern-id>/DESIGN.md.
+4. Update patterns/meta.json if global pattern metadata changes.
+5. Commit all related files together.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: patterns/*/meta.json, patterns/*/playlists/*.json, patterns/*/DESIGN.md
+
+---
+id: audiflow-smartplaylist-workflow-schema-and-docs-cleanup
+trigger: "when doing schema and docs cleanup"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Workflow Schema And Docs Cleanup
+
+## Action
+
+Follow the schema-and-docs-cleanup workflow:
+1. Remove deprecated fields/aliases from schema/playlist-definition.schema.json.
+2. Update .claude/skills/audiflow-playlist/references/schema-reference.md to match new schema.
+3. Update docs/specs/file-structure.md if file structure or accepted values change.
+4. Commit schema and docs changes together.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: schema/playlist-definition.schema.json, .claude/skills/audiflow-playlist/references/schema-reference.md, docs/specs/file-structure.md
+
+---
+id: audiflow-smartplaylist-workflow-pattern-field-normalization
+trigger: "when doing pattern field normalization"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Workflow Pattern Field Normalization
+
+## Action
+
+Follow the pattern-field-normalization workflow:
+1. Update all patterns/*/meta.json and patterns/*/playlists/*.json to match the new field order.
+2. Optionally update patterns/meta.json for global consistency.
+3. Commit all normalization changes together.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: patterns/*/meta.json, patterns/*/playlists/*.json, patterns/meta.json
+
+---
+id: audiflow-smartplaylist-instinct-file-naming
+trigger: "When creating or renaming a file in the codebase."
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct File Naming
+
+## Action
+
+Use camelCase for file names.
+
+## Evidence
+
+- Naming conventions specified in analysis
+- Pattern in namingConventions.files
+
+---
+id: audiflow-smartplaylist-instinct-function-naming
+trigger: "When defining a new function."
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Function Naming
+
+## Action
+
+Use camelCase for function names.
+
+## Evidence
+
+- Naming conventions specified in analysis
+- Pattern in namingConventions.functions
+
+---
+id: audiflow-smartplaylist-instinct-class-naming
+trigger: "When defining a new class."
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Class Naming
+
+## Action
+
+Use PascalCase for class names.
+
+## Evidence
+
+- Naming conventions specified in analysis
+- Pattern in namingConventions.classes
+
+---
+id: audiflow-smartplaylist-instinct-constant-naming
+trigger: "When defining a constant."
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Constant Naming
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for constant names.
+
+## Evidence
+
+- Naming conventions specified in analysis
+- Pattern in namingConventions.constants
+
+---
+id: audiflow-smartplaylist-instinct-import-style
+trigger: "When importing modules in Python files."
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Import Style
+
+## Action
+
+Use relative imports.
+
+## Evidence
+
+- importStyle: relative in analysis
+
+---
+id: audiflow-smartplaylist-instinct-export-style
+trigger: "When exporting modules or functions."
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Export Style
+
+## Action
+
+Use named exports.
+
+## Evidence
+
+- exportStyle: named in analysis
+
+---
+id: audiflow-smartplaylist-instinct-git-commit-format
+trigger: "When writing a git commit message."
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Git Commit Format
+
+## Action
+
+Use Conventional Commits format with prefixes: chore, feat, refactor, fix.
+
+## Evidence
+
+- Pattern in commit prefixes: chore, feat, refactor, fix
+- Examples: 'chore: vendor v5 schema from editor repo', 'feat: add ReTACTION RADIO pattern...'
+
+---
+id: audiflow-smartplaylist-instinct-git-commit-length
+trigger: "When composing a commit message."
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Git Commit Length
+
+## Action
+
+Keep commit message length around 57 characters on average.
+
+## Evidence
+
+- averageLength: 57 in commit analysis
+
+---
+id: audiflow-smartplaylist-instinct-schema-version-upgrade
+trigger: "When a new schema version is released and all patterns must be updated to comply."
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Schema Version Upgrade
+
+## Action
+
+Update schema files, migrate all pattern files to new schema syntax, update documentation, and commit all changes together.
+
+## Evidence
+
+- Workflow: schema-version-upgrade-and-pattern-migration
+- Commit sequence and files involved in workflow definition
+
+---
+id: audiflow-smartplaylist-instinct-add-update-pattern
+trigger: "When adding a new playlist pattern or making significant changes to an existing pattern."
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Add Update Pattern
+
+## Action
+
+Create or update pattern meta.json and playlist definition files, optionally update DESIGN.md, update patterns/meta.json if needed, and commit all related files together.
+
+## Evidence
+
+- Workflow: add-or-update-pattern
+- Commit sequence and files involved in workflow definition
+
+---
+id: audiflow-smartplaylist-instinct-schema-docs-cleanup
+trigger: "When deprecated schema fields or aliases are no longer needed."
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Schema Docs Cleanup
+
+## Action
+
+Remove deprecated fields/aliases from schema, update documentation to match, and commit schema and docs changes together.
+
+## Evidence
+
+- Workflow: schema-and-docs-cleanup
+- Commit sequence and files involved in workflow definition
+
+---
+id: audiflow-smartplaylist-instinct-pattern-field-normalization
+trigger: "When introducing or enforcing a new field order or normalization rule for pattern files."
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Pattern Field Normalization
+
+## Action
+
+Update all pattern meta.json and playlist files to match new field order and commit all normalization changes together.
+
+## Evidence
+
+- Workflow: pattern-field-normalization
+- Commit sequence and files involved in workflow definition
+
+---
+id: audiflow-smartplaylist-instinct-pattern-test-location
+trigger: "When adding or updating tests for patterns."
+confidence: 0.7
+domain: testing
+source: repo-analysis
+source_repo: audiflow/audiflow-smartplaylist
+---
+
+# Audiflow Smartplaylist Instinct Pattern Test Location
+
+## Action
+
+Place test files in a separate test location, not mixed with source files.
+
+## Evidence
+
+- testLocation: separate in architecture analysis
+
