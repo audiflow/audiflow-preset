@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- Pattern ba9893efc22f (ながら日経) with personality, with-nikkei, nikkei-the-pitch, and techno-sinsei playlists
+- Pattern da8d282b7e26 (ヤング日経) with personality playlist
+
 ## [v3] - 2026-04-08
 
 ### Added
