@@ -8,7 +8,7 @@
     }
   },
   "groupItem": {
-    "showDateRange": true
+    "showDateRange": false
   },
   "groupListing": {
     "userSortable": true,
