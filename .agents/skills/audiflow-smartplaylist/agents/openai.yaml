@@ -1,0 +1,6 @@
+interface:
+  display_name: "Audiflow Smartplaylist"
+  short_description: "Repo-specific patterns and workflows for audiflow-smartplaylist"
+  default_prompt: "Use the audiflow-smartplaylist repo skill to follow existing architecture, testing, and workflow conventions."
+policy:
+  allow_implicit_invocation: true
