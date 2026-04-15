@@ -14,6 +14,12 @@
       "source": "title"
     }
   },
+  "episodeListing": {
+    "sort": {
+      "field": "publishedAt",
+      "order": "ascending"
+    }
+  },
   "grouping": {
     "by": "titleClassifier",
     "staticClassifiers": [
