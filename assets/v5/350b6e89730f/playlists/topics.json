@@ -1,0 +1,36 @@
+{
+  "id": "topics",
+  "displayName": "テーマ回",
+  "priority": 0,
+  "episodeFilters": {
+    "require": [
+      {
+        "title": "（(?:その\\d+|[前中後]編)）"
+      }
+    ],
+    "exclude": [
+      {
+        "title": "番外編|雑談回|特別編"
+      }
+    ]
+  },
+  "grouping": {
+    "by": "titleDiscovery"
+  },
+  "groupListing": {
+    "yearBinding": "pinToYear",
+    "userSortable": true,
+    "sort": {
+      "field": "newestEpisodeDate",
+      "order": "ascending"
+    }
+  },
+  "groupItem": {
+    "showDateRange": true,
+    "titleExtractor": {
+      "source": "title",
+      "pattern": "^#\\d+ *?(.*?)（(?:その\\d+|[前中後]編)）",
+      "group": 1
+    }
+  }
+}

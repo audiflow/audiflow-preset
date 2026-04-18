@@ -1,0 +1,13 @@
+{
+  "dataVersion": 1,
+  "feedUrls": [
+    "https://anchor.fm/s/57a9101c/podcast/rss"
+  ],
+  "id": "350b6e89730f",
+  "playlists": [
+    "topics",
+    "extras",
+    "others"
+  ],
+  "yearGroupedEpisodes": true
+}
