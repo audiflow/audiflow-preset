@@ -49,6 +49,13 @@
       "feedUrlHint": "https://feeds.megaphone.fm/young",
       "id": "da8d282b7e26",
       "playlistCount": 1
+    },
+    {
+      "dataVersion": 2,
+      "displayName": "ながら日経",
+      "feedUrlHint": "https://feeds.megaphone.fm/nagara",
+      "id": "ba9893efc22f",
+      "playlistCount": 4
     }
   ],
   "schemaVersion": 5
