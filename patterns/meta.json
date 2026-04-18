@@ -1,5 +1,5 @@
 {
-  "dataVersion": 25,
+  "dataVersion": 20,
   "patterns": [
     {
       "dataVersion": 2,
@@ -30,7 +30,7 @@
       "playlistCount": 3
     },
     {
-      "dataVersion": 2,
+      "dataVersion": 1,
       "displayName": "東京ビジネスハブ",
       "feedUrlHint": "https://feeds.megaphone.fm/TBS6742412969",
       "id": "9d1626c9a46b",
@@ -44,7 +44,7 @@
       "playlistCount": 1
     },
     {
-      "dataVersion": 2,
+      "dataVersion": 1,
       "displayName": "ヤング日経",
       "feedUrlHint": "https://feeds.megaphone.fm/young",
       "id": "da8d282b7e26",
