@@ -1,14 +1,30 @@
 # Schema Changelog
 
+## Unreleased
+
+### Renamed: `playlistStructure` -> `presentation`
+
+**Values:** `split` -> `separate`, `grouped` -> `combined`
+
+**Why:** The pair `split`/`grouped` lacked a coherent naming axis -- `split` described an action while `grouped` described a state. The new names sit on a clear presentation axis: `separate` means each resolver result is presented as its own playlist (selectable from a dropdown); `combined` means all results are presented as group cards inside a single playlist. The field name `presentation` reflects that this controls how results appear to the user, not internal structure.
+
+### Removed: `nullSeasonGroupKey`
+
+**Why:** Episodes without a season number naturally fall through to a fallback definition. The explicit group key assignment added complexity without value -- the fallback mechanism already handles this case.
+
+### Removed: `priority`
+
+**Why:** The app does not use priority as described in the schema. Episode claiming order is determined by whether a definition has filters (filtered definitions process first, filter-less fallbacks process second), not by a numeric priority value.
+
 ## 2026-03-08 -- v2 restructure
 
-### Renamed: `contentType` -> `playlistStructure`
+### Renamed: `contentType` -> `playlistStructure` (subsequently renamed to `presentation`; see Unreleased)
 
-**Values:** `episodes` -> `split`, `groups` -> `grouped`
+**Values:** `episodes` -> `split`, `groups` -> `grouped` (subsequently renamed to `separate`/`combined`)
 
 **Format:** Changed from `enum` to `oneOf` with per-value descriptions.
 
-**Why:** `contentType` was too generic. `episodes` described the content, not the structural outcome (one definition splitting into many independent playlists). The new names make the structural choice self-evident: `split` produces many playlists, `grouped` nests groups inside one playlist.
+**Why:** `contentType` was too generic. `episodes` described the content, not the structural outcome (one definition splitting into many independent playlists). The new names make the structural choice self-evident: `split` produces many playlists, `grouped` nests groups inside one playlist. (Note: `split` and `grouped` were subsequently renamed to `separate` and `combined`; see Unreleased.)
 
 ### Renamed: `yearHeaderMode` -> `groupList.yearBinding`
 
@@ -16,11 +32,11 @@
 
 **Format:** Changed from `enum` to `oneOf` with per-value descriptions. Moved inside `groupList` object.
 
-**Why:** `yearHeaderMode` described the UI mechanism (headers) rather than the relationship (how groups bind to years). `perEpisode` was misleading -- the behavior is splitting a group across multiple years, parallel to `playlistStructure: split`. `firstEpisode` was unclear about what "first" meant; `pinToYear` clearly says the group anchors to one year.
+**Why:** `yearHeaderMode` described the UI mechanism (headers) rather than the relationship (how groups bind to years). `perEpisode` was misleading -- the behavior is splitting a group across multiple years, parallel to `playlistStructure: split` (subsequently renamed to `presentation: separate`). `firstEpisode` was unclear about what "first" meant; `pinToYear` clearly says the group anchors to one year.
 
-### Renamed: `smartPlaylistEpisodeExtractor` -> `episodeExtractor`
+### Renamed: `smartPlaylistEpisodeExtractor` -> `episodeExtractor` (subsequently renamed to `numberingExtractor` in v4)
 
-**Why:** Shorter, clearer. The `smartPlaylist` prefix was redundant since the entire schema is about smart playlists.
+**Why:** Shorter, clearer. The `smartPlaylist` prefix was redundant since the entire schema is about smart playlists. In the v2 restructure, this field was renamed to `episodeExtractor`; the later `numberingExtractor` rename happened in v4.
 
 ### Restructured: flat filters -> `episodeFilters` object
 
@@ -31,7 +47,7 @@ where `EpisodeFilterEntry` is `{ title?: string, description?: string }`
 **Why:**
 - The three original fields were mathematically redundant (`titleFilter` and `requireFilter` are the same operation). Unifying into `require`/`exclude` arrays eliminates this.
 - Filtering was hardcoded to episode titles. The new `EpisodeFilterEntry` allows matching against `title`, `description`, or both (AND within an entry).
-- Order does not matter (set intersection is commutative): all `require` entries are ANDed, all `exclude` entries are ANDed, and require/exclude are independent.
+- Order does not matter (set intersection is commutative): all `require` entries are ANDed, all `exclude` entries are ORed (episode excluded if ANY matches), and require/exclude are independent.
 - Array format supports multiple independent conditions without inventing new field names.
 
 ### Restructured: grouped-only display settings -> `groupList` object
@@ -39,7 +55,7 @@ where `EpisodeFilterEntry` is `{ title?: string, description?: string }`
 **Before:** `yearHeaderMode`, `showSortOrderToggle`, `showDateRange`, `customSort` (flat top-level fields)
 **After:** `groupList.yearBinding`, `groupList.userSortable`, `groupList.showDateRange`, `groupList.sort`
 
-**Why:** These settings only apply when `playlistStructure` is `grouped`. Nesting them makes the conditional relationship explicit -- the entire `groupList` object is meaningless in `split` mode.
+**Why:** These settings only apply when `playlistStructure` is `grouped` (subsequently renamed to `presentation: combined`). Nesting them makes the conditional relationship explicit -- the entire `groupList` object is meaningless in `split` (subsequently `separate`) mode.
 
 ### Restructured: `episodeYearHeaders` -> `episodeList.showYearHeaders`
 
@@ -60,7 +76,7 @@ where `EpisodeFilterEntry` is `{ title?: string, description?: string }`
 **New fields in GroupDef:**
 - `display` object: `showDateRange`, `yearBinding` (overrides groupList defaults)
 - `episodeList` object: `showYearHeaders`, `sort`, `titleExtractor` (overrides definition-level episodeList)
-- `episodeExtractor` (overrides definition-level episodeExtractor)
+- `numberingExtractor` (overrides definition-level numberingExtractor)
 
 **Removed from GroupDef:** `episodeYearHeaders`, `showDateRange` (replaced by nested `display` and `episodeList` objects)
 
@@ -116,7 +132,7 @@ where `EpisodeFilterEntry` is `{ title?: string, description?: string }`
 
 ### Kept at top level: `titleExtractor`, `prependSeasonNumber`
 
-**Why:** Both apply to resolver results regardless of `playlistStructure`. In `split` mode they affect playlist titles; in `grouped` mode they affect group card titles. They are not grouped-only settings.
+**Why:** Both apply to resolver results regardless of `playlistStructure` (subsequently renamed to `presentation`). In `split` (subsequently `separate`) mode they affect playlist titles; in `grouped` (subsequently `combined`) mode they affect group card titles. They are not grouped-only settings.
 
 ### Schema version: v1 -> v2
 
@@ -126,9 +142,9 @@ where `EpisodeFilterEntry` is `{ title?: string, description?: string }`
 
 | v1 field | v2 field |
 |----------|----------|
-| `contentType` | `playlistStructure` |
-| `contentType: "episodes"` | `playlistStructure: "split"` |
-| `contentType: "groups"` | `playlistStructure: "grouped"` |
+| `contentType` | `presentation` |
+| `contentType: "episodes"` | `presentation: "separate"` |
+| `contentType: "groups"` | `presentation: "combined"` |
 | `titleFilter` | `episodeFilters.require: [{ title: "..." }]` |
 | `excludeFilter` | `episodeFilters.exclude: [{ title: "..." }]` |
 | `requireFilter` | `episodeFilters.require: [{ title: "..." }]` (merged with titleFilter) |
@@ -140,12 +156,12 @@ where `EpisodeFilterEntry` is `{ title?: string, description?: string }`
 | `showSeasonNumber` | `prependSeasonNumber` |
 | `showSortOrderToggle` | `groupList.userSortable` (default: true) |
 | `episodeYearHeaders` | `episodeList.showYearHeaders` |
-| `smartPlaylistEpisodeExtractor` | `episodeExtractor` |
+| `smartPlaylistEpisodeExtractor` | `numberingExtractor` |
 | `SortRule.field: "progress"` | (removed -- runtime concern) |
 | `GroupDef.episodeYearHeaders` | `GroupDef.episodeList.showYearHeaders` |
 | `GroupDef.showDateRange` | `GroupDef.display.showDateRange` |
 | (new) | `GroupDef.display.yearBinding` |
-| (new) | `GroupDef.episodeExtractor` |
+| (new) | `GroupDef.numberingExtractor` |
 | (new) | `episodeList.sort` (EpisodeSortRule) |
 | (new) | `episodeList.titleExtractor` (TitleExtractor) |
 | (new) | `GroupDef.episodeList.sort` |

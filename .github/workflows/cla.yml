@@ -10,8 +10,7 @@ on:
     types: [opened, closed, synchronize]
 
 permissions:
-  actions: write
-  contents: write
+  contents: read
   pull-requests: write
   statuses: write
 
@@ -33,7 +32,7 @@ jobs:
           branch: "main"
           allowlist: "reedom,dependabot[bot],github-actions[bot]"
           remote-organization-name: "audiflow"
-          remote-repository-name: "audiflow"
+          remote-repository-name: ".github"
           custom-notsigned-prcomment: >
             Thank you for your contribution! Before we can merge this PR, you need
             to sign the Contributor License Agreement (CLA.md in this repository).

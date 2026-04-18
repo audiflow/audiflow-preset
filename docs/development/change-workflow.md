@@ -42,11 +42,15 @@ Schema changes originate in `audiflow-smartplaylist-dev`, not here. If a schema 
 5. Update `docs/specs/file-structure.md` if structure changed
 6. Run conformance tests in `audiflow` app repo
 
+For a new schema **major** version (e.g. v4 -> v5), see
+[version-branch-rollout.md](version-branch-rollout.md) for the
+`dev/vN` branch creation and CI-gated promotion flow.
+
 ## During implementation
 
 - Keep changes localized to one pattern when possible
 - Ensure `id` fields match directory/file names exactly
-- Use existing patterns as reference (e.g., `patterns/coten_radio/` for `rss` resolver)
+- Use existing patterns as reference (e.g., `patterns/2e86c4b573b7/` for `seasonNumber` resolver)
 - All JSON must use `additionalProperties: false` per schema -- no extra fields
 
 ## Validation checklist

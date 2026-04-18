@@ -1,0 +1,13 @@
+interface:
+  display_name: "audiflow Playlist"
+  short_description: "Create and manage smart playlist patterns for audiflow"
+  brand_color: "#6366F1"
+  default_prompt: "Create a new audiflow smart playlist pattern"
+  instructions_file: "../SKILL.md"
+  related_paths:
+    - "../SKILL.md"
+    - "../references/schema-reference.md"
+    - "../scripts/search-feeds.py"
+    - "../scripts/analyze-feed.py"
+policy:
+  allow_implicit_invocation: true
