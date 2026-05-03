@@ -3,8 +3,7 @@
   "displayName": "ゲスト別",
   "priority": 0,
   "grouping": {
-    "by": "titleDiscovery",
-    "discoveryHint": "【(?:出演：)?(.+?)(?:\\s*編.?)?】"
+    "by": "titleDiscovery"
   },
   "selector": {
     "partitionBy": "seasonNumber",
