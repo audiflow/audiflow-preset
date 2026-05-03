@@ -12,7 +12,7 @@
   },
   "episodeItem": {
     "titleExtractor": {
-      "pattern": "-(\\d+)】([^【]+)",
+      "pattern": "-(\\d+)】\\s*([^【]+)",
       "source": "title",
       "template": "${1}. ${2}"
     }

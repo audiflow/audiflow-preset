@@ -8,5 +8,6 @@
     "regular",
     "extras"
   ],
+  "showEpisodeThumbnail": true,
   "yearGroupedEpisodes": false
 }

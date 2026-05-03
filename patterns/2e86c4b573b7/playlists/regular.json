@@ -13,14 +13,16 @@
     ]
   },
   "episodeItem": {
+    "showThumbnail": false,
     "titleExtractor": {
-      "pattern": "-(\\d+)】([^【]+)",
+      "pattern": "-(\\d+)】\\s*([^【]+)",
       "source": "title",
       "template": "${1}. ${2}"
     }
   },
   "groupItem": {
     "showDateRange": true,
+    "showThumbnail": true,
     "titleExtractor": {
       "fallback": {
         "pattern": "【COTEN RADIO\\s*(.+?)\\s*(\\d+)】",

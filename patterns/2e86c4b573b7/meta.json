@@ -9,5 +9,6 @@
     "short",
     "extras"
   ],
+  "showEpisodeThumbnail": true,
   "yearGroupedEpisodes": true
 }

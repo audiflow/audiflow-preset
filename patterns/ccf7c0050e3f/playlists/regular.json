@@ -13,9 +13,11 @@
     ]
   },
   "episodeItem": {
+    "showThumbnail": false,
     "titleExtractor": {
-      "pattern": "【[^】]+】\\s*(.+)",
-      "source": "title"
+      "pattern": "(\\d+)\\s*】\\s*(#?[^#]+)+?(?:#\\d+$)?",
+      "source": "title",
+      "template": "${1}. ${2}"
     }
   },
   "episodeListing": {
@@ -27,6 +29,7 @@
   "groupItem": {
     "pinToYear": true,
     "showDateRange": true,
+    "showThumbnail": true,
     "titleExtractor": {
       "pattern": "【(\\D+)\\d+\\s*】",
       "source": "title",
