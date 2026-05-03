@@ -11,6 +11,7 @@
     ]
   },
   "episodeItem": {
+    "showThumbnail": false,
     "titleExtractor": {
       "pattern": "-(\\d+)】\\s*([^【]+)",
       "source": "title",
@@ -19,6 +20,7 @@
   },
   "groupItem": {
     "showDateRange": true,
+    "showThumbnail": true,
     "titleExtractor": {
       "fallback": {
         "pattern": "【COTEN RADIOショート\\s+(.+?)\\s*(\\d+|前編|中編|後編)】",

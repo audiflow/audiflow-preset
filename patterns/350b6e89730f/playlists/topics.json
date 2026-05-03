@@ -12,12 +12,8 @@
       }
     ]
   },
-  "episodeItem": {
-    "showThumbnail": false
-  },
   "groupItem": {
     "showDateRange": true,
-    "showThumbnail": false,
     "titleExtractor": {
       "pattern": "^#\\d+ *?(.*?)（(?:その\\d+|[前中後]編)）",
       "source": "title",

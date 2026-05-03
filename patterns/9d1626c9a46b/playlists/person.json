@@ -8,7 +8,6 @@
     ]
   },
   "episodeItem": {
-    "showThumbnail": false,
     "titleExtractor": {
       "pattern": "^(.*?)[(（][^)）]+[)）]\\s*$",
       "source": "title",
@@ -20,7 +19,6 @@
   },
   "groupItem": {
     "showDateRange": false,
-    "showThumbnail": false,
     "titleExtractor": {
       "fallback": {
         "pattern": "（([^）]+)）",

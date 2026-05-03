@@ -7,13 +7,9 @@
       }
     ]
   },
-  "episodeItem": {
-    "showThumbnail": false
-  },
   "groupItem": {
     "prependSeasonNumber": true,
     "showDateRange": true,
-    "showThumbnail": true,
     "titleExtractor": {
       "pattern": "^(.*?) [-|] ",
       "source": "title",

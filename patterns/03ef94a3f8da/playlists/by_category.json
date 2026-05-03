@@ -1,13 +1,7 @@
 {
   "displayName": "カテゴリ別",
-  "episodeItem": {
-    "showThumbnail": false
-  },
   "episodeListing": {
     "showYearHeaders": true
-  },
-  "groupItem": {
-    "showThumbnail": false
   },
   "grouping": {
     "by": "titleClassifier",

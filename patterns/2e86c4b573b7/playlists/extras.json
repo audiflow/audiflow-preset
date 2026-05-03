@@ -1,5 +1,8 @@
 {
   "displayName": "その他(番外編など)",
+  "episodeItem": {
+    "showThumbnail": false
+  },
   "episodeListing": {
     "sort": {
       "field": "publishedAt",
@@ -7,7 +10,8 @@
     }
   },
   "groupItem": {
-    "showDateRange": true
+    "showDateRange": true,
+    "showThumbnail": false
   },
   "groupListing": {
     "sort": {
