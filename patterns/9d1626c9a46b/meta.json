@@ -7,5 +7,7 @@
   "playlists": [
     "person",
     "others"
-  ]
+  ],
+  "showEpisodeThumbnail": false,
+  "yearGroupedEpisodes": false
 }

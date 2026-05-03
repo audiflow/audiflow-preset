@@ -8,5 +8,6 @@
     "by_category",
     "by_year"
   ],
+  "showEpisodeThumbnail": false,
   "yearGroupedEpisodes": true
 }

@@ -6,5 +6,7 @@
   "id": "6e3ddeeaed0a",
   "playlists": [
     "seasons"
-  ]
+  ],
+  "showEpisodeThumbnail": false,
+  "yearGroupedEpisodes": false
 }

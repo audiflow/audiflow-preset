@@ -3,34 +3,35 @@
   "episodeFilters": {
     "exclude": [
       {
-        "title": "【COTEN RADIO\\s*ショート"
+        "title": "【雑談"
       }
     ],
     "require": [
       {
-        "title": "【\\d+-\\d+】"
+        "title": "【\\D+\\d+\\s*】"
       }
     ]
   },
   "episodeItem": {
     "showThumbnail": false,
     "titleExtractor": {
-      "pattern": "-(\\d+)】\\s*([^【]+)",
+      "pattern": "(\\d+)\\s*】\\s*(#?[^#]+)+?(?:#\\d+$)?",
       "source": "title",
       "template": "${1}. ${2}"
     }
   },
+  "episodeListing": {
+    "sort": {
+      "field": "publishedAt",
+      "order": "ascending"
+    }
+  },
   "groupItem": {
+    "pinToYear": true,
     "showDateRange": true,
     "showThumbnail": true,
     "titleExtractor": {
-      "fallback": {
-        "pattern": "【COTEN RADIO\\s*(.+?)\\s*(\\d+)】",
-        "source": "title",
-        "template": "${1}"
-      },
-      "fallbackValue": "その他",
-      "pattern": "【COTEN RADIO\\s*([^】]+)編\\s*(\\d+)】",
+      "pattern": "【(\\D+)\\d+\\s*】",
       "source": "title",
       "template": "${1}"
     }
@@ -44,16 +45,7 @@
     "yearBinding": "pinToYear"
   },
   "grouping": {
-    "by": "seasonNumber",
-    "numberingExtractor": {
-      "episodeGroup": 2,
-      "fallbackEpisodePattern": "(\\d+)】",
-      "fallbackSeasonNumber": 0,
-      "fallbackToRss": true,
-      "pattern": "【(\\d+)-(\\d+)】",
-      "seasonGroup": 1,
-      "source": "title"
-    }
+    "by": "titleDiscovery"
   },
   "id": "regular",
   "priority": 0

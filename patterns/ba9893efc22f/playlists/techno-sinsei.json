@@ -9,9 +9,9 @@
   },
   "episodeItem": {
     "titleExtractor": {
-      "group": 1,
       "pattern": "(「.*)",
-      "source": "title"
+      "source": "title",
+      "template": "${1}"
     }
   },
   "episodeListing": {

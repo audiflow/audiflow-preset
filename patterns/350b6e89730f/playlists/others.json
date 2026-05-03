@@ -1,7 +1,5 @@
 {
-  "id": "others",
   "displayName": "その他",
-  "priority": 2,
   "episodeFilters": {
     "exclude": [
       {
@@ -14,5 +12,7 @@
   },
   "grouping": {
     "by": "year"
-  }
+  },
+  "id": "others",
+  "priority": 2
 }
