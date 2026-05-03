@@ -1,5 +1,5 @@
 {
-  "dataVersion": 25,
+  "dataVersion": 26,
   "patterns": [
     {
       "dataVersion": 2,
@@ -56,6 +56,13 @@
       "feedUrlHint": "https://feeds.megaphone.fm/nagara",
       "id": "ba9893efc22f",
       "playlistCount": 4
+    },
+    {
+      "dataVersion": 1,
+      "displayName": "日本一たのしい哲学ラジオ",
+      "feedUrlHint": "https://anchor.fm/s/e4d354fc/podcast/rss",
+      "id": "ccf7c0050e3f",
+      "playlistCount": 2
     }
   ],
   "schemaVersion": 6

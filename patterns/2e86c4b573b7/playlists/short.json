@@ -10,6 +10,13 @@
       }
     ]
   },
+  "episodeItem": {
+    "titleExtractor": {
+      "pattern": "-(\\d+)】([^【]+)",
+      "source": "title",
+      "template": "${1}. ${2}"
+    }
+  },
   "groupItem": {
     "showDateRange": true,
     "titleExtractor": {
