@@ -1,0 +1,28 @@
+{
+  "displayName": "Seasons",
+  "episodeFilters": {
+    "exclude": [
+      {
+        "title": "^(Best of Business Wars Daily|Encore: )"
+      }
+    ]
+  },
+  "episodeItem": {
+    "showThumbnail": false
+  },
+  "groupItem": {
+    "prependSeasonNumber": true,
+    "showDateRange": true,
+    "showThumbnail": true,
+    "titleExtractor": {
+      "pattern": "^(.*?) [-|] ",
+      "source": "title",
+      "template": "${1}"
+    }
+  },
+  "grouping": {
+    "by": "seasonNumber"
+  },
+  "id": "seasons",
+  "priority": 0
+}

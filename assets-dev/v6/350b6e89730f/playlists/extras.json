@@ -1,0 +1,21 @@
+{
+  "displayName": "番外編・雑談回",
+  "episodeFilters": {
+    "require": [
+      {
+        "title": "番外編|雑談回|特別編"
+      }
+    ]
+  },
+  "groupItem": {
+    "showDateRange": true
+  },
+  "groupListing": {
+    "userSortable": true
+  },
+  "grouping": {
+    "by": "year"
+  },
+  "id": "extras",
+  "priority": 1
+}

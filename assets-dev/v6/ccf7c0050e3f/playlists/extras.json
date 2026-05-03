@@ -1,0 +1,54 @@
+{
+  "displayName": "その他",
+  "episodeListing": {
+    "sort": {
+      "field": "publishedAt",
+      "order": "descending"
+    }
+  },
+  "groupItem": {
+    "pinToYear": true,
+    "showDateRange": true
+  },
+  "groupListing": {
+    "sort": {
+      "field": "newestEpisodeDate",
+      "order": "descending"
+    },
+    "userSortable": true,
+    "yearBinding": "splitByYear"
+  },
+  "grouping": {
+    "by": "titleClassifier",
+    "staticClassifiers": [
+      {
+        "displayName": "雑談回",
+        "id": "zatsudan",
+        "pattern": {
+          "pattern": "【雑談|雑談回】",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "特別編",
+        "episodeListing": {
+          "sort": {
+            "field": "publishedAt",
+            "order": "ascending"
+          }
+        },
+        "id": "tokubetsu",
+        "pattern": {
+          "pattern": "【特別編",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "その他",
+        "id": "other"
+      }
+    ]
+  },
+  "id": "extras",
+  "priority": 1
+}

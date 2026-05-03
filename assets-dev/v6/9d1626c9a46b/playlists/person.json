@@ -1,0 +1,44 @@
+{
+  "displayName": "パーソナリティ",
+  "episodeFilters": {
+    "require": [
+      {
+        "title": "（[^）]+）|\\([^)]+\\)"
+      }
+    ]
+  },
+  "episodeItem": {
+    "showThumbnail": false,
+    "titleExtractor": {
+      "pattern": "^(.*?)[(（][^)）]+[)）]\\s*$",
+      "source": "title",
+      "template": "${1}"
+    }
+  },
+  "episodeListing": {
+    "showYearHeaders": true
+  },
+  "groupItem": {
+    "showDateRange": false,
+    "showThumbnail": false,
+    "titleExtractor": {
+      "fallback": {
+        "pattern": "（([^）]+)）",
+        "source": "title",
+        "template": "${1}"
+      },
+      "pattern": "\\(([^)]+)\\)",
+      "source": "title",
+      "template": "${1}"
+    }
+  },
+  "groupListing": {
+    "userSortable": true,
+    "yearBinding": "splitByYear"
+  },
+  "grouping": {
+    "by": "titleDiscovery"
+  },
+  "id": "person",
+  "priority": 0
+}
