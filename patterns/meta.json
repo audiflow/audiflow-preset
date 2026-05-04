@@ -1,36 +1,36 @@
 {
-  "dataVersion": 26,
+  "dataVersion": 27,
   "patterns": [
     {
-      "dataVersion": 3,
+      "dataVersion": 4,
       "displayName": "Coten Radio",
       "feedUrlHint": "https://anchor.fm/s/8c2088c/podcast/rss",
       "id": "2e86c4b573b7",
       "playlistCount": 3
     },
     {
-      "dataVersion": 3,
+      "dataVersion": 4,
       "displayName": "News Connect",
       "feedUrlHint": "https://anchor.fm/s/81fb5eec/podcast/rss",
       "id": "03ef94a3f8da",
       "playlistCount": 2
     },
     {
-      "dataVersion": 3,
+      "dataVersion": 4,
       "displayName": "Business Wars",
       "feedUrlHint": "https://rss.art19.com/business-wars",
       "id": "6e3ddeeaed0a",
       "playlistCount": 1
     },
     {
-      "dataVersion": 3,
+      "dataVersion": 4,
       "displayName": "超相対性理論",
       "feedUrlHint": "https://anchor.fm/s/57a9101c/podcast/rss",
       "id": "350b6e89730f",
       "playlistCount": 3
     },
     {
-      "dataVersion": 3,
+      "dataVersion": 4,
       "displayName": "東京ビジネスハブ",
       "feedUrlHint": "https://feeds.megaphone.fm/TBS6742412969",
       "id": "9d1626c9a46b",
