@@ -1,0 +1,18 @@
+{
+  "displayName": "その他",
+  "episodeFilters": {
+    "exclude": [
+      {
+        "title": "（(?:その\\d+|[前中後]編)）"
+      },
+      {
+        "title": "番外編|雑談回|特別編"
+      }
+    ]
+  },
+  "grouping": {
+    "by": "year"
+  },
+  "id": "others",
+  "priority": 2
+}

@@ -1,0 +1,12 @@
+{
+  "dataVersion": 2,
+  "feedUrls": [
+    "https://anchor.fm/s/f4b89cec/podcast/rss"
+  ],
+  "id": "c5c8f04b8b54",
+  "playlists": [
+    "professors"
+  ],
+  "showEpisodeThumbnail": false,
+  "yearGroupedEpisodes": false
+}

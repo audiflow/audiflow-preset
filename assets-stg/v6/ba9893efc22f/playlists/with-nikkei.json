@@ -1,0 +1,21 @@
+{
+  "displayName": "with NIKKEI",
+  "episodeFilters": {
+    "require": [
+      {
+        "title": "with NIKKEI"
+      }
+    ]
+  },
+  "episodeListing": {
+    "sort": {
+      "field": "publishedAt",
+      "order": "descending"
+    }
+  },
+  "grouping": {
+    "by": "year"
+  },
+  "id": "with-nikkei",
+  "priority": 1
+}
