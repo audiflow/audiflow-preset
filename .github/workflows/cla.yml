@@ -30,7 +30,7 @@ jobs:
           path-to-signatures: "signatures/cla.json"
           path-to-document: "https://github.com/${{ github.repository }}/blob/main/CLA.md"
           branch: "main"
-          allowlist: "reedom,dependabot[bot],github-actions[bot]"
+          allowlist: "reedom,dependabot[bot],github-actions[bot],audiflow-ci-bot[bot],claude"
           remote-organization-name: "audiflow"
           remote-repository-name: ".github"
           custom-notsigned-prcomment: >
