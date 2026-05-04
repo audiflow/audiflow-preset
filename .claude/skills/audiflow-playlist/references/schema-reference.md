@@ -1,4 +1,4 @@
-# Schema Reference (v5)
+# Schema Reference (v6)
 
 Schema reference for audiflow smart playlist configuration files. Covers all three schema levels: pattern index, pattern meta, and playlist definition.
 
@@ -53,7 +53,7 @@ patterns/
 
 **File:** `patterns/meta.json`
 
-**Schema:** `https://audiflow.app/schema/v5/pattern-index.json`
+**Schema:** `https://audiflow.app/schema/v6/pattern-index.json`
 
 Root index of all patterns. The app fetches this file first and compares `dataVersion` to detect changes.
 
@@ -101,7 +101,7 @@ Each element in the `patterns` array:
 
 **File:** `{patternId}/meta.json`
 
-**Schema:** `https://audiflow.app/schema/v5/pattern-meta.json`
+**Schema:** `https://audiflow.app/schema/v6/pattern-meta.json`
 
 Per-podcast metadata. The app matches incoming feeds against `podcastGuid` (preferred) or `feedUrls` to find the right config.
 
@@ -137,7 +137,7 @@ Per-podcast metadata. The app matches incoming feeds against `podcastGuid` (pref
 
 **File:** `{patternId}/playlists/{playlistId}.json`
 
-**Schema:** `https://audiflow.app/schema/v5/playlist-definition.json`
+**Schema:** `https://audiflow.app/schema/v6/playlist-definition.json`
 
 Defines how a playlist filters, groups, and displays episodes. The field layout follows the data processing pipeline:
 
@@ -210,7 +210,6 @@ Required. Defines how episodes are organized into groups.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `by` | enum | yes | Grouping method. See [Grouping Methods](#grouping-methods). |
-| `discoveryHint` | string | no | Regex for `titleDiscovery` fallback extraction. |
 | `numberingExtractor` | object | no | Parses season/episode numbers from titles. See [NumberingExtractor](#numberingextractor). |
 | `staticClassifiers` | array | conditional | Group definitions. Required when `by` is `titleClassifier`. See [StaticClassifier](#staticclassifier). |
 
@@ -443,15 +442,13 @@ Groups episodes by publication year.
 
 Finds recurring patterns in episode titles and groups by them, in the order they first appear in the feed.
 
-- Uses `groupItem.titleExtractor` to derive group names.
-- `grouping.discoveryHint` provides a regex fallback for group extraction.
+- Uses `groupItem.titleExtractor` to derive group names; capture group 1 becomes the group name.
 - Best for podcasts with titled story arcs or recurring guest series.
 
 ```json
 {
   "grouping": {
-    "by": "titleDiscovery",
-    "discoveryHint": "[(.+?)\\s*]"
+    "by": "titleDiscovery"
   },
   "groupItem": {
     "titleExtractor": {

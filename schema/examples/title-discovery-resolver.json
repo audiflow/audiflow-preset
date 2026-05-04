@@ -9,7 +9,6 @@
   },
   "grouping": {
     "by": "titleDiscovery",
-    "discoveryHint": "\\[(.+?)\\s+\\d+\\]",
     "numberingExtractor": {
       "source": "title",
       "pattern": "\\[.+?\\s+(\\d+)\\]",

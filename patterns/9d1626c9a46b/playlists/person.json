@@ -1,7 +1,5 @@
 {
-  "id": "person",
   "displayName": "パーソナリティ",
-  "priority": 0,
   "episodeFilters": {
     "require": [
       {
@@ -9,34 +7,36 @@
       }
     ]
   },
-  "grouping": {
-    "by": "titleDiscovery"
-  },
-  "groupListing": {
-    "yearBinding": "splitByYear",
-    "userSortable": true
-  },
-  "groupItem": {
-    "showDateRange": false,
+  "episodeItem": {
     "titleExtractor": {
+      "pattern": "^(.*?)[(（][^)）]+[)）]\\s*$",
       "source": "title",
-      "pattern": "\\(([^)]+)\\)",
-      "group": 1,
-      "fallback": {
-        "source": "title",
-        "pattern": "（([^）]+)）",
-        "group": 1
-      }
+      "template": "${1}"
     }
   },
   "episodeListing": {
     "showYearHeaders": true
   },
-  "episodeItem": {
+  "groupItem": {
+    "showDateRange": false,
     "titleExtractor": {
+      "fallback": {
+        "pattern": "（([^）]+)）",
+        "source": "title",
+        "template": "${1}"
+      },
+      "pattern": "\\(([^)]+)\\)",
       "source": "title",
-      "pattern": "^(.*?)[(（][^)）]+[)）]\\s*$",
-      "group": 1
+      "template": "${1}"
     }
-  }
+  },
+  "groupListing": {
+    "userSortable": true,
+    "yearBinding": "splitByYear"
+  },
+  "grouping": {
+    "by": "titleDiscovery"
+  },
+  "id": "person",
+  "priority": 0
 }

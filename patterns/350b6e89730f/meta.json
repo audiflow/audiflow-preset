@@ -1,5 +1,5 @@
 {
-  "dataVersion": 2,
+  "dataVersion": 4,
   "feedUrls": [
     "https://anchor.fm/s/57a9101c/podcast/rss"
   ],
@@ -9,5 +9,6 @@
     "extras",
     "others"
   ],
+  "showEpisodeThumbnail": false,
   "yearGroupedEpisodes": true
 }

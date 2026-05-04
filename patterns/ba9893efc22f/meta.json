@@ -10,5 +10,6 @@
     "nikkei-the-pitch",
     "techno-sinsei"
   ],
+  "showEpisodeThumbnail": false,
   "yearGroupedEpisodes": false
 }

@@ -1,325 +1,329 @@
 {
-  "id": "extras",
   "displayName": "その他(番外編など)",
-  "priority": 2,
-  "grouping": {
-    "by": "titleClassifier",
-    "staticClassifiers": [
-      {
-        "id": "murokoshi",
-        "displayName": "人類学って何？室越龍之介",
-        "pattern": {
-          "source": "title",
-          "pattern": "人類学って何？"
-        }
-      },
-      {
-        "id": "nakamuratetsu",
-        "displayName": "「一隅を照らす」中村哲",
-        "pattern": {
-          "source": "title",
-          "pattern": "「一隅を照らす」中村哲"
-        }
-      },
-      {
-        "id": "takatoriya",
-        "displayName": "中東で一番有名な日本人！鷹鳥屋明",
-        "pattern": {
-          "source": "title",
-          "pattern": "中東で一番有名な日本人！鷹鳥屋明"
-        }
-      },
-      {
-        "id": "takachin",
-        "displayName": "握手しただけで才能と性癖がわかる男・たかちん",
-        "pattern": {
-          "source": "title",
-          "pattern": "握手しただけで才能と性癖がわかる男・たかちん"
-        }
-      },
-      {
-        "id": "mental_care",
-        "displayName": "メンタルケア、どうしてる？",
-        "pattern": {
-          "source": "title",
-          "pattern": "メンタルケア、どうしてる？"
-        }
-      },
-      {
-        "id": "boderlessjapan",
-        "displayName": "ソーシャルベンチャーの旗手 ボーダレス・ジャパン田口代表が掲げる夢と志",
-        "pattern": {
-          "source": "title",
-          "pattern": "ボーダレス・ジャパン田口代表"
-        }
-      },
-      {
-        "id": "yell-shinoda",
-        "displayName": "エール株式会社 篠田真貴子さんと語る「聴く力」",
-        "pattern": {
-          "source": "title",
-          "pattern": "エール株式会社 篠田真貴子さんと語る「聴く力」"
-        }
-      },
-      {
-        "id": "shikumi_design",
-        "displayName": "しくみデザイン 中村俊介さんが描く未来の社会と教育のカタチ",
-        "pattern": {
-          "source": "title",
-          "pattern": "しくみデザイン 中村俊介"
-        }
-      },
-      {
-        "id": "wakamiya1",
-        "displayName": "実験と挑戦 プロデューサー・研究者 若新雄純さんが企むこれまで&これから",
-        "pattern": {
-          "source": "title",
-          "pattern": "若新雄純さんが企むこれまで"
-        },
-        "episodeListing": {
-          "showYearHeaders": false
-        }
-      },
-      {
-        "id": "processeconomy",
-        "displayName": "プロセスエコノミー 〜デジタル社会を生き続けるボクらの物語〜　尾原和啓",
-        "pattern": {
-          "source": "title",
-          "pattern": "プロセスエコノミー"
-        }
-      },
-      {
-        "id": "av_nimura",
-        "displayName": "[PG-18]AV監督・二村ヒトシさんに聞く人類を幸せにする為のセックス",
-        "pattern": {
-          "source": "title",
-          "pattern": "AV監督・二村ヒトシ"
-        }
-      },
-      {
-        "id": "zaibatsu",
-        "displayName": "財閥の歴史 〜日本の近代化を担った老舗たちの系譜〜",
-        "pattern": {
-          "source": "title",
-          "pattern": "財閥の歴史"
-        }
-      },
-      {
-        "id": "hongokazuto",
-        "displayName": "東京大学史料編纂所 本郷和人教授への歴史Q&A",
-        "pattern": {
-          "source": "title",
-          "pattern": "東京大学史料編纂所 本郷和人"
-        }
-      },
-      {
-        "id": "ukita",
-        "displayName": "戦国の貴公子　宇喜多秀家　～夢託されし秀吉チルドレンの生き様～",
-        "pattern": {
-          "source": "title",
-          "pattern": "宇喜多秀家"
-        },
-        "episodeListing": {
-          "showYearHeaders": false
-        }
-      },
-      {
-        "id": "sadoshima",
-        "displayName": "世界を理解する為の観察力の鍛え方 佐渡島庸平",
-        "pattern": {
-          "source": "title",
-          "pattern": "佐渡島庸平"
-        },
-        "episodeListing": {
-          "showYearHeaders": false
-        }
-      },
-      {
-        "id": "kusano",
-        "displayName": "PMの仕事から見るCOTEN 草野陽夏",
-        "pattern": {
-          "source": "title",
-          "pattern": "草野陽夏の仕事から見る"
-        },
-        "episodeListing": {
-          "showYearHeaders": false
-        }
-      },
-      {
-        "id": "wakamiya2",
-        "displayName": "迫り来る老いと死、ボクたちはどう向き合う？若新雄純",
-        "pattern": {
-          "source": "title",
-          "pattern": "若新雄純リターンズ"
-        }
-      },
-      {
-        "id": "heralbony",
-        "displayName": "株式会社ヘラルボニーの挑戦",
-        "pattern": {
-          "source": "title",
-          "pattern": "株式会社ヘラルボニーの挑戦"
-        },
-        "episodeListing": {
-          "showYearHeaders": false
-        }
-      },
-      {
-        "id": "ukraine",
-        "displayName": "ウクライナ戦争",
-        "pattern": {
-          "source": "title",
-          "pattern": "【特別編　緊急収録】ウクライナとロシア|当事者としてのウクライナ戦争|ウクライナ戦争の現状と今後|揺らぐ北欧秩序"
-        }
-      },
-      {
-        "id": "christ-chiba",
-        "displayName": "一緒に学ぼう！キリスト教 千葉遊大",
-        "pattern": {
-          "source": "title",
-          "pattern": "一緒に学ぼう！キリスト教"
-        }
-      },
-      {
-        "id": "community-nurse",
-        "displayName": "出雲発！コミュニティナースって何？ 矢田明子",
-        "pattern": {
-          "source": "title",
-          "pattern": "出雲発！コミュニティナースって何？"
-        }
-      },
-      {
-        "id": "dazaifu",
-        "displayName": "太宰府天満宮 第40代宮司 西高辻󠄀信宏",
-        "pattern": {
-          "source": "title",
-          "pattern": "太宰府天満宮 第40代宮司 西高辻󠄀信宏さん"
-        }
-      },
-      {
-        "id": "aoyagi",
-        "displayName": "青柳考哉（株式会社BOOK）",
-        "pattern": {
-          "source": "title",
-          "pattern": "青柳考哉"
-        },
-        "episodeListing": {
-          "showYearHeaders": false
-        }
-      },
-      {
-        "id": "nakagawa",
-        "displayName": "中川政七商店",
-        "pattern": {
-          "source": "title",
-          "pattern": "中川政七商店"
-        },
-        "episodeListing": {
-          "showYearHeaders": false
-        }
-      },
-      {
-        "id": "kitagawa",
-        "displayName": "量子コンピュータ 北川拓也",
-        "pattern": {
-          "source": "title",
-          "pattern": "北川拓也"
-        },
-        "episodeListing": {
-          "showYearHeaders": false
-        }
-      },
-      {
-        "id": "bukkyou",
-        "displayName": "仏教のこと、龍源さんに聞こう",
-        "pattern": {
-          "source": "title",
-          "pattern": "仏教のこと、龍源さんに聞こう"
-        }
-      },
-      {
-        "id": "marui_aoi",
-        "displayName": "丸井グループCEO 青井浩",
-        "pattern": {
-          "source": "title",
-          "pattern": "丸井グループ.*?青井浩"
-        }
-      },
-      {
-        "id": "shijonawate_azuma",
-        "displayName": "首長経験者が見る政治の世界 前 四條畷市長・東修平",
-        "pattern": {
-          "source": "title",
-          "pattern": "前 四條畷市長・東修平"
-        }
-      },
-      {
-        "id": "special",
-        "displayName": "特別編",
-        "pattern": {
-          "source": "title",
-          "pattern": "特別編"
-        },
-        "groupListing": {
-          "yearBinding": "splitByYear"
-        },
-        "episodeListing": {
-          "showYearHeaders": true,
-          "sort": {
-            "field": "publishedAt",
-            "order": "descending"
-          }
-        }
-      },
-      {
-        "id": "extra",
-        "displayName": "番外編",
-        "pattern": {
-          "source": "title",
-          "pattern": "番外編\\s*[#＃]"
-        },
-        "groupListing": {
-          "yearBinding": "splitByYear"
-        },
-        "episodeListing": {
-          "showYearHeaders": true,
-          "sort": {
-            "field": "publishedAt",
-            "order": "descending"
-          }
-        }
-      },
-      {
-        "id": "other",
-        "displayName": "その他",
-        "groupListing": {
-          "yearBinding": "splitByYear"
-        },
-        "episodeListing": {
-          "showYearHeaders": true,
-          "sort": {
-            "field": "publishedAt",
-            "order": "descending"
-          }
-        }
-      }
-    ]
-  },
-  "groupListing": {
-    "yearBinding": "pinToYear",
-    "userSortable": true,
-    "sort": {
-      "field": "newestEpisodeDate",
-      "order": "ascending"
-    }
-  },
-  "groupItem": {
-    "showDateRange": true
+  "episodeItem": {
+    "showThumbnail": false
   },
   "episodeListing": {
     "sort": {
       "field": "publishedAt",
       "order": "ascending"
     }
-  }
+  },
+  "groupItem": {
+    "showDateRange": true,
+    "showThumbnail": false
+  },
+  "groupListing": {
+    "sort": {
+      "field": "newestEpisodeDate",
+      "order": "ascending"
+    },
+    "userSortable": true,
+    "yearBinding": "pinToYear"
+  },
+  "grouping": {
+    "by": "titleClassifier",
+    "staticClassifiers": [
+      {
+        "displayName": "人類学って何？室越龍之介",
+        "id": "murokoshi",
+        "pattern": {
+          "pattern": "人類学って何？",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "「一隅を照らす」中村哲",
+        "id": "nakamuratetsu",
+        "pattern": {
+          "pattern": "「一隅を照らす」中村哲",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "中東で一番有名な日本人！鷹鳥屋明",
+        "id": "takatoriya",
+        "pattern": {
+          "pattern": "中東で一番有名な日本人！鷹鳥屋明",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "握手しただけで才能と性癖がわかる男・たかちん",
+        "id": "takachin",
+        "pattern": {
+          "pattern": "握手しただけで才能と性癖がわかる男・たかちん",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "メンタルケア、どうしてる？",
+        "id": "mental_care",
+        "pattern": {
+          "pattern": "メンタルケア、どうしてる？",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "ソーシャルベンチャーの旗手 ボーダレス・ジャパン田口代表が掲げる夢と志",
+        "id": "boderlessjapan",
+        "pattern": {
+          "pattern": "ボーダレス・ジャパン田口代表",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "エール株式会社 篠田真貴子さんと語る「聴く力」",
+        "id": "yell-shinoda",
+        "pattern": {
+          "pattern": "エール株式会社 篠田真貴子さんと語る「聴く力」",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "しくみデザイン 中村俊介さんが描く未来の社会と教育のカタチ",
+        "id": "shikumi_design",
+        "pattern": {
+          "pattern": "しくみデザイン 中村俊介",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "実験と挑戦 プロデューサー・研究者 若新雄純さんが企むこれまで&これから",
+        "episodeListing": {
+          "showYearHeaders": false
+        },
+        "id": "wakamiya1",
+        "pattern": {
+          "pattern": "若新雄純さんが企むこれまで",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "プロセスエコノミー 〜デジタル社会を生き続けるボクらの物語〜　尾原和啓",
+        "id": "processeconomy",
+        "pattern": {
+          "pattern": "プロセスエコノミー",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "[PG-18]AV監督・二村ヒトシさんに聞く人類を幸せにする為のセックス",
+        "id": "av_nimura",
+        "pattern": {
+          "pattern": "AV監督・二村ヒトシ",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "財閥の歴史 〜日本の近代化を担った老舗たちの系譜〜",
+        "id": "zaibatsu",
+        "pattern": {
+          "pattern": "財閥の歴史",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "東京大学史料編纂所 本郷和人教授への歴史Q&A",
+        "id": "hongokazuto",
+        "pattern": {
+          "pattern": "東京大学史料編纂所 本郷和人",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "戦国の貴公子　宇喜多秀家　～夢託されし秀吉チルドレンの生き様～",
+        "episodeListing": {
+          "showYearHeaders": false
+        },
+        "id": "ukita",
+        "pattern": {
+          "pattern": "宇喜多秀家",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "世界を理解する為の観察力の鍛え方 佐渡島庸平",
+        "episodeListing": {
+          "showYearHeaders": false
+        },
+        "id": "sadoshima",
+        "pattern": {
+          "pattern": "佐渡島庸平",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "PMの仕事から見るCOTEN 草野陽夏",
+        "episodeListing": {
+          "showYearHeaders": false
+        },
+        "id": "kusano",
+        "pattern": {
+          "pattern": "草野陽夏の仕事から見る",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "迫り来る老いと死、ボクたちはどう向き合う？若新雄純",
+        "id": "wakamiya2",
+        "pattern": {
+          "pattern": "若新雄純リターンズ",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "株式会社ヘラルボニーの挑戦",
+        "episodeListing": {
+          "showYearHeaders": false
+        },
+        "id": "heralbony",
+        "pattern": {
+          "pattern": "株式会社ヘラルボニーの挑戦",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "ウクライナ戦争",
+        "id": "ukraine",
+        "pattern": {
+          "pattern": "【特別編　緊急収録】ウクライナとロシア|当事者としてのウクライナ戦争|ウクライナ戦争の現状と今後|揺らぐ北欧秩序",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "一緒に学ぼう！キリスト教 千葉遊大",
+        "id": "christ-chiba",
+        "pattern": {
+          "pattern": "一緒に学ぼう！キリスト教",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "出雲発！コミュニティナースって何？ 矢田明子",
+        "id": "community-nurse",
+        "pattern": {
+          "pattern": "出雲発！コミュニティナースって何？",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "太宰府天満宮 第40代宮司 西高辻󠄀信宏",
+        "id": "dazaifu",
+        "pattern": {
+          "pattern": "太宰府天満宮 第40代宮司 西高辻󠄀信宏さん",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "青柳考哉（株式会社BOOK）",
+        "episodeListing": {
+          "showYearHeaders": false
+        },
+        "id": "aoyagi",
+        "pattern": {
+          "pattern": "青柳考哉",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "中川政七商店",
+        "episodeListing": {
+          "showYearHeaders": false
+        },
+        "id": "nakagawa",
+        "pattern": {
+          "pattern": "中川政七商店",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "量子コンピュータ 北川拓也",
+        "episodeListing": {
+          "showYearHeaders": false
+        },
+        "id": "kitagawa",
+        "pattern": {
+          "pattern": "北川拓也",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "仏教のこと、龍源さんに聞こう",
+        "id": "bukkyou",
+        "pattern": {
+          "pattern": "仏教のこと、龍源さんに聞こう",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "丸井グループCEO 青井浩",
+        "id": "marui_aoi",
+        "pattern": {
+          "pattern": "丸井グループ.*?青井浩",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "首長経験者が見る政治の世界 前 四條畷市長・東修平",
+        "id": "shijonawate_azuma",
+        "pattern": {
+          "pattern": "前 四條畷市長・東修平",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "特別編",
+        "episodeListing": {
+          "showYearHeaders": true,
+          "sort": {
+            "field": "publishedAt",
+            "order": "descending"
+          }
+        },
+        "groupListing": {
+          "yearBinding": "splitByYear"
+        },
+        "id": "special",
+        "pattern": {
+          "pattern": "特別編",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "番外編",
+        "episodeListing": {
+          "showYearHeaders": true,
+          "sort": {
+            "field": "publishedAt",
+            "order": "descending"
+          }
+        },
+        "groupListing": {
+          "yearBinding": "splitByYear"
+        },
+        "id": "extra",
+        "pattern": {
+          "pattern": "番外編\\s*[#＃]",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "その他",
+        "episodeListing": {
+          "showYearHeaders": true,
+          "sort": {
+            "field": "publishedAt",
+            "order": "descending"
+          }
+        },
+        "groupListing": {
+          "yearBinding": "splitByYear"
+        },
+        "id": "other"
+      }
+    ]
+  },
+  "id": "extras",
+  "priority": 2
 }
