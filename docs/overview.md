@@ -1,5 +1,10 @@
 # Overview
 
+> **Naming migration in progress.** The "smartplaylist" naming is being
+> retired in favor of "preset" (see `docs/architecture/naming-migration.md`).
+> Data and code on `v7+` branches use the new vocabulary; `v6` branches
+> retain the legacy names until deprecation.
+
 ## Purpose
 
 audiflow-smartplaylist is the configuration data repository for the audiflow podcast ecosystem's smart playlist feature. It stores JSON config files that define how podcast episodes are grouped, filtered, sorted, and displayed within the audiflow mobile app. These files are deployed as static assets to GitHub Pages and fetched by the app at runtime.

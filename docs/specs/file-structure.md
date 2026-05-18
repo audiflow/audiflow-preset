@@ -1,5 +1,10 @@
 # File Structure Specification
 
+> **Naming migration in progress.** The "smartplaylist" naming is being
+> retired in favor of "preset" (see `docs/architecture/naming-migration.md`).
+> Data and code on `v7+` branches use the new vocabulary; `v6` branches
+> retain the legacy names until deprecation.
+
 ## Purpose
 
 Defines the three-level JSON file hierarchy used by this repository to store smart playlist configurations. All consumers (app, editor, CI tools) depend on this structure.

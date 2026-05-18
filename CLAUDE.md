@@ -2,6 +2,11 @@
 
 Smart playlist configuration data for all environments. Static JSON files deployed to GitHub Pages via CI. The app fetches configs from `https://audiflow.github.io/audiflow-smartplaylist/`.
 
+> **Naming migration in progress.** The "smartplaylist" naming is being
+> retired in favor of "preset" (see `docs/architecture/naming-migration.md`).
+> Data and code on `v7+` branches use the new vocabulary; `v6` branches
+> retain the legacy names until deprecation.
+
 ## Branch and deployment model
 
 `main` holds infrastructure (workflows, docs, scripts). Data and vendored schemas live on env/version branches:

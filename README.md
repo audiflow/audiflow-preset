@@ -2,6 +2,11 @@
 
 Smart playlist configuration data for the [audiflow](https://github.com/audiflow) podcast ecosystem. Static JSON files deployed to GitHub Pages and fetched by the app at runtime.
 
+> **Naming migration in progress.** The "smartplaylist" naming is being
+> retired in favor of "preset" (see `docs/architecture/naming-migration.md`).
+> Data and code on `v7+` branches use the new vocabulary; `v6` branches
+> retain the legacy names until deprecation.
+
 ## How it works
 
 ```
