@@ -22,9 +22,9 @@ consumes.
 | pattern-index.schema.json / pattern-meta.schema.json | preset-index.schema.json / preset-meta.schema.json |
 | playlist-definition.schema.json | playlist-definition.schema.json *(unchanged — "playlist" inside a preset stays valid)* |
 | sp_core / sp_cli / sp_server (Rust crates) | preset_core / preset_cli / preset_server |
-| audiflow-editor (release binary name) | audiflow-preset-tool *(see Phase 1 decision)* |
+| audiflow-editor (release binary name) | audiflow-preset-tool *(see Phase 1 in the [migration plan](../superpowers/plans/2026-05-18-rename-smartplaylist-to-preset.md))* |
 
-The container is a **preset**. A preset contains **playlists**. "Playlist" remains a valid term for the curated track-group entity inside a preset.
+The container is a **preset**. A preset contains **playlists**. On disk, a preset is `presets/{presetId}/` containing `meta.json` plus `playlists/*.json`. "Playlist" remains a valid term for the curated track-group entity inside a preset.
 
 ## Repository renames (scheduled in Phase 4)
 
@@ -49,3 +49,7 @@ The container is a **preset**. A preset contains **playlists**. "Playlist" remai
 - Phase 3: app rename + URL cutover
 - Phase 4: GitHub repo renames
 - Phase 5: v6 deprecation
+
+## See also
+
+- [Full migration plan](../superpowers/plans/2026-05-18-rename-smartplaylist-to-preset.md)
