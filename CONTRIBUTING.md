@@ -34,8 +34,8 @@ in a way that keeps the project sustainable long-term.
 | Repository | Content | License |
 |------------|---------|---------|
 | `audiflow` | Flutter mobile app | AGPL-3.0 |
-| `audiflow-smartplaylist` | Playlist config data | CC BY-SA 4.0 |
-| `audiflow-smartplaylist-editor` | Web editor (Rust + React) | AGPL-3.0 |
+| `audiflow-preset` | Preset config data | CC BY-SA 4.0 |
+| `audiflow-preset-editor` | Web editor (Rust + React) | AGPL-3.0 |
 
 ## How to Contribute
 
@@ -53,14 +53,14 @@ in a way that keeps the project sustainable long-term.
 4. Ensure tests pass
 5. Submit a pull request
 
-### Playlist Data Contributions
+### Preset Data Contributions
 
-The `audiflow-smartplaylist` repository contains curated podcast playlists.
-Contributions of new playlists or improvements to existing ones are welcome.
+The `audiflow-preset` repository contains curated podcast presets.
+Contributions of new presets or improvements to existing ones are welcome.
 
-1. Fork `audiflow-smartplaylist`
-2. Use the [audiflow-smartplaylist-editor](https://github.com/audiflow/audiflow-smartplaylist-editor)
-   to create or modify playlists
+1. Fork `audiflow-preset`
+2. Use the [audiflow-preset-editor](https://github.com/audiflow/audiflow-preset-editor)
+   to create or modify presets
 3. Export the config data
 4. Submit a pull request
 

@@ -2,7 +2,7 @@
 
 ## Goal
 
-Serve as the source of truth for smart playlist configurations consumed by the audiflow mobile app across all environments (prod, staging, dev). This repository is a static data store with CI-driven validation and deployment -- it contains no application logic.
+Serve as the source of truth for preset configurations consumed by the audiflow mobile app across all environments (prod, staging, dev). This repository is a static data store with CI-driven validation and deployment -- it contains no application logic.
 
 ## Context
 
@@ -19,32 +19,32 @@ The `main` branch holds infrastructure only:
 - `docs/`: Repository documentation
 - `scripts/`: Infrastructure scripts (GitHub rulesets setup)
 
-Env/version branches (e.g., `prod/v2`, `stg/v2`, `dev/v2`) hold:
-- `patterns/`: All configuration data
-  - `meta.json`: Root index for pattern discovery
-  - `{patternId}/meta.json`: Per-pattern feed matching and playlist ordering
-  - `{patternId}/playlists/{playlistId}.json`: Individual playlist definitions
+Env/version branches (e.g., `prod/v7`, `stg/v7`, `dev/v7`) hold:
+- `presets/`: All configuration data
+  - `meta.json`: Root index for preset discovery
+  - `{presetId}/meta.json`: Per-preset feed matching and playlist ordering
+  - `{presetId}/playlists/{playlistId}.json`: Individual playlist definitions
 - `schema/`: Vendored JSON Schema files and validation tooling
   - `playlist-definition.schema.json`: Playlist definition schema
-  - `pattern-index.schema.json`: Root index schema
-  - `pattern-meta.schema.json`: Pattern meta schema
+  - `preset-index.schema.json`: Root index schema
+  - `preset-meta.schema.json`: PresetMeta schema
   - `scripts/validate.sh`: Local validation using check-jsonschema
 
 ## Main data flow
 
-1. User edits configs in `audiflow-smartplaylist-editor` (local-first)
+1. User edits configs in `audiflow-preset-editor` (local-first)
 2. User commits and pushes changes to an env/version branch in this repository
-3. On PR: CI downloads pre-compiled `audiflow-editor` binary, runs `validate` against `patterns/`
+3. On PR: CI downloads pre-compiled `audiflow-editor` binary, runs `validate` against `presets/`
 4. On merge: CI runs `audiflow-editor bump-versions` to auto-increment `dataVersion` fields
-5. CI deploys `patterns/` directory to the appropriate GitHub Pages path (e.g., `/assets/v2/`)
-6. App fetches `meta.json` -> pattern meta -> playlist definitions (lazy, cached)
+5. CI deploys `presets/` directory to the appropriate GitHub Pages path (e.g., `/assets/v7/`)
+6. App fetches `meta.json` -> preset meta -> playlist definitions (lazy, cached)
 
 ## Primary interfaces
 
 - **Input**: JSON files authored by the editor tool, committed via git to env/version branches
-- **Output**: Static files served at `https://audiflow.github.io/audiflow-smartplaylist/`
+- **Output**: Static files served at `https://audiflow.github.io/audiflow-preset/`
 - **External dependencies**:
-  - `audiflow-smartplaylist-editor` (pre-compiled `audiflow-editor` binary): validation and version bumping
+  - `audiflow-preset-editor` (pre-compiled `audiflow-editor` binary): validation and version bumping
   - GitHub Pages: static hosting
   - GitHub Actions: CI/CD
 
@@ -53,9 +53,9 @@ Env/version branches (e.g., `prod/v2`, `stg/v2`, `dev/v2`) hold:
 - No application code in this repository -- data, schema, and infrastructure only
 - All JSON must pass schema validation before merge
 - `dataVersion` fields are managed by CI, not manually edited
-- The `patterns/` directory on each env branch is the deployment root
-- Three schemas govern three file types: root index, pattern meta, playlist definition
-- Multiple schema versions can be served concurrently (e.g., `/assets/v1/` and `/assets/v2/`)
+- The `presets/` directory on each env branch is the deployment root
+- Three schemas govern three file types: root index, preset meta, playlist definition
+- Multiple schema versions can be served concurrently (e.g., `/assets/v7/` and `/assets/v8/`)
 - `main` branch is infrastructure-only; data lives exclusively on env/version branches
 
 ## When to update

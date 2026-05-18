@@ -1,6 +1,6 @@
 # Version branch rollout
 
-Operational runbook for landing a new schema major version (e.g. v4 -> v5).
+Operational runbook for landing a new schema major version (e.g. v7 -> v8).
 For the architectural model (branch layout, gh-pages topology, lifecycle),
 see [../architecture/multi-env-deploy.md](../architecture/multi-env-deploy.md).
 
@@ -8,22 +8,22 @@ see [../architecture/multi-env-deploy.md](../architecture/multi-env-deploy.md).
 
 - `.github/workflows/deploy-pages.yml` triggers on push to `{env}/vN` and
   downloads the `audiflow-editor` release tagged `vN` from
-  `audiflow-smartplaylist-editor`. It runs
+  `audiflow-preset-editor`. It runs
   `audiflow-editor bump-versions HEAD~1` and commits
   `chore: bump versions` as `audiflow-ci-bot[bot]`. Manual `dataVersion`
-  bumps in `patterns/**/meta.json` are not required.
+  bumps in `presets/**/meta.json` are not required.
 - `.github/workflows/validate.yml` triggers on PRs targeting `{env}/vN`
   and downloads the editor release matching the **base** branch version.
 
 ## Preconditions
 
-1. `audiflow-smartplaylist-editor` has a `vN` Release with the
+1. `audiflow-preset-editor` has a `vN` Release with the
    `audiflow-editor-x86_64-unknown-linux-gnu` asset. Without it, both
    `validate` and `deploy-pages` hard-fail at `gh release download`.
 2. A feature branch (conventionally `feat/vN`) carries the full migration:
    - `schema/VERSION` set to `N`
    - `schema/*.schema.json` vendored from the editor SSoT
-   - All `patterns/**` migrated to the new schema
+   - All `presets/**` migrated to the new schema
 
 Per [multi-env-deploy.md](../architecture/multi-env-deploy.md), `dev/vN`
 is conventionally created from `main` so it inherits current workflows
@@ -65,7 +65,7 @@ flow for major version bumps.
   `feat/vN`; `dataVersion` is bot-managed.
 - Do not create `dev/vN` before the editor `vN` release exists.
 - Do not rebase `feat/vN` onto `dev/vN` after the PR is open unless
-  necessary -- the merge commit is what triggers the first v5 deploy.
+  necessary -- the merge commit is what triggers the first vN deploy.
 
 ## Promotion
 
