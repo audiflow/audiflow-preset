@@ -8,10 +8,9 @@ This repo serves production, staging, and development environments across multip
 
 | Branch | Deploy directory | URL path |
 |--------|-----------------|----------|
-| `prod/v1` | `assets/v1/` | `/assets/v1/` |
-| `prod/v2` | `assets/v2/` | `/assets/v2/` |
-| `stg/v2` | `assets-stg/v2/` | `/assets-stg/v2/` |
-| `dev/v2` | `assets-dev/v2/` | `/assets-dev/v2/` |
+| `prod/v7` | `assets/v7/` | `/assets/v7/` |
+| `stg/v7` | `assets-stg/v7/` | `/assets-stg/v7/` |
+| `dev/v7` | `assets-dev/v7/` | `/assets-dev/v7/` |
 
 Branch flow per version: `dev/v{N}` -> PR -> `stg/v{N}` -> PR -> `prod/v{N}`
 
@@ -23,29 +22,28 @@ A single `gh-pages` branch holds all environments and versions side by side:
 
 ```
 gh-pages branch:
-  assets/v1/       <- from prod/v1
-  assets/v2/       <- from prod/v2
-  assets-stg/v2/   <- from stg/v2
-  assets-dev/v2/   <- from dev/v2
+  assets/v7/       <- from prod/v7
+  assets-stg/v7/   <- from stg/v7
+  assets-dev/v7/   <- from dev/v7
 ```
 
-When any env branch receives a push to `patterns/`, the deploy workflow:
+When any env branch receives a push to `presets/`, the deploy workflow:
 
-1. Parses the branch name into env prefix and version (e.g., `prod/v2` -> `assets/v2`)
+1. Parses the branch name into env prefix and version (e.g., `prod/v7` -> `assets/v7`)
 2. Runs version bump on the source branch
 3. Checks out `gh-pages` (or initializes it on first run)
-4. Syncs `patterns/` into the branch's deploy directory via `rsync --delete`
+4. Syncs `presets/` into the branch's deploy directory via `rsync --delete`
 5. Commits and pushes to `gh-pages`
 
 Each branch has its own concurrency group. Push conflicts are handled by retry-with-rebase -- safe because each branch writes to its own directory.
 
 ## Schema version lifecycle
 
-1. Schema v2 is current: `dev/v2`, `stg/v2`, `prod/v2` are active
-2. Schema v3 ships: create `dev/v3` from `main`, add patterns, promote through stg/prod
-3. Bug fix for v2: commit to `dev/v2`, promote through `stg/v2` -> `prod/v2`
-4. Both `/assets/v2/` and `/assets/v3/` are served concurrently
-5. When v2 is sunset: delete `prod/v2` branch (frozen content remains on `gh-pages` until manually cleaned)
+1. Schema v7 is current: `dev/v7`, `stg/v7`, `prod/v7` are active
+2. Schema v8 ships: create `dev/v8` from `main`, add presets, promote through stg/prod
+3. Bug fix for v7: commit to `dev/v7`, promote through `stg/v7` -> `prod/v7`
+4. Both `/assets/v7/` and `/assets/v8/` are served concurrently
+5. When v7 is sunset: delete `prod/v7` branch (frozen content remains on `gh-pages` until manually cleaned)
 
 ## Branch protection
 
