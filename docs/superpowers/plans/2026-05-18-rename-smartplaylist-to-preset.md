@@ -22,7 +22,7 @@
 | pattern-index.schema.json / pattern-meta.schema.json | preset-index.schema.json / preset-meta.schema.json |
 | playlist-definition.schema.json | playlist-definition.schema.json *(unchanged — "playlist" inside a preset stays valid)* |
 | sp_core / sp_cli / sp_server (Rust crates) | preset_core / preset_cli / preset_server |
-| audiflow-editor (release binary name) | audiflow-preset-tool *(see Phase 1 decision)* |
+| audiflow-editor (release binary name) | audiflow-editor (kept for v7; rename deferred to a later major -- see Phase 1 below) |
 
 The container is a **preset**. A preset contains **playlists**. "Playlist" remains a valid term for the curated track-group entity inside a preset.
 

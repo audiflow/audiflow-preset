@@ -1,7 +1,7 @@
 # File Structure Specification
 
 > **Naming migration in progress.** The "smartplaylist" naming is being
-> retired in favor of "preset" (see `docs/architecture/naming-migration.md`).
+> retired in favor of "preset" (see [../architecture/naming-migration.md](../architecture/naming-migration.md)).
 > Data and code on `v7+` branches use the new vocabulary; `v6` branches
 > retain the legacy names until deprecation.
 

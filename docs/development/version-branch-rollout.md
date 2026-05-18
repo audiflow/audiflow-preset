@@ -73,11 +73,12 @@ major bump where the rollout differs structurally from previous versions.
   workflow change ships ON the v7 branch (`feat/v7` -> `dev/v7` -> ...),
   not on `main`. Earlier-version branches keep the `patterns/`-based
   workflow.
-- The editor release binary name remains `audiflow-editor` for v7
-  (decision recorded in the migration plan -- no `audiflow-preset-editor`
-  rename). The v7 binary's `bump-versions` subcommand auto-detects
-  `patterns/` vs `presets/`, so a single release works against both old
-  and new layouts.
+- The editor release binary name remains `audiflow-editor` for v7;
+  renaming the binary is deferred to a later major (see Phase 1 in the
+  [migration plan](../superpowers/plans/2026-05-18-rename-smartplaylist-to-preset.md)).
+  The v7 binary's `bump-versions` subcommand auto-detects `patterns/`
+  vs `presets/`, so a single release works against both old and new
+  layouts.
 
 See also:
 

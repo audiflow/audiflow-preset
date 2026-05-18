@@ -22,7 +22,7 @@ consumes.
 | pattern-index.schema.json / pattern-meta.schema.json | preset-index.schema.json / preset-meta.schema.json |
 | playlist-definition.schema.json | playlist-definition.schema.json *(unchanged — "playlist" inside a preset stays valid)* |
 | sp_core / sp_cli / sp_server (Rust crates) | preset_core / preset_cli / preset_server |
-| audiflow-editor (release binary name) | audiflow-preset-tool *(see Phase 1 in the [migration plan](../superpowers/plans/2026-05-18-rename-smartplaylist-to-preset.md))* |
+| audiflow-editor (release binary name) | audiflow-editor (kept for v7; rename deferred to a later major -- see Phase 1 in the [migration plan](../superpowers/plans/2026-05-18-rename-smartplaylist-to-preset.md)) |
 
 The container is a **preset**. A preset contains **playlists**. On disk, a preset is `presets/{presetId}/` containing `meta.json` plus `playlists/*.json`. "Playlist" remains a valid term for the curated track-group entity inside a preset.
 
@@ -32,6 +32,12 @@ The container is a **preset**. A preset contains **playlists**. On disk, a prese
 |-----|-----|
 | audiflow-smartplaylist | audiflow-preset |
 | audiflow-smartplaylist-editor | audiflow-preset-editor |
+
+## Binary compatibility
+
+The v7 `audiflow-editor` binary's `bump-versions` subcommand auto-detects
+`patterns/` vs `presets/`, so a single release services both legacy v6
+branches and the renamed v7 branches.
 
 ## Branch / URL mapping
 
