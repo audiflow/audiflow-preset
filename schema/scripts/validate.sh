@@ -12,12 +12,12 @@ usage() {
   echo ""
   echo "Arguments:"
   echo "  path  One or more files or directories to validate"
-  echo "        (default: patterns/). Directories are validated recursively."
+  echo "        (default: presets/). Directories are validated recursively."
   echo ""
   echo "Examples:"
   echo "  schema/scripts/validate.sh"
-  echo "  schema/scripts/validate.sh patterns/"
-  echo "  schema/scripts/validate.sh patterns/**/*.json"
+  echo "  schema/scripts/validate.sh presets/"
+  echo "  schema/scripts/validate.sh presets/**/*.json"
 }
 
 if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
@@ -26,7 +26,7 @@ if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
 fi
 
 if [ "$#" -eq 0 ]; then
-  set -- "$REPO_ROOT/patterns"
+  set -- "$REPO_ROOT/presets"
 fi
 
 for target in "$@"; do

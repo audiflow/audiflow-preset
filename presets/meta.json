@@ -1,6 +1,6 @@
 {
   "dataVersion": 27,
-  "patterns": [
+  "presets": [
     {
       "dataVersion": 4,
       "displayName": "Coten Radio",
@@ -65,5 +65,5 @@
       "playlistCount": 2
     }
   ],
-  "schemaVersion": 6
+  "schemaVersion": 7
 }

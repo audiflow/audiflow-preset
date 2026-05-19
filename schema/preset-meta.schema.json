@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://audiflow.app/schema/v6/pattern-meta.json",
-  "title": "SmartPlaylist Pattern Meta",
-  "description": "Per-config metadata file at {patternId}/meta.json. Contains feed matching rules to identify the podcast, and an ordered list of playlist definitions. The app uses podcastGuid and feedUrls for matching.",
+  "$id": "https://audiflow.app/schema/v7/preset-meta.json",
+  "title": "Preset Meta",
+  "description": "Per-preset metadata file at {presetId}/meta.json. Contains feed matching rules to identify the podcast, and an ordered list of playlist definitions. The app uses podcastGuid and feedUrls for matching.",
   "type": "object",
   "required": [
     "dataVersion",
@@ -15,12 +15,12 @@
     "dataVersion": {
       "type": "integer",
       "minimum": 1,
-      "description": "Monotonically increasing version for this pattern's data. Bumped by CI whenever any file in this pattern directory changes (meta.json or any playlist definition). The mobile app compares this against its cached version; a mismatch triggers re-fetching all files for this pattern."
+      "description": "Monotonically increasing version for this preset's data. Bumped by CI whenever any file in this preset directory changes (meta.json or any playlist definition). The mobile app compares this against its cached version; a mismatch triggers re-fetching all files for this preset."
     },
     "id": {
       "type": "string",
       "minLength": 1,
-      "description": "A unique identifier for this config, derived at creation time. Must match the parent directory name. Used for constructing file paths (e.g., {id}/playlists/{playlistId}.json)."
+      "description": "A unique identifier for this preset, derived at creation time. Must match the parent directory name. Used for constructing file paths (e.g., {id}/playlists/{playlistId}.json)."
     },
     "podcastGuid": {
       "type": "string",
@@ -28,7 +28,7 @@
     },
     "feedUrls": {
       "type": "array",
-      "description": "One or more RSS feed URLs that identify this podcast. The app matches incoming feeds against these URLs to find the right config. Multiple URLs support podcasts that have migrated hosts or have alternate feeds.",
+      "description": "One or more RSS feed URLs that identify this podcast. The app matches incoming feeds against these URLs to find the right preset. Multiple URLs support podcasts that have migrated hosts or have alternate feeds.",
       "items": {
         "type": "string"
       },

@@ -4,7 +4,7 @@ on:
   push:
     branches: ["prod/**", "stg/**", "dev/**"]
     paths:
-      - "patterns/**.json"
+      - "presets/**.json"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -81,7 +81,7 @@ jobs:
         run: |
           git config user.name "audiflow-ci-bot[bot]"
           git config user.email "audiflow-ci-bot[bot]@users.noreply.github.com"
-          git add patterns/
+          git add presets/
           git diff --cached --quiet || git commit -m "chore: bump versions"
           git push
 
@@ -110,13 +110,13 @@ jobs:
           git remote add origin \
             "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 
-      - name: Sync patterns to deploy directory
+      - name: Sync presets to deploy directory
         env:
           DEPLOY_DIR: ${{ steps.env.outputs.deploy_dir }}
         run: |
           mkdir -p "gh-pages/${DEPLOY_DIR}"
           rsync -a --delete \
-            source/patterns/ \
+            source/presets/ \
             "gh-pages/${DEPLOY_DIR}/"
 
       - name: Commit and push to gh-pages

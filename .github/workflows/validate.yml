@@ -3,7 +3,7 @@ name: Validate Configs
 on:
   pull_request:
     branches: ["prod/**", "stg/**", "dev/**"]
-    paths: ["patterns/**.json"]
+    paths: ["presets/**.json"]
 
 jobs:
   validate:
@@ -35,4 +35,4 @@ jobs:
           chmod +x /usr/local/bin/audiflow-editor
 
       - name: Validate configs
-        run: audiflow-editor validate $GITHUB_WORKSPACE/patterns
+        run: audiflow-editor validate $GITHUB_WORKSPACE/presets
