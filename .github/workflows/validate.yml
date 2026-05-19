@@ -29,7 +29,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release download "$SCHEMA_VERSION" \
-            --repo audiflow/audiflow-smartplaylist-editor \
+            --repo audiflow/audiflow-preset-editor \
             --pattern 'audiflow-editor-x86_64-unknown-linux-gnu' \
             --output /usr/local/bin/audiflow-editor
           chmod +x /usr/local/bin/audiflow-editor
