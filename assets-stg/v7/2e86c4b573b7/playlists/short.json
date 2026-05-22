@@ -1,0 +1,57 @@
+{
+  "displayName": "ショートシリーズ",
+  "episodeFilters": {
+    "require": [
+      {
+        "title": "【\\d+-\\d+】"
+      },
+      {
+        "title": "【COTEN RADIO\\s*ショート"
+      }
+    ]
+  },
+  "episodeItem": {
+    "showThumbnail": false,
+    "titleExtractor": {
+      "pattern": "-(\\d+)】\\s*([^【]+)",
+      "source": "title",
+      "template": "${1}. ${2}"
+    }
+  },
+  "groupItem": {
+    "showDateRange": true,
+    "showThumbnail": true,
+    "titleExtractor": {
+      "fallback": {
+        "pattern": "【COTEN RADIOショート\\s+(.+?)\\s*(\\d+|前編|中編|後編)】",
+        "source": "title"
+      },
+      "fallbackValue": "番外編",
+      "pattern": "【COTEN RADIOショート\\s+(.+?)編?\\s*(\\d+|前編|中編|後編)】",
+      "source": "title",
+      "template": "${1}"
+    }
+  },
+  "groupListing": {
+    "sort": {
+      "field": "playlistNumber",
+      "order": "ascending"
+    },
+    "userSortable": true,
+    "yearBinding": "pinToYear"
+  },
+  "grouping": {
+    "by": "seasonNumber",
+    "numberingExtractor": {
+      "episodeGroup": 2,
+      "fallbackEpisodePattern": "【番外編[＃#](\\d+)】",
+      "fallbackSeasonNumber": 0,
+      "fallbackToRss": true,
+      "pattern": "【(\\d+)-(\\d+)】",
+      "seasonGroup": 1,
+      "source": "title"
+    }
+  },
+  "id": "short",
+  "priority": 1
+}

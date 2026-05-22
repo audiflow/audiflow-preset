@@ -1,0 +1,15 @@
+{
+  "displayName": "その他",
+  "episodeFilters": {
+    "exclude": [
+      {
+        "title": "（.+?）|\\(.+?\\)"
+      }
+    ]
+  },
+  "grouping": {
+    "by": "year"
+  },
+  "id": "others",
+  "priority": 1
+}
