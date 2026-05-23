@@ -1,11 +1,11 @@
 ---
-name: audiflow-playlist
-description: Create and update audiflow smart playlist patterns and definitions. Use this skill whenever the user wants to create a new playlist pattern, modify an existing pattern, analyze a podcast RSS feed for grouping, search for podcast feeds, validate patterns, or discuss any aspect of the audiflow playlist schema (resolver types, title extractors, episode filters, groups, numbering). Also trigger when the user mentions pattern IDs, feed URLs, the audiflow-editor CLI, or refers to files under patterns/. Even if the user just says "add a podcast" or "new pattern" or names a specific podcast, this skill applies.
+name: audiflow-preset
+description: Create and update audiflow preset patterns and definitions. Use this skill whenever the user wants to create a new playlist pattern, modify an existing pattern, analyze a podcast RSS feed for grouping, search for podcast feeds, validate patterns, or discuss any aspect of the audiflow playlist schema (resolver types, title extractors, episode filters, groups, numbering). Also trigger when the user mentions pattern IDs, feed URLs, the audiflow-editor CLI, or refers to files under patterns/. Even if the user just says "add a podcast" or "new pattern" or names a specific podcast, this skill applies.
 ---
 
-# audiflow-playlist
+# audiflow-preset
 
-Create and manage smart playlist patterns for the audiflow ecosystem. This skill covers the full workflow: searching for podcasts, analyzing RSS feeds, writing pattern JSON, and validating with the editor CLI.
+Create and manage preset patterns for the audiflow ecosystem. This skill covers the full workflow: searching for podcasts, analyzing RSS feeds, writing pattern JSON, and validating with the editor CLI.
 
 ## Quick Reference
 
@@ -279,7 +279,7 @@ The `audiflow-editor` binary is downloaded automatically by the scripts in `sche
 | `bump-versions` | `audiflow-editor bump-versions HEAD~1` | Auto-increment dataVersion for changed files |
 | `--version` | `audiflow-editor --version` | Show binary version |
 
-Schema version is tracked in `schema/VERSION` (currently v4). The binary is fetched from `audiflow/audiflow-smartplaylist-editor` GitHub releases, cached in `.cache/bin/{version}/`.
+Schema version is tracked in `schema/VERSION` (currently v4). The binary is fetched from `audiflow/audiflow-preset-editor` GitHub releases, cached in `.cache/bin/{version}/`.
 
 ---
 
