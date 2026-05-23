@@ -1,6 +1,6 @@
 # Schema Reference (v6)
 
-Schema reference for audiflow smart playlist configuration files. Covers all three schema levels: pattern index, pattern meta, and playlist definition.
+Schema reference for audiflow preset configuration files. Covers all three schema levels: pattern index, pattern meta, and playlist definition.
 
 Schema version: **5** (backwards-compatible with v4 fields accepted as aliases).
 
