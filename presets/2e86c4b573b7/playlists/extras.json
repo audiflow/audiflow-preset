@@ -273,6 +273,14 @@
         }
       },
       {
+        "displayName": "昭和OSの終焉とAI時代の志 尾原和啓",
+        "id": "showa_os_ohara",
+        "pattern": {
+          "pattern": "昭和OSの終焉とAI時代の志",
+          "source": "title"
+        }
+      },
+      {
         "displayName": "特別編",
         "episodeListing": {
           "showYearHeaders": true,
