@@ -2,7 +2,7 @@
 # Runs every *_test.sh under tests/scripts/. Each test file sources _assert.sh
 # and calls summary at end.
 set -eu
-cd "$(dirname "$0")"
+cd "$(CDPATH= cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
 shopt -s nullglob
 files=( *_test.sh )

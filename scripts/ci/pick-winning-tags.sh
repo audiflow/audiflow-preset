@@ -5,12 +5,18 @@
 # Portable: works on bash 3.2 (no associative arrays).
 set -eu
 
-HERE="$(cd "$(dirname "$0")" && pwd)"
+HERE="$(CDPATH= cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 PARSE="$HERE/parse-tag.sh"
+[ -x "$PARSE" ] || { echo "pick-winning-tags: missing $PARSE" >&2; exit 2; }
 
 while IFS= read -r tag; do
   [ -z "$tag" ] && continue
-  parsed="$(bash "$PARSE" "$tag" 2>/dev/null)" || continue
+  parsed="$(bash "$PARSE" "$tag" 2>/dev/null)" && rc=0 || rc=$?
+  if [ "$rc" -ne 0 ]; then
+    [ "$rc" -eq 1 ] && continue
+    echo "pick-winning-tags: parse-tag failed (rc=$rc) for '$tag'" >&2
+    exit "$rc"
+  fi
   read -r env major minor <<<"$parsed"
   printf '%s\t%s\t%s\t%s\n' "$env" "$major" "$minor" "$tag"
 done | awk -F'\t' '

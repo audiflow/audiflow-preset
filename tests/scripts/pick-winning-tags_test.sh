@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
-HERE="$(cd "$(dirname "$0")" && pwd)"
-ROOT="$(cd "$HERE/../.." && pwd)"
+HERE="$(CDPATH= cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(CDPATH= cd -P -- "$HERE/../.." && pwd)"
 . "$HERE/_assert.sh"
 
 S="$ROOT/scripts/ci/pick-winning-tags.sh"
@@ -25,5 +25,9 @@ assert_eq "ignore invalid" "prod 7 2 prod/v7.2" "$(run "${input3[@]}")"
 
 # Empty stdin -> empty stdout, exit 0.
 assert_eq "empty input" "" "$(printf '' | bash "$S" 2>/dev/null)"
+
+# Regression: CDPATH must not corrupt HERE resolution inside the script.
+assert_eq "ignores exported CDPATH" "prod 7 1 prod/v7.1" \
+  "$(CDPATH=/tmp printf 'prod/v7.1\n' | bash "$S" 2>/dev/null)"
 
 summary

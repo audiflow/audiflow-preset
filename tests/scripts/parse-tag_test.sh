@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
-HERE="$(cd "$(dirname "$0")" && pwd)"
-ROOT="$(cd "$HERE/../.." && pwd)"
+HERE="$(CDPATH= cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(CDPATH= cd -P -- "$HERE/../.." && pwd)"
 . "$HERE/_assert.sh"
 
 S="$ROOT/scripts/ci/parse-tag.sh"
