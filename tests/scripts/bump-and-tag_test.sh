@@ -13,10 +13,13 @@ trap 'rm -rf "$TMP"' EXIT
 mkdir -p "$TMP/bin"
 cat >"$TMP/bin/audiflow-editor" <<'EOF'
 #!/usr/bin/env bash
-# Fake audiflow-editor: supports "bump-versions <range>" by incrementing
-# .dataVersion in presets/meta.json.
+# Fake audiflow-editor: bumps .dataVersion in presets/meta.json only if
+# HEAD vs HEAD~1 actually changed something under presets/.
 set -eu
 [ "${1:-}" = "bump-versions" ] || { echo "fake: unsupported $*" >&2; exit 1; }
+if git diff --quiet HEAD~1..HEAD -- presets/; then
+  exit 0
+fi
 meta="presets/meta.json"
 cur="$(jq -r .dataVersion "$meta")"
 new=$((cur + 1))
@@ -66,9 +69,13 @@ assert_eq "tag created locally" "1" "$tag_count"
 remote_tag="$(git --git-dir="$TMP/remote.git" tag -l 'prod/v7.42' | wc -l | tr -d ' ')"
 assert_eq "tag pushed to remote" "1" "$remote_tag"
 
-# Re-run with no presets change: should not commit, should not tag again.
-output2="$(BUMP_ENV=prod GIT_REMOTE=origin bash "$S" 2>&1)"
-last_msg2="$(git log -1 --pretty=%s)"
-assert_eq "no-op leaves last commit unchanged" "chore: bump versions" "$last_msg2"
+# Re-run with no presets change: must be a true no-op.
+head_before="$(git rev-parse HEAD)"
+tag_count_before="$(git tag -l 'prod/v7.*' | wc -l | tr -d ' ')"
+BUMP_ENV=prod GIT_REMOTE=origin bash "$S" >/dev/null 2>&1
+head_after="$(git rev-parse HEAD)"
+tag_count_after="$(git tag -l 'prod/v7.*' | wc -l | tr -d ' ')"
+assert_eq "no-op leaves HEAD unchanged"   "$head_before"      "$head_after"
+assert_eq "no-op leaves tag count same"   "$tag_count_before" "$tag_count_after"
 
 summary
