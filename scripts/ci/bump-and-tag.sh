@@ -20,6 +20,15 @@ require_cmd git
 require_cmd jq
 require_cmd audiflow-editor
 
+# Defense in depth: workflow's actor guard should prevent re-trigger on bot
+# commits, but if this script is invoked manually or re-entered, do nothing
+# when HEAD is already a bot bump commit.
+BUMP_BOT_EMAIL="${BUMP_BOT_EMAIL:-audiflow-ci-bot[bot]@users.noreply.github.com}"
+if [ "$(git log -1 --pretty=%ae)" = "$BUMP_BOT_EMAIL" ]; then
+  echo "bump-and-tag: HEAD is already a bot commit; nothing to do"
+  exit 0
+fi
+
 # Skip bump on the very first commit (no HEAD~1).
 if git rev-parse --verify -q HEAD~1 >/dev/null; then
   audiflow-editor bump-versions HEAD~1
