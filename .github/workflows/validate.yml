@@ -1,38 +1,40 @@
-name: Validate Configs
+name: Validate presets
 
 on:
   pull_request:
-    branches: ["prod/**", "stg/**", "dev/**"]
-    paths: ["presets/**.json"]
+    branches: [main, develop]
+    paths:
+      - "presets/**"
+      - "schema/**"
+      - ".github/workflows/validate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Parse schema version from base branch
-        id: env
-        env:
-          BASE_REF: ${{ github.base_ref }}
-        run: |
-          version="${BASE_REF#*/}"
-          if ! echo "$version" | grep -qE '^v[0-9]+$'; then
-            echo "::error::Cannot parse version from base branch '${BASE_REF}'"
-            exit 1
-          fi
-          echo "schema_version=${version}" >> "$GITHUB_OUTPUT"
+      - name: Checkout PR head
+        uses: actions/checkout@v4
 
-      - uses: actions/checkout@v4
+      - name: Resolve schema major
+        id: schema
+        run: |
+          major="$(jq -r .schemaVersion presets/meta.json)"
+          echo "major=${major}" >> "$GITHUB_OUTPUT"
 
       - name: Download audiflow-editor
         env:
-          SCHEMA_VERSION: ${{ steps.env.outputs.schema_version }}
+          MAJOR: ${{ steps.schema.outputs.major }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release download "$SCHEMA_VERSION" \
+          gh release download "v${MAJOR}" \
             --repo audiflow/audiflow-preset-editor \
             --pattern 'audiflow-editor-x86_64-unknown-linux-gnu' \
             --output /usr/local/bin/audiflow-editor
           chmod +x /usr/local/bin/audiflow-editor
 
-      - name: Validate configs
-        run: audiflow-editor validate $GITHUB_WORKSPACE/presets
+      - name: Validate
+        run: audiflow-editor validate presets/
