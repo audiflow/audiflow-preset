@@ -5,7 +5,9 @@ Status: Approved (design), awaiting implementation plan
 
 ## Goal
 
-Migrate from a many-env-branch source model (`prod/v{N}`, `stg/v{N}`, `dev/v{N}`, ...) to a two-branch + tag-driven model, while preserving the existing GitHub Pages directory layout (`assets/v{N}/`, `assets-dev/v{N}/`). The `gh-pages` branch remains the deploy artifact and continues to be served as-is.
+Migrate from a many-env-branch source model (`prod/v{N}`, `stg/v{N}`, `dev/v{N}`, ...) to a two-branch + tag-driven model, while preserving the existing GitHub Pages directory layout (`assets/v{N}/`, `assets-dev/v{N}/`). Each deploy uploads a Pages artifact via GitHub Actions (`actions/upload-pages-artifact` + `actions/deploy-pages`); no persistent deploy branch is used. Pages source is set to "GitHub Actions".
+
+> Note: an earlier revision of this design kept a `gh-pages` branch as the deploy artifact. That branch-based deploy was superseded by the Actions-sourced Pages deploy in `fix/pages-actions-source`; the sections below describe the current model.
 
 ## Out of scope
 
@@ -109,10 +111,10 @@ Promotion = PR merge `develop -> main`. The resulting merge commit gets a `prod/
      - `git worktree add /tmp/wt-${env}-${major} ${tag}`.
      - Read `schemaVersion` from that worktree's `presets/meta.json`.
      - If `schemaVersion != major` from tag, emit `::warning::` and skip.
-     - Stage: `rsync -a --delete /tmp/wt-${env}-${major}/presets/ staging/${deployDir}/v${major}/`, where `deployDir = assets` (prod) or `assets-dev` (dev).
-  6. Checkout `gh-pages` into separate path.
-  7. `rsync -a --delete staging/ gh-pages/` (full replace -- dirs without backing tag, e.g. `assets-stg/*`, are removed).
-  8. Commit `deploy: rebuild from tags @ ${GITHUB_REF_NAME}` as bot, push with retry-rebase (3 attempts).
+     - Stage: `rsync -a /tmp/wt-${env}-${major}/presets/ _site/${deployDir}/v${major}/`, where `deployDir = assets` (prod) or `assets-dev` (dev).
+  6. Upload `_site/` via `actions/upload-pages-artifact@v3`.
+  7. In a separate `deploy` job (needs: build), publish via `actions/deploy-pages@v4` with `environment: github-pages`. The job requires `pages: write` and `id-token: write`.
+  8. No persistent deploy branch is written; each run replaces the live tree atomically. Directories without a backing tag (e.g. legacy `assets-stg/*`) simply do not appear in the new artifact.
 
 ### `validate.yml` (revised)
 
@@ -127,8 +129,8 @@ Promotion = PR merge `develop -> main`. The resulting merge commit gets a `prod/
 ## Branch + tag protection
 
 - `main`, `develop`: PR required, `validate` must pass, no force-push, no delete.
-- `gh-pages`: bot-only push.
 - Tags `prod/**`, `dev/**`: GitHub tag protection rule -- tagger must be a maintainer or `audiflow-ci-bot[bot]`. Once pushed, immutable (no delete, no move).
+- No `gh-pages` branch: Pages source is "GitHub Actions"; `deploy-pages.yml` uploads an artifact and `actions/deploy-pages` publishes it.
 
 ## Migration plan
 
@@ -144,15 +146,15 @@ Executed by a maintainer in this order:
 3. Initial tagging (one-shot, manual):
    - On `main`: `git tag prod/v$(jq -r .schemaVersion presets/meta.json).$(jq -r .dataVersion presets/meta.json) && git push --tags`.
    - On `develop`: `git tag dev/v$(jq -r .schemaVersion presets/meta.json).$(jq -r .dataVersion presets/meta.json) && git push --tags`.
-4. First `deploy-pages` run rebuilds `gh-pages`. Diff the result against the pre-migration `gh-pages` snapshot (recorded at step 1): only `assets-stg/*` should disappear. Any other differences abort the migration and trigger rollback.
-5. Delete old branches: `prod/v*`, `stg/v*`, `dev/v*`, stale `feat/*-v*`, `chore/rename-editor-repo-*`.
+4. Switch GitHub Pages source from "Deploy from a branch" (`gh-pages` / `/`) to "GitHub Actions" in Settings > Pages. Trigger `deploy-pages.yml` once via `workflow_dispatch` and verify both `build` and `deploy` jobs succeed. Spot-check the deployed Pages URL (`curl -I https://audiflow.github.io/audiflow-preset/assets/v7/presets/meta.json` should return `200`). Any failure aborts the migration and triggers rollback.
+5. Delete the legacy `gh-pages` branch only after step 4 succeeds (`git push origin --delete gh-pages`). Delete old source branches: `prod/v*`, `stg/v*`, `dev/v*`, stale `feat/*-v*`, `chore/rename-editor-repo-*`.
 6. Update branch protection rulesets to cover `main`, `develop` only; remove old env-branch rules.
 
-Rollback: delete the new `main` workflows and restore prior versions from git history. `gh-pages` can be reverted to its pre-migration commit. Old branches restored from local clones or reflog if needed within the GitHub retention window.
+Rollback: revert the `deploy-pages.yml` change on `main` and switch the Pages source back to "Deploy from a branch" (`gh-pages` / `/`). Do this before step 5; once `gh-pages` is deleted the branch-based fallback is unavailable without restoring the branch from a local clone or the reflog within GitHub's retention window. Old source branches restored similarly if needed.
 
 ## Risks and accepted limitations
 
-- **No per-semver immutable mirror on `gh-pages`.** Each `(env, major)` dir always reflects the highest-minor tag's content. Historical data is recoverable only via repo tags. Acceptable per stated requirement.
+- **No per-semver immutable mirror.** Each `(env, major)` dir in the live Pages deploy always reflects the highest-minor tag's content. Historical data is recoverable only via repo tags. Acceptable per stated requirement.
 - **Tag flood.** Every `presets/` push to `main` or `develop` produces a tag. Acceptable: tags are cheap and serve as the audit log that branch history previously provided.
 - **Concurrent pushes.** The single global concurrency group on `deploy-pages` serializes; full-rebuild idempotency means a coalesced run still produces correct output.
 - **First commit on a branch.** `HEAD~1` doesn't exist; the bump step guards and skips.

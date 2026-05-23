@@ -56,4 +56,4 @@ See `docs/development/version-branch-rollout.md`.
 
 - **PR to `main` or `develop`** (`validate.yml`): downloads `audiflow-editor` matching `presets/meta.json:.schemaVersion` on the PR head, runs `validate`.
 - **Push to `main` or `develop`** (`bump-versions.yml`): bumps `dataVersion`, commits, tags `{env}/v{M}.{d}`, pushes tag.
-- **Push of any `prod/v*.*` or `dev/v*.*` tag** (`deploy-pages.yml`): rebuilds `gh-pages` from all matching tags (highest minor per env+major wins).
+- **Push of any `prod/v*.*` or `dev/v*.*` tag** (`deploy-pages.yml`): builds a Pages artifact from all matching tags (highest minor per env+major wins) and deploys it via GitHub Actions. No persistent deploy branch.

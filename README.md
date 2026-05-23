@@ -21,7 +21,7 @@ Two long-lived branches:
 
 `presets/` and `schema/` live at the repo root on both branches.
 
-Deployment is driven by **tags**, not branches. Each tag push triggers a full rebuild of `gh-pages`; per `(env, major)`, the highest-minor tag wins:
+Deployment is driven by **tags**, not branches. Each tag push builds a Pages artifact from the winning tags' contents and deploys it via GitHub Actions; the Pages source is set to "GitHub Actions" (no persistent deploy branch). Per `(env, major)`, the highest-minor tag wins:
 
 | Tag pattern | Deploy path | URL |
 |-------------|------------|-----|
@@ -65,7 +65,7 @@ schema/scripts/validate.sh presets/coten_radio/playlists/regular.json
 
 - **validate.yml** -- On PR to `main`/`develop`: reads `presets/meta.json:.schemaVersion`, downloads the matching `audiflow-editor` release, validates all JSON in `presets/`.
 - **bump-versions.yml** -- On push to `main`/`develop`: bumps `dataVersion`, commits as the CI bot, and auto-tags `prod/v{schemaVersion}.{dataVersion}` (from `main`) or `dev/v{...}` (from `develop`).
-- **deploy-pages.yml** -- On push of any `prod/v*.*` or `dev/v*.*` tag: enumerates all matching tags, picks the highest-minor per `(env, major)`, and rebuilds the entire `gh-pages` tree from those tags.
+- **deploy-pages.yml** -- On push of any `prod/v*.*` or `dev/v*.*` tag: enumerates all matching tags, picks the highest-minor per `(env, major)`, assembles a Pages artifact from those tags, and deploys it via `actions/upload-pages-artifact` + `actions/deploy-pages` (Pages source = "GitHub Actions").
 
 ## Ecosystem
 

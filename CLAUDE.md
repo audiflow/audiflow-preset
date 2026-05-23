@@ -13,7 +13,7 @@ Two long-lived branches:
 
 `presets/` and `schema/` live at the repo root on both branches.
 
-Deployment is driven by tags, not branches. `deploy-pages.yml` rebuilds the entire `gh-pages` tree on each tag push; per `(env, major)`, the highest-minor tag wins:
+Deployment is driven by tags. `deploy-pages.yml` builds an artifact from the winning tags' contents and deploys it via GitHub Actions; Pages source is set to "GitHub Actions", no persistent deploy branch. Per `(env, major)`, the highest-minor tag wins:
 
 | Tag | Deploy path | URL |
 |-----|-------------|-----|

@@ -9,10 +9,6 @@ Run these steps after the PR adding workflows + docs has merged to `main`.
 gh release view v7 --repo audiflow/audiflow-preset-editor \
   --json assets -q '.assets[].name' | grep audiflow-editor-x86_64-unknown-linux-gnu
 
-# Record current gh-pages tree for the diff check in step 4
-git clone --depth 1 --branch gh-pages \
-  https://github.com/audiflow/audiflow-preset.git /tmp/gh-pages-before
-
 # Disable the new tag-triggered deploy temporarily to avoid surprise runs.
 # Edit .github/workflows/deploy-pages.yml on main and comment out the `push.tags`
 # trigger, leaving only workflow_dispatch. Commit + push. We re-enable in step 4.
@@ -67,28 +63,41 @@ git tag "dev/v${maj}.${data}"
 git push origin "dev/v${maj}.${data}"
 ```
 
-## 4. First deploy + diff check
+## 4. Switch Pages source and run the first Actions deploy
 
-```bash
-# Re-enable the push.tags trigger in deploy-pages.yml (undo step 0 change).
-gh workflow run deploy-pages.yml --ref main
-# Wait for completion.
+1. In GitHub Settings > Pages, change "Build and deployment > Source" from
+   "Deploy from a branch" (`gh-pages` / `/`) to "GitHub Actions".
+2. Re-enable the `push.tags` trigger in `deploy-pages.yml` (undo step 0 change),
+   then trigger a run:
 
-# Diff against pre-migration snapshot.
-git clone --depth 1 --branch gh-pages \
-  https://github.com/audiflow/audiflow-preset.git /tmp/gh-pages-after
-diff -r --brief /tmp/gh-pages-before /tmp/gh-pages-after
-```
+   ```bash
+   gh workflow run deploy-pages.yml --ref main
+   # Wait for both the `build` and `deploy` jobs to succeed.
+   ```
 
-Expected diff: only `assets-stg/*` removed. Anything else aborts the migration; investigate before continuing.
+3. Verify the deploy:
 
-Rollback if needed:
+   ```bash
+   # The Actions run page exposes the deployed Pages URL on the `deploy` job.
+   # Spot-check a known asset over the Pages CDN.
+   curl -sSI https://audiflow.github.io/audiflow-preset/assets/v7/presets/meta.json | head -1
+   ```
 
-```bash
-# Restore prior gh-pages
-cd /tmp/gh-pages-before
-git push --force origin HEAD:gh-pages
-```
+   Expected: `HTTP/2 200`. Anything else aborts the migration; investigate
+   before continuing.
+
+4. Only after the first Actions deploy succeeds and serves correctly, delete
+   the legacy `gh-pages` branch:
+
+   ```bash
+   git push origin --delete gh-pages
+   ```
+
+Rollback if needed: revert the `deploy-pages.yml` change on `main` (restoring
+the prior workflow), and in Settings > Pages flip the source back to
+"Deploy from a branch" (`gh-pages` / `/`). Do this before deleting `gh-pages`
+in step 4 above; once the branch is gone the branch-based fallback is no
+longer available without restoring it from a local clone.
 
 ## 5. Delete old source branches
 
