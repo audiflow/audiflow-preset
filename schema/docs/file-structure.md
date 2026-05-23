@@ -1,6 +1,6 @@
 # Config File Structure
 
-Smart playlist configurations are stored as a three-level file hierarchy in the data repository.
+Preset configurations are stored as a three-level file hierarchy in the data repository.
 
 ## Directory Layout
 
@@ -9,7 +9,7 @@ meta.json                           # Root: version + pattern summaries
 {patternId}/
   meta.json                         # Pattern: feed matching + playlist IDs
   playlists/
-    {playlistId}.json               # Playlist definition (SmartPlaylistDefinition)
+    {playlistId}.json               # Playlist definition (PlaylistDefinition)
 ```
 
 ## Root meta.json
