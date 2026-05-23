@@ -29,7 +29,7 @@ def search_feeds(query: str, limit: int = 10, country: str = "jp") -> list[dict]
     })
     url = f"https://itunes.apple.com/search?{params}"
 
-    req = urllib.request.Request(url, headers={"User-Agent": "audiflow-playlist-skill/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "audiflow-preset-skill/1.0"})
     with urllib.request.urlopen(req, timeout=15) as resp:
         data = json.loads(resp.read().decode("utf-8"))
 
