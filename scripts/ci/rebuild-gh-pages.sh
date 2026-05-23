@@ -28,15 +28,32 @@ trap 'rm -rf "$STAGING"; (cd "$SRC" && git worktree prune) >/dev/null 2>&1 || tr
 
 cd "$SRC"
 
-bash "$HERE/select-deploy-targets.sh" | while read -r env major minor tag dir; do
+set -o pipefail
+
+plan="$(bash "$HERE/select-deploy-targets.sh")"
+
+if [ -z "$plan" ]; then
+  if [ "${REBUILD_ALLOW_EMPTY:-0}" != "1" ]; then
+    echo "rebuild-gh-pages: empty deploy plan; refusing to wipe gh-pages. Set REBUILD_ALLOW_EMPTY=1 to override." >&2
+    exit 3
+  fi
+  echo "rebuild-gh-pages: empty plan accepted via REBUILD_ALLOW_EMPTY=1" >&2
+fi
+
+while IFS=' ' read -r env major minor tag dir; do
   [ -z "${env:-}" ] && continue
+  if [ -z "${dir:-}" ]; then
+    echo "rebuild-gh-pages: missing deployDir for tag '$tag'" >&2
+    exit 1
+  fi
   wt="$(mktemp -d)"
   git worktree add --quiet --detach "$wt" "$tag"
   target="$STAGING/$dir/v$major"
   mkdir -p "$target"
   rsync -a --delete "$wt/presets/" "$target/"
-  git worktree remove --force "$wt"
-done
+  git worktree remove --force "$wt" || true
+  rm -rf "$wt"
+done <<<"$plan"
 
 # Sync staging into gh-pages root. --delete drops any tree without a backing tag,
 # but excludes top-level files we don't manage (CNAME, README, .gitignore, .git).
