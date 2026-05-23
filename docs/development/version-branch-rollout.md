@@ -6,7 +6,7 @@ Operational runbook for landing a new schema major (e.g. v7 -> v8).
 
 - `bump-versions.yml`: triggers on push to `main`/`develop`. Reads `presets/meta.json:.schemaVersion`, downloads `audiflow-editor` from editor release `v{N}`, bumps `dataVersion`, commits, and tags `{env}/v{N}.{dataVersion}`.
 - `validate.yml`: triggers on PR to `main`/`develop`. Same `schemaVersion`-keyed download.
-- `deploy-pages.yml`: triggers on tag push matching `prod/v*.*` or `dev/v*.*`. Full rebuild.
+- `deploy-pages.yml`: triggers on tag push matching `prod/v*.*` or `dev/v*.*`. Builds the deploy tree from all winning tags and publishes it as a Pages artifact via GitHub Actions (no persistent deploy branch).
 
 ## Preconditions
 

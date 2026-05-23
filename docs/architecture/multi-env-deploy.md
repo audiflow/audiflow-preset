@@ -21,10 +21,12 @@ Two long-lived branches:
 - `dataVersion` is read from `presets/meta.json`, bumped automatically by CI on every push.
 - Same commit may carry multiple env tags (e.g. `prod/v7.10` and `dev/v7.10`) when promotion produces identical content.
 
-## gh-pages layout
+## Deploy artifact layout
+
+Each deploy uploads a Pages artifact with this tree (no persistent deploy branch):
 
 ```
-gh-pages branch:
+_site/
   assets/v7/       <- highest-minor prod/v7.* tag
   assets/v8/       <- highest-minor prod/v8.* tag
   assets-dev/v7/   <- highest-minor dev/v7.* tag
@@ -34,7 +36,7 @@ gh-pages branch:
 ## How it works
 
 - Push to `main` or `develop` (touching `presets/**.json`) -> `bump-versions.yml` runs `audiflow-editor bump-versions`, commits, and tags `{env}/v{schemaVersion}.{dataVersion}`.
-- That tag push -> `deploy-pages.yml` enumerates all matching tags, picks the highest minor per `(env, major)`, and rebuilds the full `gh-pages` tree from the winning tags' `presets/` content. Directories without a backing tag (e.g. legacy `assets-stg/*`) are removed.
+- That tag push -> `deploy-pages.yml` enumerates all matching tags, picks the highest minor per `(env, major)`, builds the deploy tree from the winning tags' `presets/` content into `_site/`, uploads it via `actions/upload-pages-artifact`, and publishes it via `actions/deploy-pages`. Each deploy fully replaces the live tree; directories without a backing tag (e.g. legacy `assets-stg/*`) simply do not appear in the new artifact.
 
 ## Schema major lifecycle
 
@@ -47,9 +49,8 @@ gh-pages branch:
 ## Branch + tag protection
 
 - `main`, `develop`: PR required, `validate` must pass, no force-push, no delete.
-- `gh-pages`: bot-only push.
 - Tags `prod/**`, `dev/**`: protected ruleset; only maintainers and `audiflow-ci-bot[bot]` can create; no delete, no overwrite.
 
 ## GitHub Pages configuration
 
-Pages deploys from the `gh-pages` branch at `/` (root). Set in Settings > Pages.
+Pages source is set to "GitHub Actions" (Settings > Pages > Build and deployment > Source). No persistent deploy branch exists; each successful `deploy-pages.yml` run publishes a fresh artifact via `actions/deploy-pages`.
