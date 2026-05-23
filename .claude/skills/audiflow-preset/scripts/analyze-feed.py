@@ -84,7 +84,7 @@ NS = {
 def fetch_feed(url: str) -> bytes:
     """Fetch RSS feed content from URL as raw bytes."""
     req = urllib.request.Request(url, headers={
-        "User-Agent": "audiflow-playlist-skill/1.0",
+        "User-Agent": "audiflow-preset-skill/1.0",
         "Accept": "application/rss+xml, application/xml, text/xml",
     })
     with urllib.request.urlopen(req, timeout=30) as resp:
