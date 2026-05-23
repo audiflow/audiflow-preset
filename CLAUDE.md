@@ -4,17 +4,26 @@ Preset configuration data for all environments. Static JSON files deployed to Gi
 
 ## Branch and deployment model
 
-`main` holds infrastructure (workflows, docs, scripts). Data and vendored schemas live on env/version branches:
+Two long-lived branches:
 
-| Branch | Deploy path | URL |
-|--------|------------|-----|
-| `prod/v7` | `/assets/v7/` | `audiflow.github.io/audiflow-preset/assets/v7/` |
-| `stg/v7` | `/assets-stg/v7/` | `audiflow.github.io/audiflow-preset/assets-stg/v7/` |
-| `dev/v7` | `/assets-dev/v7/` | `audiflow.github.io/audiflow-preset/assets-dev/v7/` |
+| Branch | Role |
+|--------|------|
+| `main` | Promoted/stable. Auto-tagged `prod/v{schemaVersion}.{dataVersion}` on each push. |
+| `develop` | Current-major working branch. Auto-tagged `dev/v{schemaVersion}.{dataVersion}` on each push. |
 
-Branch flow per version: `dev/v{N}` -> PR -> `stg/v{N}` -> PR -> `prod/v{N}`
+`presets/` and `schema/` live at the repo root on both branches.
 
-Multiple schema versions can be served concurrently. Old versions remain deployable for bug fixes.
+Deployment is driven by tags, not branches. `deploy-pages.yml` rebuilds the entire `gh-pages` tree on each tag push; per `(env, major)`, the highest-minor tag wins:
+
+| Tag | Deploy path | URL |
+|-----|-------------|-----|
+| `prod/v7.*` (max minor) | `/assets/v7/` | `audiflow.github.io/audiflow-preset/assets/v7/` |
+| `dev/v7.*` (max minor) | `/assets-dev/v7/` | `audiflow.github.io/audiflow-preset/assets-dev/v7/` |
+| `prod/v8.*` (max minor) | `/assets/v8/` | ... |
+
+Promotion: `develop` -> PR -> `main`.
+
+Old-major hotfix: check out an old tag, branch, fix, tag the next free minor manually.
 
 ## Ecosystem context
 
@@ -34,22 +43,18 @@ The single data repo in the audiflow ecosystem (3 repos: app, editor, config dat
 
 ## File layout
 
-On `main` (infrastructure only):
 ```
-.github/workflows/    # CI pipelines
+.github/workflows/    # CI: validate, bump-versions, deploy-pages
 docs/                 # Repository documentation
-scripts/              # Infrastructure scripts
-```
-
-On env/version branches (e.g., `prod/v7`):
-```
+scripts/              # CI helpers (scripts/ci/*) + repo tooling
 presets/
-  meta.json                    # Root index: dataVersion, schemaVersion, preset summaries
+  meta.json                    # Root index: schemaVersion, dataVersion, preset summaries
   {presetId}/
     meta.json                  # PresetMeta: feedUrls, playlists list, flags
     playlists/
       {playlistId}.json        # PlaylistDefinition (one per playlist)
 schema/                        # Vendored schemas + validation tooling
+tests/scripts/                 # Bash test harness for scripts/ci/
 ```
 
 ## Validation

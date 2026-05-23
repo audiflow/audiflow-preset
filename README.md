@@ -12,23 +12,32 @@ The [audiflow-preset-editor](https://github.com/audiflow/audiflow-preset-editor)
 
 ## Branch and deployment model
 
-`main` holds infrastructure only (workflows, docs, scripts). Data lives on environment/version branches:
+Two long-lived branches:
 
-| Branch | Deploy path | URL |
-|--------|------------|-----|
-| `prod/v7` | `/assets/v7/` | `audiflow.github.io/audiflow-preset/assets/v7/` |
-| `stg/v7` | `/assets-stg/v7/` | `audiflow.github.io/audiflow-preset/assets-stg/v7/` |
-| `dev/v7` | `/assets-dev/v7/` | `audiflow.github.io/audiflow-preset/assets-dev/v7/` |
+| Branch | Role |
+|--------|------|
+| `main` | Promoted/stable. Auto-tagged `prod/v{schemaVersion}.{dataVersion}` on each push. |
+| `develop` | Current-major working branch. Auto-tagged `dev/v{schemaVersion}.{dataVersion}` on each push. |
 
-Promotion flow: `dev/v{N}` -> PR -> `stg/v{N}` -> PR -> `prod/v{N}`
+`presets/` and `schema/` live at the repo root on both branches.
 
-Multiple schema versions can be served concurrently.
+Deployment is driven by **tags**, not branches. Each tag push triggers a full rebuild of `gh-pages`; per `(env, major)`, the highest-minor tag wins:
 
-## File structure (on data branches)
+| Tag pattern | Deploy path | URL |
+|-------------|------------|-----|
+| `prod/v7.*` (max minor) | `/assets/v7/` | `audiflow.github.io/audiflow-preset/assets/v7/` |
+| `dev/v7.*` (max minor) | `/assets-dev/v7/` | `audiflow.github.io/audiflow-preset/assets-dev/v7/` |
+| `prod/v8.*` (max minor) | `/assets/v8/` | ... |
+
+Promotion: `develop` -> PR -> `main`. Old-major hotfix: check out an old tag, branch, fix, manually tag the next free minor.
+
+Multiple schema majors are served concurrently as long as their tags exist.
+
+## File structure
 
 ```
 presets/
-  meta.json                    # Root index: dataVersion, schemaVersion, preset list
+  meta.json                    # Root index: schemaVersion, dataVersion, preset list
   {presetId}/
     meta.json                  # Preset metadata: feed URLs, playlist IDs
     playlists/
@@ -36,6 +45,8 @@ presets/
 schema/
   *.schema.json                # Vendored JSON schemas (SSoT is in the editor repo)
   scripts/validate.sh          # Local validation (requires uv)
+scripts/ci/                    # Shell helpers used by CI workflows
+tests/scripts/                 # Bash test harness for scripts/ci/
 ```
 
 The app loads configs lazily: root index -> preset meta -> individual playlists.
@@ -52,8 +63,9 @@ schema/scripts/validate.sh presets/coten_radio/playlists/regular.json
 
 ## CI pipelines
 
-- **validate.yml** -- On PR to env branches: downloads `audiflow-editor` binary, validates all JSON in `presets/`
-- **deploy-pages.yml** -- On merge to env branches: bumps `dataVersion`, deploys `presets/` to the correct path on `gh-pages`
+- **validate.yml** -- On PR to `main`/`develop`: reads `presets/meta.json:.schemaVersion`, downloads the matching `audiflow-editor` release, validates all JSON in `presets/`.
+- **bump-versions.yml** -- On push to `main`/`develop`: bumps `dataVersion`, commits as the CI bot, and auto-tags `prod/v{schemaVersion}.{dataVersion}` (from `main`) or `dev/v{...}` (from `develop`).
+- **deploy-pages.yml** -- On push of any `prod/v*.*` or `dev/v*.*` tag: enumerates all matching tags, picks the highest-minor per `(env, major)`, and rebuilds the entire `gh-pages` tree from those tags.
 
 ## Ecosystem
 

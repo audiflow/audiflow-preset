@@ -1,0 +1,21 @@
+{
+  "displayName": "NIKKEI THE PITCH",
+  "episodeFilters": {
+    "require": [
+      {
+        "title": "NIKKEI THE PITCH"
+      }
+    ]
+  },
+  "episodeListing": {
+    "sort": {
+      "field": "publishedAt",
+      "order": "descending"
+    }
+  },
+  "grouping": {
+    "by": "year"
+  },
+  "id": "nikkei-the-pitch",
+  "priority": 2
+}

@@ -1,0 +1,25 @@
+{
+  "id": "seasons",
+  "displayName": "Seasons",
+  "priority": 0,
+  "grouping": {
+    "by": "seasonNumber"
+  },
+  "groupListing": {
+    "sort": {
+      "field": "playlistNumber",
+      "order": "descending"
+    }
+  },
+  "groupItem": {
+    "showDateRange": true,
+    "titleExtractor": {
+      "source": "seasonNumber",
+      "template": "Season {value}",
+      "fallbackValue": "Specials"
+    }
+  },
+  "episodeListing": {
+    "showYearHeaders": true
+  }
+}

@@ -2,49 +2,22 @@ name: Deploy to Pages
 
 on:
   push:
-    branches: ["prod/**", "stg/**", "dev/**"]
-    paths:
-      - "patterns/**.json"
-      - ".github/workflows/deploy-pages.yml"
+    tags:
+      - "prod/v*.*"
+      - "dev/v*.*"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: deploy-${{ github.ref_name }}
+  group: deploy-pages
   cancel-in-progress: false
 
 jobs:
-  bump-and-deploy:
-    if: github.actor != 'audiflow-ci-bot[bot]'
+  rebuild:
     runs-on: ubuntu-latest
     steps:
-      - name: Parse branch name
-        id: env
-        env:
-          BRANCH: ${{ github.ref_name }}
-        run: |
-          # Branch format: {env}/{version} (e.g., prod/v2, stg/v1, dev/v2)
-          env_name="${BRANCH%%/*}"
-          version="${BRANCH#*/}"
-
-          case "$env_name" in
-            prod) dir=assets ;;
-            stg)  dir=assets-stg ;;
-            dev)  dir=assets-dev ;;
-            *)    echo "::error::Unsupported env '${env_name}' in branch '${BRANCH}'" && exit 1 ;;
-          esac
-
-          if ! echo "$version" | grep -qE '^v[0-9]+$'; then
-            echo "::error::Invalid version '${version}' in branch '${BRANCH}'. Expected v1, v2, etc."
-            exit 1
-          fi
-
-          echo "deploy_dir=${dir}/${version}" >> "$GITHUB_OUTPUT"
-          echo "schema_version=${version}" >> "$GITHUB_OUTPUT"
-
-      # --- Generate App token for pushing to protected branches ---
       - name: Generate CI bot token
         id: app-token
         uses: actions/create-github-app-token@v1
@@ -52,40 +25,21 @@ jobs:
           app-id: ${{ vars.CI_BOT_APP_ID }}
           private-key: ${{ secrets.CI_BOT_PRIVATE_KEY }}
 
-      # --- Checkout source ---
-      - name: Checkout source
+      - name: Checkout main (workflow + scripts)
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
-          path: source
+          ref: main
+          fetch-depth: 1
+          path: src
           token: ${{ steps.app-token.outputs.token }}
 
-      # --- Version Bump ---
-      - name: Download audiflow-editor
-        env:
-          SCHEMA_VERSION: ${{ steps.env.outputs.schema_version }}
-          GH_TOKEN: ${{ github.token }}
+      - name: Fetch all matching tags
+        working-directory: src
         run: |
-          gh release download "$SCHEMA_VERSION" \
-            --repo audiflow/audiflow-smartplaylist-editor \
-            --pattern 'audiflow-editor-x86_64-unknown-linux-gnu' \
-            --output /usr/local/bin/audiflow-editor
-          chmod +x /usr/local/bin/audiflow-editor
+          git fetch --tags --quiet origin \
+            "+refs/tags/prod/*:refs/tags/prod/*" \
+            "+refs/tags/dev/*:refs/tags/dev/*"
 
-      - name: Bump versions
-        working-directory: source
-        run: audiflow-editor bump-versions HEAD~1
-
-      - name: Commit version bump
-        working-directory: source
-        run: |
-          git config user.name "audiflow-ci-bot[bot]"
-          git config user.email "audiflow-ci-bot[bot]@users.noreply.github.com"
-          git add patterns/
-          git diff --cached --quiet || git commit -m "chore: bump versions"
-          git push
-
-      # --- Deploy to gh-pages ---
       - name: Checkout gh-pages
         id: checkout-ghpages
         uses: actions/checkout@v4
@@ -104,36 +58,32 @@ jobs:
           rm -rf gh-pages
           mkdir gh-pages && cd gh-pages
           git init -b gh-pages
-          git config user.name "audiflow-ci-bot[bot]"
+          git config user.name  "audiflow-ci-bot[bot]"
           git config user.email "audiflow-ci-bot[bot]@users.noreply.github.com"
           git commit --allow-empty -m "chore: initialize gh-pages"
           git remote add origin \
             "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 
-      - name: Sync patterns to deploy directory
-        env:
-          DEPLOY_DIR: ${{ steps.env.outputs.deploy_dir }}
-        run: |
-          mkdir -p "gh-pages/${DEPLOY_DIR}"
-          rsync -a --delete \
-            source/patterns/ \
-            "gh-pages/${DEPLOY_DIR}/"
+      - name: Rebuild gh-pages from tags
+        run: bash src/scripts/ci/rebuild-gh-pages.sh src gh-pages
 
-      - name: Commit and push to gh-pages
+      - name: Commit + push gh-pages
         working-directory: gh-pages
         env:
-          DEPLOY_DIR: ${{ steps.env.outputs.deploy_dir }}
-          BRANCH: ${{ github.ref_name }}
+          TRIGGER: ${{ github.ref_name }}
         run: |
-          git config user.name "audiflow-ci-bot[bot]"
+          git config user.name  "audiflow-ci-bot[bot]"
           git config user.email "audiflow-ci-bot[bot]@users.noreply.github.com"
-          git add .
-          git diff --cached --quiet && echo "No changes to deploy" && exit 0
-          git commit -m "deploy: update ${DEPLOY_DIR} from ${BRANCH}"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "deploy-pages: no changes"
+            exit 0
+          fi
+          git commit -m "deploy: rebuild from tags @ ${TRIGGER}"
           for attempt in 1 2 3; do
             git push origin gh-pages && exit 0
-            echo "Push conflict (attempt ${attempt}), rebasing..."
+            echo "push conflict (attempt ${attempt}); rebasing"
             git pull --rebase origin gh-pages
           done
-          echo "::error::Failed to push to gh-pages after 3 attempts"
+          echo "::error::failed to push to gh-pages after 3 attempts"
           exit 1

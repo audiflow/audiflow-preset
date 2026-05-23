@@ -1,0 +1,44 @@
+{
+  "id": "categories",
+  "displayName": "Story Arcs",
+  "priority": 0,
+  "episodeFilters": {
+    "require": [
+      { "title": "(?:Main|Bonus)" }
+    ],
+    "exclude": [
+      { "title": "(?:Trailer|Preview)" }
+    ]
+  },
+  "grouping": {
+    "by": "titleClassifier",
+    "staticClassifiers": [
+      {
+        "id": "main",
+        "displayName": "Main Episodes",
+        "pattern": {
+          "source": "title",
+          "pattern": "^Main\\b"
+        }
+      },
+      {
+        "id": "bonus",
+        "displayName": "Bonus Content",
+        "pattern": {
+          "source": "title",
+          "pattern": "^Bonus\\b"
+        }
+      },
+      {
+        "id": "other",
+        "displayName": "Other"
+      }
+    ]
+  },
+  "groupItem": {
+    "showDateRange": true
+  },
+  "episodeListing": {
+    "showYearHeaders": true
+  }
+}

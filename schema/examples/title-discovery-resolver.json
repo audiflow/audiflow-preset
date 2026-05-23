@@ -1,0 +1,27 @@
+{
+  "id": "story-arcs",
+  "displayName": "Story Arcs",
+  "priority": 0,
+  "episodeFilters": {
+    "require": [
+      { "title": "\\[.+\\]" }
+    ]
+  },
+  "grouping": {
+    "by": "titleDiscovery",
+    "numberingExtractor": {
+      "source": "title",
+      "pattern": "\\[.+?\\s+(\\d+)\\]",
+      "seasonGroup": null,
+      "episodeGroup": 1,
+      "fallbackToRss": true
+    }
+  },
+  "groupItem": {
+    "titleExtractor": {
+      "source": "title",
+      "pattern": "\\[(.+?)\\s+\\d+\\]",
+      "group": 1
+    }
+  }
+}

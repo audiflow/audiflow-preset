@@ -1,0 +1,15 @@
+{
+  "dataVersion": 1,
+  "feedUrls": [
+    "https://feeds.megaphone.fm/nagara"
+  ],
+  "id": "ba9893efc22f",
+  "playlists": [
+    "personality",
+    "with-nikkei",
+    "nikkei-the-pitch",
+    "techno-sinsei"
+  ],
+  "showEpisodeThumbnail": false,
+  "yearGroupedEpisodes": false
+}

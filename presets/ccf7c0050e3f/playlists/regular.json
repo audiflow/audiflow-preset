@@ -1,0 +1,52 @@
+{
+  "displayName": "レギュラーシリーズ",
+  "episodeFilters": {
+    "exclude": [
+      {
+        "title": "【雑談"
+      }
+    ],
+    "require": [
+      {
+        "title": "【\\D+\\d+\\s*】"
+      }
+    ]
+  },
+  "episodeItem": {
+    "showThumbnail": false,
+    "titleExtractor": {
+      "pattern": "(\\d+)\\s*】\\s*(#?[^#]+)+?(?:#\\d+$)?",
+      "source": "title",
+      "template": "${1}. ${2}"
+    }
+  },
+  "episodeListing": {
+    "sort": {
+      "field": "publishedAt",
+      "order": "ascending"
+    }
+  },
+  "groupItem": {
+    "pinToYear": true,
+    "showDateRange": true,
+    "showThumbnail": true,
+    "titleExtractor": {
+      "pattern": "【(\\D+)\\d+\\s*】",
+      "source": "title",
+      "template": "${1}"
+    }
+  },
+  "groupListing": {
+    "sort": {
+      "field": "playlistNumber",
+      "order": "ascending"
+    },
+    "userSortable": true,
+    "yearBinding": "pinToYear"
+  },
+  "grouping": {
+    "by": "titleDiscovery"
+  },
+  "id": "regular",
+  "priority": 0
+}

@@ -1,0 +1,38 @@
+{
+  "displayName": "コラボ小説",
+  "episodeFilters": {
+    "require": [
+      {
+        "title": "テクノ新世"
+      }
+    ]
+  },
+  "episodeItem": {
+    "titleExtractor": {
+      "pattern": "(「.*)",
+      "source": "title",
+      "template": "${1}"
+    }
+  },
+  "episodeListing": {
+    "sort": {
+      "field": "publishedAt",
+      "order": "ascending"
+    }
+  },
+  "grouping": {
+    "by": "titleClassifier",
+    "staticClassifiers": [
+      {
+        "displayName": "テクノ新世×津村記久子さんコラボ小説",
+        "id": "group-1",
+        "pattern": {
+          "pattern": "テクノ新世×津村記久子さんコラボ小説",
+          "source": "title"
+        }
+      }
+    ]
+  },
+  "id": "techno-sinsei",
+  "priority": 3
+}

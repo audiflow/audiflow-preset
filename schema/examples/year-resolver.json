@@ -1,0 +1,15 @@
+{
+  "id": "by-year",
+  "displayName": "By Year",
+  "priority": 0,
+  "grouping": {
+    "by": "year"
+  },
+  "groupListing": {
+    "yearBinding": "splitByYear",
+    "sort": {
+      "field": "playlistNumber",
+      "order": "descending"
+    }
+  }
+}
