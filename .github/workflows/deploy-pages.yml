@@ -8,82 +8,48 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: deploy-pages
   cancel-in-progress: false
 
 jobs:
-  rebuild:
+  build:
     runs-on: ubuntu-latest
+    outputs:
+      artifact_id: ${{ steps.upload.outputs.artifact_id }}
     steps:
-      - name: Generate CI bot token
-        id: app-token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ vars.CI_BOT_APP_ID }}
-          private-key: ${{ secrets.CI_BOT_PRIVATE_KEY }}
-
       - name: Checkout main (workflow + scripts)
         uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 1
-          path: src
-          token: ${{ steps.app-token.outputs.token }}
 
       - name: Fetch all matching tags
-        working-directory: src
         run: |
           git fetch --tags --quiet origin \
             "+refs/tags/prod/*:refs/tags/prod/*" \
             "+refs/tags/dev/*:refs/tags/dev/*"
 
-      - name: Checkout gh-pages
-        id: checkout-ghpages
-        uses: actions/checkout@v4
+      - name: Build deploy tree from tags
+        run: bash scripts/ci/build-pages-tree.sh . _site
+
+      - name: Upload Pages artifact
+        id: upload
+        uses: actions/upload-pages-artifact@v3
         with:
-          ref: gh-pages
-          path: gh-pages
-          token: ${{ steps.app-token.outputs.token }}
-        continue-on-error: true
+          path: _site
 
-      - name: Initialize gh-pages if needed
-        if: steps.checkout-ghpages.outcome == 'failure'
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: |
-          rm -rf gh-pages
-          mkdir gh-pages && cd gh-pages
-          git init -b gh-pages
-          git config user.name  "audiflow-ci-bot[bot]"
-          git config user.email "audiflow-ci-bot[bot]@users.noreply.github.com"
-          git commit --allow-empty -m "chore: initialize gh-pages"
-          git remote add origin \
-            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-
-      - name: Rebuild gh-pages from tags
-        run: bash src/scripts/ci/rebuild-gh-pages.sh src gh-pages
-
-      - name: Commit + push gh-pages
-        working-directory: gh-pages
-        env:
-          TRIGGER: ${{ github.ref_name }}
-        run: |
-          git config user.name  "audiflow-ci-bot[bot]"
-          git config user.email "audiflow-ci-bot[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "deploy-pages: no changes"
-            exit 0
-          fi
-          git commit -m "deploy: rebuild from tags @ ${TRIGGER}"
-          for attempt in 1 2 3; do
-            git push origin gh-pages && exit 0
-            echo "push conflict (attempt ${attempt}); rebasing"
-            git pull --rebase origin gh-pages
-          done
-          echo "::error::failed to push to gh-pages after 3 attempts"
-          exit 1
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

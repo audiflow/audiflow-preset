@@ -1,5 +1,7 @@
 # Tag-based deployment Implementation Plan
 
+> **Status (2026-05-23):** The `gh-pages`-branch-based deploy described in this plan (notably Task 7's `scripts/ci/rebuild-gh-pages.sh` and Task 9's `gh-pages` checkout + push) was superseded by the GitHub-Actions-sourced Pages deploy landed on branch `fix/pages-actions-source`. The script is now `scripts/ci/build-pages-tree.sh` (env var `BUILD_ALLOW_EMPTY`), and `deploy-pages.yml` uploads a `_site` artifact via `actions/upload-pages-artifact@v3` and publishes it via `actions/deploy-pages@v4` (no commit to `gh-pages`). Treat the Task 7 / Task 9 sections below as historical; the current spec is in `docs/superpowers/specs/2026-05-23-tag-based-deploy-design.md` and the live workflow in `.github/workflows/deploy-pages.yml`.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace per-env source branches (`prod/v*`, `stg/v*`, `dev/v*`) with a two-branch + tag-driven model (`main` + `develop`, tags `{env}/v{schemaVersion}.{dataVersion}`) while keeping the existing `gh-pages` layout (`assets/v{N}/`, `assets-dev/v{N}/`).
