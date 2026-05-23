@@ -1,23 +1,36 @@
-name: Validate presets
+name: Bump versions + tag
 
 on:
-  pull_request:
+  push:
     branches: [main, develop]
     paths:
-      - "presets/**"
-      - "schema/**"
-      - ".github/workflows/validate.yml"
+      - "presets/**.json"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: bump-${{ github.ref_name }}
+  cancel-in-progress: false
 
 jobs:
-  validate:
+  bump-and-tag:
+    if: github.actor != 'audiflow-ci-bot[bot]'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout PR head
+      - name: Generate CI bot token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.CI_BOT_APP_ID }}
+          private-key: ${{ secrets.CI_BOT_PRIVATE_KEY }}
+
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Resolve schema major
         id: schema
@@ -36,5 +49,8 @@ jobs:
             --output /usr/local/bin/audiflow-editor
           chmod +x /usr/local/bin/audiflow-editor
 
-      - name: Validate
-        run: audiflow-editor validate presets/
+      - name: Bump and tag
+        env:
+          BUMP_ENV: ${{ github.ref_name == 'main' && 'prod' || 'dev' }}
+          GIT_REMOTE: origin
+        run: bash scripts/ci/bump-and-tag.sh

@@ -22,20 +22,22 @@ This follows the same convention as GitHub Actions (e.g., `actions/checkout@v4`)
 
 ### Data repo CI consumption
 
-The data repo's deploy and validate workflows download the binary from the mutable tag:
+The data repo's workflows download the editor binary keyed by the schema major
+read from `presets/meta.json:.schemaVersion`:
 
 ```yaml
 - run: |
-    gh release download v7 \
+    major="$(jq -r .schemaVersion presets/meta.json)"
+    gh release download "v${major}" \
       --repo audiflow/audiflow-preset-editor \
       --pattern 'audiflow-editor-x86_64-unknown-linux-gnu' \
       --output audiflow-editor
     chmod +x audiflow-editor
 - run: ./audiflow-editor validate presets/
-- run: ./audiflow-editor bump-versions presets/ HEAD~1
+- run: ./audiflow-editor bump-versions HEAD~1
 ```
 
-No Rust toolchain, no clone, no `cargo build` required.
+No Rust toolchain, no clone, no `cargo build` required. Branch name is not used.
 
 ## Version branch model
 

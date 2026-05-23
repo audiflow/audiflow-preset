@@ -1,89 +1,59 @@
-# Change Workflow
+# Change workflow
 
-## Before making changes
+## Branches
 
-- Read docs/overview.md for repository context
-- Read docs/specs/file-structure.md for the JSON hierarchy specification
-- Read docs/architecture/multi-env-deploy.md for the branch model
-- Identify whether the change affects:
-  - An existing preset (modify files on the appropriate env/version branch)
-  - A new preset (create new directory on a dev branch)
-  - Schema or validation (coordinate with `audiflow-preset-editor` first)
-- Data changes go on env/version branches (e.g., `dev/v7`), not `main`
+- Edit on `develop` (current schema major, dev environment).
+- Promote to `main` via PR (= prod environment).
+- Old majors are tag-only; see hotfix section below.
 
 ## Adding a new preset
 
-1. Check out the appropriate dev branch (e.g., `dev/v7`)
-2. Create directory: `presets/{presetId}/`
-3. Create `presets/{presetId}/meta.json` with required fields (`dataVersion`, `id`, `feedUrls`, `playlists`)
-4. Create `presets/{presetId}/playlists/{playlistId}.json` for each playlist
-5. Add a PresetSummary entry to `presets/meta.json` `presets` array with matching `id`, `dataVersion`, `displayName`, `feedUrlHint`, `playlistCount`
-6. Validate locally: `schema/scripts/validate.sh presets/**/*.json`
-7. Open PR to the dev branch -- CI runs `audiflow-editor validate`
+1. Check out `develop`: `git checkout develop && git pull`.
+2. Create directory: `presets/{presetId}/`.
+3. Create `presets/{presetId}/meta.json` (required: `dataVersion`, `id`, `feedUrls`, `playlists`).
+4. Create `presets/{presetId}/playlists/{playlistId}.json` for each playlist.
+5. Add a `PresetSummary` entry to `presets/meta.json:.presets` (matching `id`, `dataVersion`, `displayName`, `feedUrlHint`, `playlistCount`).
+6. Validate locally: `schema/scripts/validate.sh presets/**/*.json`.
+7. Push (or open PR if `develop` is protected). CI runs `validate.yml`, then `bump-versions.yml` cuts a `dev/v{M}.{m}` tag and deploys.
 
 ## Modifying an existing preset
 
-1. Check out the appropriate env/version branch
-2. Edit the relevant JSON files under `presets/{presetId}/`
-3. Do NOT manually bump `dataVersion` -- CI handles this on merge
-4. Validate locally: `schema/scripts/validate.sh presets/{presetId}/**/*.json`
-5. Open PR -- CI validates
+1. Check out the relevant working branch (`develop` for current major; a hotfix branch off an old tag for old majors).
+2. Edit JSON under `presets/{presetId}/`.
+3. Do NOT manually bump `dataVersion` -- CI handles it.
+4. Validate locally.
+5. Push or open PR.
 
 ## Adding a playlist to an existing preset
 
-1. Create `presets/{presetId}/playlists/{newPlaylistId}.json`
-2. Add `{newPlaylistId}` to the `playlists` array in `presets/{presetId}/meta.json`
-3. Update `playlistCount` in the root `presets/meta.json` entry for this preset
-4. Validate locally
+1. Create `presets/{presetId}/playlists/{newPlaylistId}.json`.
+2. Add `{newPlaylistId}` to `presets/{presetId}/meta.json:.playlists`.
+3. Update `playlistCount` in `presets/meta.json` for that preset.
+4. Validate locally.
 
-## Promoting data across environments
+## Promoting dev to prod
 
-Branch flow per version: `dev/v{N}` -> PR -> `stg/v{N}` -> PR -> `prod/v{N}`
+```
+develop -> PR -> main
+```
 
-Each merge triggers CI deployment to the corresponding GitHub Pages path.
+The merge commit on `main` is auto-tagged `prod/v{M}.{m}` and deployed.
 
-## Schema changes
+## Hotfix on an old schema major
 
-Schema changes originate in `audiflow-preset-editor`, not here. If a schema change is needed:
-1. Update schema in `audiflow-preset-editor/crates/preset_core/assets/`
-2. Update editor models and tests
-3. Copy updated schema files to this repo's `schema/` directory (on the relevant env/version branch)
-4. Update affected configs in `presets/` to conform
-5. Update `docs/specs/file-structure.md` if structure changed
-6. Run conformance tests in `audiflow` app repo
+1. List tags for the target major: `git tag -l 'prod/v6.*'`.
+2. Check out the latest one: `git checkout prod/v6.42`.
+3. Branch: `git checkout -b hotfix/v6-fix-X`.
+4. Apply fix; bump `dataVersion` manually (no CI on hotfix branches): `jq '.dataVersion += 1' presets/meta.json | sponge presets/meta.json` (and update affected per-preset `dataVersion`s if you touched them).
+5. Commit; tag with the next free minor: `git tag prod/v6.43`.
+6. Push the tag (not the branch): `git pull --tags && git push origin prod/v6.43`. Push fails if `prod/v6.43` already exists -- re-fetch and pick a higher minor.
 
-For a new schema **major** version (e.g. v7 -> v8), see
-[version-branch-rollout.md](version-branch-rollout.md) for the
-`dev/vN` branch creation and CI-gated promotion flow.
+## Schema major bump
 
-## During implementation
-
-- Keep changes localized to one preset when possible
-- Ensure `id` fields match directory/file names exactly
-- Use existing presets as reference (e.g., `coten_radio` for `rss` resolver)
-- All JSON must use `additionalProperties: false` per schema -- no extra fields
-
-## Validation checklist
-
-- [ ] Local validation passes: `schema/scripts/validate.sh presets/**/*.json`
-- [ ] `id` fields match directory and file names
-- [ ] Root index `playlistCount` matches actual playlist count
-- [ ] Root index entry `dataVersion` matches preset meta `dataVersion`
-- [ ] Relevant docs updated (if structure or process changed)
+See `docs/development/version-branch-rollout.md`.
 
 ## CI behavior
 
-- **On PR to env/version branch** (`validate.yml`): Downloads pre-compiled `audiflow-editor` binary, runs `validate` against `presets/`
-- **On merge to env/version branch** (`deploy-pages.yml`):
-  1. Runs `audiflow-editor bump-versions` to increment `dataVersion` in affected files
-  2. Commits the version bump to the source branch
-  3. Deploys `presets/` to the appropriate GitHub Pages directory
-
-## When to update
-
-Update this document when:
-- CI pipeline steps change
-- New validation requirements are added
-- The relationship with editor repo tooling changes
-- New preset or file types are introduced
-- Branch model or promotion flow changes
+- **PR to `main` or `develop`** (`validate.yml`): downloads `audiflow-editor` matching `presets/meta.json:.schemaVersion` on the PR head, runs `validate`.
+- **Push to `main` or `develop`** (`bump-versions.yml`): bumps `dataVersion`, commits, tags `{env}/v{M}.{d}`, pushes tag.
+- **Push of any `prod/v*.*` or `dev/v*.*` tag** (`deploy-pages.yml`): rebuilds `gh-pages` from all matching tags (highest minor per env+major wins).

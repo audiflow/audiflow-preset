@@ -1,3 +1,7 @@
 .cache/
 .DS_Store
+<<<<<<< HEAD
 __pycache__
+=======
+/tests/scripts/.tmp/
+>>>>>>> cb3c77a (chore: add bash test harness for ci scripts)
