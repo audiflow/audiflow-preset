@@ -1,1 +1,1 @@
-../../../.claude/skills/audiflow-playlist/SKILL.md
+../../../.claude/skills/audiflow-preset/SKILL.md
