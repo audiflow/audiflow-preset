@@ -1,7 +1,8 @@
 {
   "displayName": "カテゴリ別",
-  "episodeListing": {
-    "showYearHeaders": true
+  "groupListing": {
+    "userSortable": true,
+    "yearBinding": "splitByYear"
   },
   "grouping": {
     "by": "titleClassifier",
@@ -43,6 +44,14 @@
         "id": "expat",
         "pattern": {
           "pattern": "【越境日本人編",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "国際欄",
+        "id": "international",
+        "pattern": {
+          "pattern": "【国際欄",
           "source": "title"
         }
       },
