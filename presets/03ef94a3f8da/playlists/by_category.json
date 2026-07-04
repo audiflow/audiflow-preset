@@ -56,6 +56,14 @@
         }
       },
       {
+        "displayName": "文化欄",
+        "id": "culture",
+        "pattern": {
+          "pattern": "【文化欄",
+          "source": "title"
+        }
+      },
+      {
         "displayName": "祝日版",
         "id": "holiday",
         "pattern": {
