@@ -281,6 +281,14 @@
         }
       },
       {
+        "displayName": "バングラデシュの教育現場より",
+        "id": "ekmattra-bangladesh",
+        "pattern": {
+          "pattern": "バングラデシュの教育現場より",
+          "source": "title"
+        }
+      },
+      {
         "displayName": "特別編",
         "episodeListing": {
           "showYearHeaders": true,
