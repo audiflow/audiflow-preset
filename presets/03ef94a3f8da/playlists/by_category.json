@@ -72,6 +72,14 @@
         }
       },
       {
+        "displayName": "金融版",
+        "id": "finance",
+        "pattern": {
+          "pattern": "【金融版",
+          "source": "title"
+        }
+      },
+      {
         "displayName": "その他",
         "id": "other"
       }
