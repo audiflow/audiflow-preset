@@ -4,24 +4,17 @@ Preset configuration data for all environments. Static JSON files deployed to Gi
 
 ## Branch and deployment model
 
-Two long-lived branches:
+Single long-lived branch: `main`. PRs target `main` directly (the former `develop` branch was retired; `origin/develop` no longer exists). Each push to `main` touching `presets/**.json` is auto-tagged `prod/v{schemaVersion}.{dataVersion}` (skipped if the version didn't change or the tag already exists).
 
-| Branch | Role |
-|--------|------|
-| `main` | Promoted/stable. Auto-tagged `prod/v{schemaVersion}.{dataVersion}` on each push. |
-| `develop` | Current-major working branch. Auto-tagged `dev/v{schemaVersion}.{dataVersion}` on each push. |
+`presets/` and `schema/` live at the repo root.
 
-`presets/` and `schema/` live at the repo root on both branches.
-
-Deployment is driven by tags. `deploy-pages.yml` builds an artifact from the winning tags' contents and deploys it via GitHub Actions; Pages source is set to "GitHub Actions", no persistent deploy branch. Per `(env, major)`, the highest-minor tag wins:
+Deployment is driven by tags. `deploy-pages.yml` builds an artifact from the winning tags' contents and deploys it via GitHub Actions; Pages source is set to "GitHub Actions", no persistent deploy branch. The workflow still triggers on both `prod/v*.*` and `dev/v*.*` tags and picks a winner independently per `(env, major)` — but with `develop` retired, nothing pushes `dev/*` tags automatically anymore; they'd only appear from a manual tag:
 
 | Tag | Deploy path | URL |
 |-----|-------------|-----|
 | `prod/v7.*` (max minor) | `/assets/v7/` | `audiflow.github.io/audiflow-preset/assets/v7/` |
-| `dev/v7.*` (max minor) | `/assets-dev/v7/` | `audiflow.github.io/audiflow-preset/assets-dev/v7/` |
+| `dev/v7.*` (max minor, if ever pushed) | `/assets-dev/v7/` | `audiflow.github.io/audiflow-preset/assets-dev/v7/` |
 | `prod/v8.*` (max minor) | `/assets/v8/` | ... |
-
-Promotion: `develop` -> PR -> `main`.
 
 Old-major hotfix: check out an old tag, branch, fix, tag the next free minor manually.
 
@@ -31,9 +24,9 @@ The single data repo in the audiflow ecosystem (3 repos: app, editor, config dat
 
 ## Responsibilities
 
-- Preset configurations for all environments (JSON under `presets/` on env branches)
+- Preset configurations for all environments (JSON under `presets/`)
 - CI deployment to GitHub Pages (via `.github/workflows/deploy-pages.yml`)
-- Schema vendoring for local validation (`schema/` on env branches)
+- Schema vendoring for local validation (`schema/`)
 
 ## Non-responsibilities
 
@@ -60,7 +53,7 @@ tests/scripts/                 # Bash test harness for scripts/ci/
 ## Validation
 
 ```bash
-# Local schema validation (on env branches, requires uv)
+# Local schema validation (requires uv)
 schema/scripts/validate.sh presets/**/*.json
 
 # CI validates on PR via editor's pre-compiled audiflow-editor binary
@@ -77,8 +70,8 @@ schema/scripts/validate.sh presets/**/*.json
 
 ## When changing this repository
 
-- Data changes go on env/version branches (e.g., `dev/v7`), not `main`
-- All JSON must conform to schemas in `schema/` (on the same branch)
-- Changes to `presets/` deploy automatically on merge to the target branch
+- Data changes go through a PR into `main`
+- All JSON must conform to schemas in `schema/`
+- Changes to `presets/` deploy automatically on merge to `main` (auto-tag + `deploy-pages.yml`)
 - Schema SSoT is in the editor repo; vendor updated schemas into `schema/`
 - Check whether docs/specs/file-structure.md needs updating
