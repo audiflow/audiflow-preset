@@ -72,7 +72,7 @@
         }
       },
       {
-        "displayName": "金融版",
+        "displayName": "金融欄",
         "id": "finance",
         "pattern": {
           "pattern": "【金融(版|欄)",
