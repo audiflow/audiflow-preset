@@ -1,7 +1,8 @@
 {
   "dataVersion": 5,
   "feedUrls": [
-    "https://anchor.fm/s/81fb5eec/podcast/rss"
+    "https://anchor.fm/s/81fb5eec/podcast/rss",
+    "https://rss.listen.style/p/smbslbmi/rss"
   ],
   "id": "03ef94a3f8da",
   "playlists": [
