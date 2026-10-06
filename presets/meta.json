@@ -1,5 +1,5 @@
 {
-  "dataVersion": 7,
+  "dataVersion": 8,
   "presets": [
     {
       "dataVersion": 3,
@@ -51,14 +51,14 @@
       "playlistCount": 1
     },
     {
-      "dataVersion": 1,
+      "dataVersion": 2,
       "displayName": "ヤング日経",
       "feedUrlHint": "https://feeds.megaphone.fm/young",
       "id": "da8d282b7e26",
       "playlistCount": 1
     },
     {
-      "dataVersion": 1,
+      "dataVersion": 2,
       "displayName": "ながら日経",
       "feedUrlHint": "https://feeds.megaphone.fm/nagara",
       "id": "ba9893efc22f",
