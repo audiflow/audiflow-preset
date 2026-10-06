@@ -21,7 +21,7 @@
         "displayName": "神下 茉衣",
         "id": "kamishita_mai",
         "pattern": {
-          "pattern": "神下\\s*茉衣(?!.*代打)",
+          "pattern": "神下\\s*茉衣(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -29,7 +29,7 @@
         "displayName": "池田 勝",
         "id": "ikeda_masaru",
         "pattern": {
-          "pattern": "池田\\s*勝(?!.*代打)",
+          "pattern": "池田\\s*勝(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -37,7 +37,7 @@
         "displayName": "もちづき / 間瀬 友惠",
         "id": "mochizuki",
         "pattern": {
-          "pattern": "もちづき(?!.*代打)",
+          "pattern": "もちづき(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -45,7 +45,7 @@
         "displayName": "佐藤 可奈子",
         "id": "sato_kanako",
         "pattern": {
-          "pattern": "佐藤\\s*可奈子(?!.*代打)",
+          "pattern": "佐藤\\s*可奈子(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -53,7 +53,7 @@
         "displayName": "阿部 美鈴",
         "id": "abe_misuzu",
         "pattern": {
-          "pattern": "阿部\\s*美鈴(?!.*代打)",
+          "pattern": "阿部\\s*美鈴(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -61,7 +61,7 @@
         "displayName": "久保 光代",
         "id": "kubo_mitsuyo",
         "pattern": {
-          "pattern": "久保\\s*光代(?!.*代打)",
+          "pattern": "久保\\s*光代(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -69,7 +69,7 @@
         "displayName": "河野 百希",
         "id": "kono_momoki",
         "pattern": {
-          "pattern": "河野\\s*百希(?!.*代打)",
+          "pattern": "河野\\s*百希(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -77,7 +77,7 @@
         "displayName": "神下 芽衣",
         "id": "kamishita_mei",
         "pattern": {
-          "pattern": "神下\\s*芽衣(?!.*代打)",
+          "pattern": "神下\\s*芽衣(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -85,7 +85,7 @@
         "displayName": "横田 香峰",
         "id": "yokota_kaho",
         "pattern": {
-          "pattern": "横田\\s*香峰",
+          "pattern": "横田\\s*香峰(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },

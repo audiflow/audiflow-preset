@@ -34,7 +34,7 @@
         "displayName": "外村 倫子",
         "id": "tonomura_rinko",
         "pattern": {
-          "pattern": "外村\\s*倫子(?!.*代打)",
+          "pattern": "外村\\s*倫子(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -42,7 +42,7 @@
         "displayName": "寺島 啓太",
         "id": "terashima_keita",
         "pattern": {
-          "pattern": "寺島\\s*啓太(?!.*代打)",
+          "pattern": "寺島\\s*啓太(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -50,7 +50,7 @@
         "displayName": "金井 一世",
         "id": "kanai_issei",
         "pattern": {
-          "pattern": "金井\\s*一世(?!.*代打)",
+          "pattern": "金井\\s*一世(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -58,7 +58,7 @@
         "displayName": "藤井 みりか",
         "id": "fujii_mirika",
         "pattern": {
-          "pattern": "藤井\\s*みりか(?!.*代打)",
+          "pattern": "藤井\\s*みりか(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -66,7 +66,7 @@
         "displayName": "和田 愛里",
         "id": "wada_airi",
         "pattern": {
-          "pattern": "和田\\s*愛里(?!.*代打)",
+          "pattern": "和田\\s*愛里(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -74,7 +74,7 @@
         "displayName": "石井 しおり",
         "id": "ishii_shiori",
         "pattern": {
-          "pattern": "石井\\s*しおり(?!.*代打)",
+          "pattern": "石井\\s*しおり(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -82,7 +82,7 @@
         "displayName": "渡辺 あやか",
         "id": "watanabe_ayaka",
         "pattern": {
-          "pattern": "渡辺\\s*あやか(?!.*代打)",
+          "pattern": "渡辺\\s*あやか(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -90,7 +90,7 @@
         "displayName": "DJ Nobby",
         "id": "dj_nobby",
         "pattern": {
-          "pattern": "DJ\\s*Nobby(?!.*代打)",
+          "pattern": "DJ\\s*Nobby(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -98,7 +98,7 @@
         "displayName": "河野 千秋",
         "id": "kono_chiaki",
         "pattern": {
-          "pattern": "河野\\s*千秋(?!.*代打)",
+          "pattern": "河野\\s*千秋(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -106,7 +106,7 @@
         "displayName": "横田 香峰",
         "id": "yokota_kaho",
         "pattern": {
-          "pattern": "横田\\s*香峰(?!.*代打)",
+          "pattern": "横田\\s*香峰(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
@@ -114,7 +114,7 @@
         "displayName": "萩原 帆南",
         "id": "hagiwara_honami",
         "pattern": {
-          "pattern": "萩原\\s*帆南(?!.*代打)",
+          "pattern": "萩原\\s*帆南(?!\\s*(?:代打|さんの代打|さんに代わり))",
           "source": "description"
         }
       },
