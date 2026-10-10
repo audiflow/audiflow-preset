@@ -1,0 +1,83 @@
+{
+  "displayName": "Spin-offs",
+  "episodeFilters": {
+    "require": [
+      {
+        "title": "The Iron King|In Conversation|Empire [Oo]f Gold|The Glass King|Nativity to Die For"
+      }
+    ]
+  },
+  "episodeItem": {
+    "titleExtractor": {
+      "fallback": {
+        "source": "title"
+      },
+      "pattern": "^(?:The Iron King|In Conversation|Empire [Oo]f Gold|The Glass King)\\s*\\|\\s*(.+)$",
+      "source": "title",
+      "template": "${1}"
+    }
+  },
+  "episodeListing": {
+    "sort": {
+      "field": "publishedAt",
+      "order": "ascending"
+    }
+  },
+  "groupItem": {
+    "showDateRange": true
+  },
+  "groupListing": {
+    "sort": {
+      "field": "playlistNumber",
+      "order": "ascending"
+    },
+    "userSortable": true
+  },
+  "grouping": {
+    "by": "titleClassifier",
+    "staticClassifiers": [
+      {
+        "displayName": "The Iron King",
+        "id": "iron_king",
+        "pattern": {
+          "pattern": "The Iron King",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "In Conversation",
+        "id": "in_conversation",
+        "pattern": {
+          "pattern": "In Conversation",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "Empire of Gold",
+        "id": "empire_of_gold",
+        "pattern": {
+          "pattern": "Empire [Oo]f Gold",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "The Glass King",
+        "id": "glass_king",
+        "pattern": {
+          "pattern": "The Glass King",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "A Nativity to Die For",
+        "id": "nativity",
+        "pattern": {
+          "pattern": "Nativity to Die For",
+          "source": "title"
+        }
+      }
+    ]
+  },
+  "id": "spinoffs",
+  "priority": 2
+}

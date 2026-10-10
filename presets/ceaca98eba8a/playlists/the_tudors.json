@@ -1,0 +1,60 @@
+{
+  "displayName": "The Tudors",
+  "episodeFilters": {
+    "require": [
+      {
+        "title": "^S\\d+ E\\d+\\s*:|^Who.s afraid of Henry Tudor"
+      }
+    ]
+  },
+  "episodeItem": {
+    "titleExtractor": {
+      "fallback": {
+        "fallback": {
+          "source": "title"
+        },
+        "pattern": "^Season \\d+\\.?\\s*\\|\\s*(.+)$",
+        "source": "title",
+        "template": "${1}"
+      },
+      "pattern": "^S\\d+ E(\\d+)\\s*[|:]\\s*(.+)$",
+      "source": "title",
+      "template": "${1}. ${2}"
+    }
+  },
+  "episodeListing": {
+    "sort": {
+      "field": "publishedAt",
+      "order": "ascending"
+    }
+  },
+  "groupItem": {
+    "showDateRange": true
+  },
+  "groupListing": {
+    "sort": {
+      "field": "playlistNumber",
+      "order": "ascending"
+    },
+    "userSortable": true
+  },
+  "grouping": {
+    "by": "titleClassifier",
+    "staticClassifiers": [
+      {
+        "displayName": "S1 Henry VII",
+        "id": "s1",
+        "pattern": {
+          "pattern": "^S1 E\\d+\\s*:|^Who.s afraid of Henry Tudor",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "New season",
+        "id": "unsorted"
+      }
+    ]
+  },
+  "id": "the_tudors",
+  "priority": 0
+}
