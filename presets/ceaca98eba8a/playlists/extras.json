@@ -1,0 +1,35 @@
+{
+  "displayName": "Extras",
+  "episodeListing": {
+    "sort": {
+      "field": "publishedAt",
+      "order": "descending"
+    }
+  },
+  "groupListing": {
+    "sort": {
+      "field": "playlistNumber",
+      "order": "descending"
+    },
+    "userSortable": true
+  },
+  "grouping": {
+    "by": "titleClassifier",
+    "staticClassifiers": [
+      {
+        "displayName": "Other podcasts",
+        "id": "promos",
+        "pattern": {
+          "pattern": "^You [Mm]ay [Aa]lso [Ll]ike|Introducing: This is History PLUS|Draptomaniax",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "Bonus & talks",
+        "id": "talks"
+      }
+    ]
+  },
+  "id": "extras",
+  "priority": 3
+}

@@ -1,0 +1,132 @@
+{
+  "displayName": "A Dynasty to Die For",
+  "episodeFilters": {
+    "require": [
+      {
+        "title": "^Season \\d+\\.?\\s*\\||^S\\d+ E\\d+\\s*\\||Dynasty to Die For\\s*$"
+      }
+    ]
+  },
+  "episodeItem": {
+    "titleExtractor": {
+      "fallback": {
+        "fallback": {
+          "source": "title"
+        },
+        "pattern": "^Season \\d+\\.?\\s*\\|\\s*(.+)$",
+        "source": "title",
+        "template": "${1}"
+      },
+      "pattern": "^S\\d+ E(\\d+)\\s*[|:]\\s*(.+)$",
+      "source": "title",
+      "template": "${1}. ${2}"
+    }
+  },
+  "episodeListing": {
+    "sort": {
+      "field": "publishedAt",
+      "order": "ascending"
+    }
+  },
+  "groupItem": {
+    "showDateRange": true
+  },
+  "groupListing": {
+    "sort": {
+      "field": "playlistNumber",
+      "order": "ascending"
+    },
+    "userSortable": true
+  },
+  "grouping": {
+    "by": "titleClassifier",
+    "staticClassifiers": [
+      {
+        "displayName": "S1 Henry II & Eleanor of Aquitaine",
+        "id": "s01",
+        "pattern": {
+          "pattern": "^Season 1\\s*\\||Season 1 of This is History",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "S2 Richard the Lionheart",
+        "id": "s02",
+        "pattern": {
+          "pattern": "^Season 2\\s*\\||Season 2 of This is History",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "S3 King John",
+        "id": "s03",
+        "pattern": {
+          "pattern": "^Season 3\\.?\\s*\\||Season 3 of This is History",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "S4 Henry III & Simon de Montfort",
+        "id": "s04",
+        "pattern": {
+          "pattern": "^Season 4\\s*\\||Season 4 of a Dynasty",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "S5 Edward II",
+        "id": "s05",
+        "pattern": {
+          "pattern": "^Season 5\\s*\\||Season 5 of a Dynasty",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "S6 Edward III",
+        "id": "s06",
+        "pattern": {
+          "pattern": "^Season 6\\s*\\||Season Six of a Dynasty",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "S7 Richard II",
+        "id": "s07",
+        "pattern": {
+          "pattern": "^Season 7\\s*\\||Season Seven of a Dynasty",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "S8 Henry IV & Henry V",
+        "id": "s08",
+        "pattern": {
+          "pattern": "^S8 E\\d+\\s*\\||Season Eight of a Dynasty",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "S9 Henry VI",
+        "id": "s09",
+        "pattern": {
+          "pattern": "^S9 E\\d+\\s*\\||Season Nine of a Dynasty",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "S10 Edward IV & Richard III",
+        "id": "s10",
+        "pattern": {
+          "pattern": "^S10 E\\d+\\s*\\||Season Ten of a Dynasty",
+          "source": "title"
+        }
+      },
+      {
+        "displayName": "Other",
+        "id": "unsorted"
+      }
+    ]
+  },
+  "id": "dynasty",
+  "priority": 1
+}

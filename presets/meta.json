@@ -70,6 +70,13 @@
       "feedUrlHint": "https://anchor.fm/s/e4d354fc/podcast/rss",
       "id": "ccf7c0050e3f",
       "playlistCount": 2
+    },
+    {
+      "dataVersion": 1,
+      "displayName": "This is History",
+      "feedUrlHint": "feeds.megaphone.fm/thisishistory",
+      "id": "ceaca98eba8a",
+      "playlistCount": 4
     }
   ],
   "schemaVersion": 7
