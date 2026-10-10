@@ -77,6 +77,16 @@ Claim order: `the_tudors` -> `dynasty` -> `spinoffs` (all filtered) -> `extras` 
 
 ## Maintenance
 
-When a new Tudors season starts, add a classifier `^S{n} E\d+\s*:` (plus its trailer
-title) before `New season`. This is the update that `audiflow-preset-curator` is meant
-to automate.
+When a new Tudors season starts:
+
+1. Add a classifier `^S{n} E\d+\s*:` (plus its trailer title) before `New season`.
+2. If the trailer title does not match `^S\d+ E\d+\s*:`, also add it to the playlist's
+   `episodeFilters.require` alternation. Otherwise the filter never claims the trailer
+   and it falls through to `extras`.
+
+This is the update that `audiflow-preset-curator` is meant to automate.
+
+Classifier patterns spell out both letter cases where titles vary (`Empire [Oo]f Gold`)
+because the editor preview used to match them case-sensitively while the app does not
+(fixed in audiflow/audiflow-preset-editor#128). The title-cleanup extractors stay
+case-sensitive, so they need the same treatment.

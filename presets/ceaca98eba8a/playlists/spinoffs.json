@@ -12,7 +12,7 @@
       "fallback": {
         "source": "title"
       },
-      "pattern": "^(?:The Iron King|In Conversation|Empire of Gold|The Glass King)\\s*\\|\\s*(.+)$",
+      "pattern": "^(?:The Iron King|In Conversation|Empire [Oo]f Gold|The Glass King)\\s*\\|\\s*(.+)$",
       "source": "title",
       "template": "${1}"
     }
