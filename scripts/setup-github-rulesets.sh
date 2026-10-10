@@ -12,7 +12,7 @@
 
 set -euo pipefail
 
-REPO="audiflow/audiflow-smartplaylist"
+REPO="audiflow/audiflow-preset"
 
 echo "=== Creating ruleset: base-branches ==="
 gh api "repos/${REPO}/rulesets" \

@@ -54,7 +54,7 @@ if [ ! -x "$EDITOR_BIN" ]; then
   echo "Downloading audiflow-editor $SCHEMA_VERSION..." >&2
   mkdir -p "$CACHE_DIR/$SCHEMA_VERSION"
   gh release download "$SCHEMA_VERSION" \
-    --repo audiflow/audiflow-smartplaylist-editor \
+    --repo audiflow/audiflow-preset-editor \
     --pattern "$BINARY_NAME" \
     --output "$EDITOR_BIN" >&2
   chmod +x "$EDITOR_BIN"
