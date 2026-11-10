@@ -49,41 +49,41 @@ patterns/
 
 ---
 
-## Pattern Index
+## Preset Index
 
-**File:** `patterns/meta.json`
+**File:** `presets/meta.json`
 
-**Schema:** `https://audiflow.app/schema/v6/pattern-index.json`
+**Schema:** `https://audiflow.app/schema/v8/preset-index.json`
 
-Root index of all patterns. The app fetches this file first and compares `dataVersion` to detect changes.
+Root index of all presets. The app fetches this file first and compares `dataVersion` to detect changes.
 
 ### Fields
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `dataVersion` | integer | yes | Monotonically increasing. Bumped by CI when any pattern changes. |
+| `dataVersion` | integer | yes | Monotonically increasing. Bumped by CI when any preset changes. |
 | `schemaVersion` | integer | yes | Schema structure version. Bumped when JSON structure changes. |
-| `patterns` | array | yes | Summary entries for all patterns. |
+| `presets` | array | yes | Summary entries, one per preset. `audiflow-editor validate` rejects a repeated `id`. |
 
-### PatternIndexEntry
+### PresetSummary
 
-Each element in the `patterns` array:
+Each element in the `presets` array:
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `id` | string | yes | Pattern identifier. See [Pattern ID Derivation](#pattern-id-derivation). |
+| `id` | string | yes | Preset identifier. See [Pattern ID Derivation](#pattern-id-derivation). |
 | `dataVersion` | integer | yes | Mirrors `{id}/meta.json` dataVersion for stale-cache detection. |
 | `displayName` | string | yes | Human-readable podcast name for admin/editor UIs. |
-| `feedUrlHints` | string[] | yes | Substrings of the feed URLs for fast pre-filtering, one per feed URL (min 1, no repeats). Each preset appears once in the index (since schema v8). |
-| `playlistCount` | integer | yes | Number of playlist definitions in this pattern. |
+| `feedUrlHints` | string[] | yes | Substrings of the feed URLs for fast pre-filtering, one per feed URL in the same order as `feedUrls` (min 1, no repeats). |
+| `playlistCount` | integer | yes | Number of playlist definitions in this preset. |
 
 ### Example
 
 ```json
 {
   "dataVersion": 42,
-  "schemaVersion": 5,
-  "patterns": [
+  "schemaVersion": 8,
+  "presets": [
     {
       "id": "a1b2c3d4e5f6",
       "dataVersion": 7,

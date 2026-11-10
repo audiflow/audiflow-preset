@@ -201,12 +201,12 @@ Do not confuse these. A pattern that extracts episode-level text (like `「(.+?)
 }
 ```
 
-**3. Update the root index** (`patterns/meta.json`):
+**3. Update the root index** (`presets/meta.json`):
 
-Add an entry to the `patterns` array:
+Add an entry to the `presets` array:
 ```json
 {
-  "id": "{patternId}",
+  "id": "{presetId}",
   "dataVersion": 1,
   "displayName": "Podcast Title",
   "feedUrlHints": ["https://anchor.fm/s/{id}/podcast/rss"],
@@ -320,7 +320,7 @@ Common patterns to look for:
 
 2. **Pattern order matters**: Groups evaluate first-to-last. Put narrow patterns before broad ones, or episodes get claimed by the wrong group.
 
-3. **One root entry per feed URL**: A podcast that moved feeds still gets one root index entry. Put both URLs in its `feedUrlHints`; a second entry with the same `id` fails validation.
+3. **One root entry per preset**: A podcast that moved feeds still gets one root index entry. Put both URLs in its `feedUrlHints`; a second entry with the same `id` fails validation.
 
 4. **Missing `id` match**: The `id` in meta.json must match the directory name. The `id` in playlist JSON must match the filename.
 

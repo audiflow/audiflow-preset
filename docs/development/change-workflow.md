@@ -15,9 +15,11 @@
 6. Validate locally: `schema/scripts/validate.sh presets/**/*.json`.
 7. Open a PR into `main`. CI runs `validate.yml`; on merge, `bump-versions.yml` cuts a `prod/v{M}.{m}` tag and deploys.
 
-## Modifying an existing preset
+## Modifying an existing preset on the current schema major
 
-1. Branch from `main` for the current major, or from an old tag for old majors (see hotfix section).
+For old majors, follow the [hotfix steps](#hotfix-on-an-old-schema-major) instead: they bump `dataVersion` and push a tag by hand.
+
+1. Branch from `main`.
 2. Edit JSON under `presets/{presetId}/`.
 3. Do NOT manually bump `dataVersion` -- CI handles it.
 4. Validate locally.
