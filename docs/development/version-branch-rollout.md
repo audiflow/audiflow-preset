@@ -18,9 +18,9 @@ Operational runbook for landing a new schema major (e.g. v7 -> v8).
 
 ## Recommended flow (PR-gated)
 
-1. Land `feat/vN` on `develop` via PR. `validate.yml` runs with the `vN` editor binary.
-2. On merge, `bump-versions.yml` cuts `dev/v{N}.{d}` and `deploy-pages.yml` publishes `assets-dev/v{N}/`.
-3. Promote to prod when stable: PR `develop` -> `main`. Merge cuts `prod/v{N}.{d}` and publishes `assets/v{N}/`.
+1. Open a PR from `feat/vN` into `main` (the former `develop` branch was retired). `validate.yml` runs with the `vN` editor binary.
+2. On merge, `bump-versions.yml` cuts `prod/v{N}.{d}` and `deploy-pages.yml` publishes `assets/v{N}/`. `assets/v{N-1}/` keeps being served from its last tag, so released apps are unaffected.
+3. Point the app at `assets/v{N}/`, verify, and release it. Fixes to `vN` data go through PRs into `main`; fixes to `v{N-1}` data are old-major hotfixes (see change-workflow.md).
 
 ## Anti-patterns
 

@@ -209,12 +209,12 @@ Add an entry to the `patterns` array:
   "id": "{patternId}",
   "dataVersion": 1,
   "displayName": "Podcast Title",
-  "feedUrlHint": "distinctive-part-of-feed-url",
+  "feedUrlHints": ["https://anchor.fm/s/{id}/podcast/rss"],
   "playlistCount": 2
 }
 ```
 
-The `feedUrlHint` should be a substring that uniquely identifies the feed. For Anchor feeds: `anchor.fm/s/{id}`. For Megaphone: `megaphone.fm/...`. Pick the most distinctive part.
+Add exactly one entry per preset. `feedUrlHints` lists every URL in the preset's `feedUrls`, in the same order (the editor writes it this way). The app treats the preset as a candidate if any hint is a substring of the podcast's feed URL. `audiflow-editor validate` fails if an `id` appears twice.
 
 ### Step 6: Write a DESIGN.md
 
@@ -320,7 +320,7 @@ Common patterns to look for:
 
 2. **Pattern order matters**: Groups evaluate first-to-last. Put narrow patterns before broad ones, or episodes get claimed by the wrong group.
 
-3. **feedUrlHint too generic**: A hint like `rss` matches everything. Use the most distinctive URL segment.
+3. **One root entry per feed URL**: A podcast that moved feeds still gets one root index entry. Put both URLs in its `feedUrlHints`; a second entry with the same `id` fails validation.
 
 4. **Missing `id` match**: The `id` in meta.json must match the directory name. The `id` in playlist JSON must match the filename.
 

@@ -41,7 +41,7 @@ patterns/
       {playlistId}.json              # Level 3: Playlist Definition
 ```
 
-**Level 1 -- Pattern Index** (`patterns/meta.json`): Root index listing all available patterns. The app fetches this first and uses `feedUrlHint` for fast pre-filtering.
+**Level 1 -- Pattern Index** (`patterns/meta.json`): Root index listing all available patterns. The app fetches this first and uses `feedUrlHints` for fast pre-filtering.
 
 **Level 2 -- Pattern Meta** (`{patternId}/meta.json`): Per-podcast metadata containing feed URLs for matching and an ordered list of playlist IDs.
 
@@ -74,7 +74,7 @@ Each element in the `patterns` array:
 | `id` | string | yes | Pattern identifier. See [Pattern ID Derivation](#pattern-id-derivation). |
 | `dataVersion` | integer | yes | Mirrors `{id}/meta.json` dataVersion for stale-cache detection. |
 | `displayName` | string | yes | Human-readable podcast name for admin/editor UIs. |
-| `feedUrlHint` | string | yes | Substring of the feed URL for fast pre-filtering. |
+| `feedUrlHints` | string[] | yes | Substrings of the feed URLs for fast pre-filtering, one per feed URL (min 1, no repeats). Each preset appears once in the index (since schema v8). |
 | `playlistCount` | integer | yes | Number of playlist definitions in this pattern. |
 
 ### Example
@@ -88,7 +88,7 @@ Each element in the `patterns` array:
       "id": "a1b2c3d4e5f6",
       "dataVersion": 7,
       "displayName": "COTEN RADIO",
-      "feedUrlHint": "anchor.fm/s/8c2088c",
+      "feedUrlHints": ["anchor.fm/s/8c2088c"],
       "playlistCount": 3
     }
   ]

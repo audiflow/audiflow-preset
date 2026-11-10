@@ -53,7 +53,7 @@ schema/
 |-------|------|----------|-------------|
 | `dataVersion` | integer | yes | Monotonically increasing; bumped by CI on any preset change |
 | `schemaVersion` | integer | yes | Structural version; bumped on breaking format changes |
-| `presets` | array | yes | PresetSummary entries for all presets |
+| `presets` | array | yes | PresetSummary entries, one per preset (`id` unique; checked by `audiflow-editor validate`) |
 
 Each entry in `presets` (PresetSummary):
 
@@ -62,7 +62,7 @@ Each entry in `presets` (PresetSummary):
 | `id` | string | yes | Must match the preset directory name |
 | `dataVersion` | integer | yes | Mirrors value in `{id}/meta.json` |
 | `displayName` | string | yes | Human-readable podcast name |
-| `feedUrlHint` | string | yes | Substring of feed URL for fast pre-filtering |
+| `feedUrlHints` | string[] | yes | Substrings of the preset's feed URLs for fast pre-filtering; one per `feedUrls` entry (min 1, no repeats) |
 | `playlistCount` | integer | yes | Number of playlist definitions |
 
 ## PresetMeta (`{presetId}/meta.json`)
@@ -95,7 +95,7 @@ See `schema/playlist-definition.schema.json` for complete field definitions.
 
 Consumers load configs lazily by level:
 
-1. Fetch `meta.json` -- discover available presets, use `feedUrlHint` for pre-filtering
+1. Fetch `meta.json` -- discover available presets, a preset is a candidate if any `feedUrlHints` entry is a substring of the feed URL
 2. Fetch `{presetId}/meta.json` -- exact feed matching via `podcastGuid` or `feedUrls`
 3. Fetch `playlists/{id}.json` -- load individual definitions as needed
 
