@@ -2,27 +2,28 @@
 
 ## Branches
 
-- Edit on `develop` (current schema major, dev environment).
-- Promote to `main` via PR (= prod environment).
+- Branch from `main` and open a PR into `main` (= prod environment). The former `develop` branch was retired.
 - Old majors are tag-only; see hotfix section below.
 
 ## Adding a new preset
 
-1. Check out `develop`: `git checkout develop && git pull`.
+1. Branch from `main`: `git checkout main && git pull && git checkout -b feat/<preset>`.
 2. Create directory: `presets/{presetId}/`.
 3. Create `presets/{presetId}/meta.json` (required: `dataVersion`, `id`, `feedUrls`, `playlists`).
 4. Create `presets/{presetId}/playlists/{playlistId}.json` for each playlist.
-5. Add a `PresetSummary` entry to `presets/meta.json:.presets` (matching `id`, `dataVersion`, `displayName`, `feedUrlHint`, `playlistCount`).
+5. Add a `PresetSummary` entry to `presets/meta.json:.presets` (matching `id`, `dataVersion`, `displayName`, `feedUrlHints`, `playlistCount`). List every URL from the preset's `feedUrls` in `feedUrlHints`; add exactly one entry per preset, even if it has several feed URLs.
 6. Validate locally: `schema/scripts/validate.sh presets/**/*.json`.
-7. Push (or open PR if `develop` is protected). CI runs `validate.yml`, then `bump-versions.yml` cuts a `dev/v{M}.{m}` tag and deploys.
+7. Open a PR into `main`. CI runs `validate.yml`; on merge, `bump-versions.yml` cuts a `prod/v{M}.{m}` tag and deploys.
 
-## Modifying an existing preset
+## Modifying an existing preset on the current schema major
 
-1. Check out the relevant working branch (`develop` for current major; a hotfix branch off an old tag for old majors).
+For old majors, follow the [hotfix steps](#hotfix-on-an-old-schema-major) instead: they bump `dataVersion` and push a tag by hand.
+
+1. Branch from `main`.
 2. Edit JSON under `presets/{presetId}/`.
 3. Do NOT manually bump `dataVersion` -- CI handles it.
 4. Validate locally.
-5. Push or open PR.
+5. Open a PR into `main`.
 
 ## Adding a playlist to an existing preset
 
@@ -30,14 +31,6 @@
 2. Add `{newPlaylistId}` to `presets/{presetId}/meta.json:.playlists`.
 3. Update `playlistCount` in `presets/meta.json` for that preset.
 4. Validate locally.
-
-## Promoting dev to prod
-
-```
-develop -> PR -> main
-```
-
-The merge commit on `main` is auto-tagged `prod/v{M}.{m}` and deployed.
 
 ## Hotfix on an old schema major
 
@@ -54,6 +47,6 @@ See `docs/development/version-branch-rollout.md`.
 
 ## CI behavior
 
-- **PR to `main` or `develop`** (`validate.yml`): downloads `audiflow-editor` matching `presets/meta.json:.schemaVersion` on the PR head, runs `validate`.
-- **Push to `main` or `develop`** (`bump-versions.yml`): bumps `dataVersion`, commits, tags `{env}/v{M}.{d}`, pushes tag.
+- **PR to `main`** (`validate.yml`): downloads `audiflow-editor` matching `presets/meta.json:.schemaVersion` on the PR head, runs `validate`.
+- **Push to `main`** (`bump-versions.yml`): bumps `dataVersion`, commits, tags `prod/v{M}.{d}`, pushes tag. The workflow still accepts `develop` and would tag `dev/`, but that branch no longer exists.
 - **Push of any `prod/v*.*` or `dev/v*.*` tag** (`deploy-pages.yml`): builds a Pages artifact from all matching tags (highest minor per env+major wins) and deploys it via GitHub Actions. No persistent deploy branch.

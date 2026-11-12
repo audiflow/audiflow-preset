@@ -41,7 +41,7 @@ patterns/
       {playlistId}.json              # Level 3: Playlist Definition
 ```
 
-**Level 1 -- Pattern Index** (`patterns/meta.json`): Root index listing all available patterns. The app fetches this first and uses `feedUrlHint` for fast pre-filtering.
+**Level 1 -- Pattern Index** (`patterns/meta.json`): Root index listing all available patterns. The app fetches this first and uses `feedUrlHints` for fast pre-filtering.
 
 **Level 2 -- Pattern Meta** (`{patternId}/meta.json`): Per-podcast metadata containing feed URLs for matching and an ordered list of playlist IDs.
 
@@ -49,46 +49,46 @@ patterns/
 
 ---
 
-## Pattern Index
+## Preset Index
 
-**File:** `patterns/meta.json`
+**File:** `presets/meta.json`
 
-**Schema:** `https://audiflow.app/schema/v6/pattern-index.json`
+**Schema:** `https://audiflow.app/schema/v8/preset-index.json`
 
-Root index of all patterns. The app fetches this file first and compares `dataVersion` to detect changes.
+Root index of all presets. The app fetches this file first and compares `dataVersion` to detect changes.
 
 ### Fields
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `dataVersion` | integer | yes | Monotonically increasing. Bumped by CI when any pattern changes. |
+| `dataVersion` | integer | yes | Monotonically increasing. Bumped by CI when any preset changes. |
 | `schemaVersion` | integer | yes | Schema structure version. Bumped when JSON structure changes. |
-| `patterns` | array | yes | Summary entries for all patterns. |
+| `presets` | array | yes | Summary entries, one per preset. `audiflow-editor validate` rejects a repeated `id`. |
 
-### PatternIndexEntry
+### PresetSummary
 
-Each element in the `patterns` array:
+Each element in the `presets` array:
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `id` | string | yes | Pattern identifier. See [Pattern ID Derivation](#pattern-id-derivation). |
+| `id` | string | yes | Preset identifier. See [Pattern ID Derivation](#pattern-id-derivation). |
 | `dataVersion` | integer | yes | Mirrors `{id}/meta.json` dataVersion for stale-cache detection. |
 | `displayName` | string | yes | Human-readable podcast name for admin/editor UIs. |
-| `feedUrlHint` | string | yes | Substring of the feed URL for fast pre-filtering. |
-| `playlistCount` | integer | yes | Number of playlist definitions in this pattern. |
+| `feedUrlHints` | string[] | yes | Substrings of the feed URLs for fast pre-filtering, one per feed URL in the same order as `feedUrls` (min 1, no repeats). |
+| `playlistCount` | integer | yes | Number of playlist definitions in this preset. |
 
 ### Example
 
 ```json
 {
   "dataVersion": 42,
-  "schemaVersion": 5,
-  "patterns": [
+  "schemaVersion": 8,
+  "presets": [
     {
       "id": "a1b2c3d4e5f6",
       "dataVersion": 7,
       "displayName": "COTEN RADIO",
-      "feedUrlHint": "anchor.fm/s/8c2088c",
+      "feedUrlHints": ["anchor.fm/s/8c2088c"],
       "playlistCount": 3
     }
   ]

@@ -1,5 +1,13 @@
 # Schema Changelog
 
+## v8 -- one root index entry per preset
+
+### Replaced: `feedUrlHint` -> `feedUrlHints`
+
+**Format:** A string became a non-empty list of unique, non-empty strings, one per URL in the preset's `feedUrls`. Each preset now appears exactly once in `presets/meta.json`; `audiflow-editor validate` rejects a repeated `id`, since JSON Schema cannot express this.
+
+**Why:** A podcast that moved feeds needed one root entry per feed URL, so `id` was not unique and consumers keying on it relied on the duplicates agreeing. See audiflow/audiflow#719.
+
 ## Unreleased
 
 ### Renamed: `playlistStructure` -> `presentation`

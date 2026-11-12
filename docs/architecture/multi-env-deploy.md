@@ -4,14 +4,9 @@ This repo serves prod and dev environments across multiple schema majors from a 
 
 ## Source model
 
-Two long-lived branches:
+One long-lived branch, `main`: `prod/v{M}.{m}` tags are cut here automatically. The former `develop` branch, which cut `dev/v{M}.{m}` tags, was retired; `dev/v7.10` is the last dev tag, so `assets-dev/v7/` is frozen and no `assets-dev/v8/` exists unless a `dev/v8.*` tag is pushed manually.
 
-| Branch | Role |
-|--------|------|
-| `main` | Promoted/stable. `prod/v{M}.{m}` tags cut here automatically. |
-| `develop` | Working branch for the current schema major. `dev/v{M}.{m}` tags cut here automatically. |
-
-`presets/` and `schema/` live at the repo root on both branches. There is no per-env or per-version source directory.
+`presets/` and `schema/` live at the repo root. There is no per-env or per-version source directory.
 
 ## Tag convention
 
@@ -35,20 +30,20 @@ _site/
 
 ## How it works
 
-- Push to `main` or `develop` (touching `presets/**.json`) -> `bump-versions.yml` runs `audiflow-editor bump-versions`, commits, and tags `{env}/v{schemaVersion}.{dataVersion}`.
+- Push to `main` (touching `presets/**.json`) -> `bump-versions.yml` runs `audiflow-editor bump-versions`, commits, and tags `{env}/v{schemaVersion}.{dataVersion}`.
 - That tag push -> `deploy-pages.yml` enumerates all matching tags, picks the highest minor per `(env, major)`, builds the deploy tree from the winning tags' `presets/` content into `_site/`, uploads it via `actions/upload-pages-artifact`, and publishes it via `actions/deploy-pages`. Each deploy fully replaces the live tree; directories without a backing tag (e.g. legacy `assets-stg/*`) simply do not appear in the new artifact.
 
 ## Schema major lifecycle
 
 1. Schema v7 is current: `presets/meta.json:.schemaVersion = 7`.
-2. Schema v8 ships: bump `schemaVersion` to 8 on `develop`, migrate all presets, get the editor `v8` release ready, push.
+2. Schema v8 ships: once the editor `v8` release exists, bump `schemaVersion` to 8 on `feat/v8`, migrate all presets, and merge the PR into `main` (see docs/development/version-branch-rollout.md).
 3. Bug fix for v7: check out an old `prod/v7.x` tag, branch off, fix, manually tag `prod/v7.{x+1}`, push the tag.
 4. Both `/assets/v7/` and `/assets/v8/` are served concurrently.
 5. Sunset v7: delete every `prod/v7.*` and `dev/v7.*` tag; next deploy run drops the directory.
 
 ## Branch + tag protection
 
-- `main`, `develop`: PR required, `validate` must pass, no force-push, no delete.
+- `main`: PR required, `validate` must pass, no force-push, no delete.
 - Tags `prod/**`, `dev/**`: protected ruleset; only maintainers and `audiflow-ci-bot[bot]` can create; no delete, no overwrite.
 
 ## GitHub Pages configuration

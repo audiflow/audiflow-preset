@@ -19,12 +19,12 @@ Lists all available presets with summary information for browsing.
 ```json
 {
   "dataVersion": 2,
-  "schemaVersion": 7,
+  "schemaVersion": 8,
   "presets": [
     {
       "dataVersion": 2,
       "displayName": "Coten Radio",
-      "feedUrlHint": "https://anchor.fm/s/8c2088c/podcast/rss",
+      "feedUrlHints": ["https://anchor.fm/s/8c2088c/podcast/rss"],
       "id": "2e86c4b573b7",
       "playlistCount": 3
     }
@@ -36,11 +36,11 @@ Lists all available presets with summary information for browsing.
 |-------|------|-------------|
 | `dataVersion` | integer | Data format version (monotonically increasing, bumped when any preset changes) |
 | `schemaVersion` | integer | Schema definition version |
-| `presets` | array | Preset summaries for discovery |
+| `presets` | array | Preset summaries for discovery, one entry per preset |
 | `presets[].id` | string | Preset directory name |
 | `presets[].dataVersion` | integer | Preset data version (incremented on change) |
 | `presets[].displayName` | string | Human-readable name |
-| `presets[].feedUrlHint` | string | Feed URL for identification |
+| `presets[].feedUrlHints` | string[] | Feed URLs for identification, one per `feedUrls` entry |
 | `presets[].playlistCount` | integer | Number of playlist definitions |
 
 ## Preset meta.json
